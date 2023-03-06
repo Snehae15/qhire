@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/add%20post.dart';
+import 'package:qhire/home.dart';
 //import 'package:qhire/register.dart';
 
-import 'login.dart';
+//import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -14,7 +16,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'Qhire',
       theme: ThemeData(
         // This is the theme of your application.
         //
@@ -27,7 +29,7 @@ class MyApp extends StatelessWidget {
         // is not restarted.
         primarySwatch: Colors.blue,
       ),
-      home: Log(),
+      home: Home(),
     );
   }
 }

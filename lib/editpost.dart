@@ -56,6 +56,5 @@ class _EditpostState extends State<Editpost> {
         ),
       ),
     );
-
   }
 }

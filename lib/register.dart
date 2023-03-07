@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qhire/home.dart';
 import 'package:qhire/login.dart';
 
 class Reg extends StatefulWidget {
@@ -166,9 +167,10 @@ class _RegState extends State<Reg> {
                     ),
                   ),
                 ),
-              ElevatedButton(onPressed: () {
-                                getData();
-                              }, child: Text("REGISTOR")),
+              ElevatedButton(onPressed: (){
+                getData();
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+              }, child: Text("Register")),
 
 ],
         ),

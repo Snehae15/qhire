@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qhire/login.dart';
+import 'package:qhire/register.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -17,10 +19,11 @@ class _HomeState extends State<Home> {
         centerTitle: true,
         leading: Icon(Icons.person),
         actions: [IconButton(onPressed: (){},
-          icon : Icon(Icons.home),icon: Icon(Icons.notification_add),
-          Icon(Icons.message),
+          icon : Icon(Icons.home),
+        ),
+        ],
     ),
-    ),
+
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.person
         ),
@@ -28,11 +31,11 @@ class _HomeState extends State<Home> {
         ),
         BottomNavigationBarItem(icon: Icon(Icons.home
         ),
-            label: "Chats"
+            label: "Home"
         ),
         BottomNavigationBarItem(icon: Icon(Icons.message
         ),
-            label: "Home"
+            label: "Message"
         ),
       ],
       ),
@@ -46,7 +49,7 @@ class _HomeState extends State<Home> {
                   Icons.arrow_forward_ios
               ),
               onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Login()));
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
               },
             ),
           ),

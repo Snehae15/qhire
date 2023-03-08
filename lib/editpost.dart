@@ -39,12 +39,18 @@ class _EditpostState extends State<Editpost> {
               ),
             ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
+                keyboardType: TextInputType.multiline,
+                maxLines: 4,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Description About post",hintText: "Enter Description About post",
+                    labelText:"Description About post",hintText: "Enter Description About post",
+                    focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: Colors.redAccent)
+                    )
                 ),
+
               ),
             ),
             ElevatedButton(onPressed: (){

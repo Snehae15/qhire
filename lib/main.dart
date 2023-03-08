@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/viewprofile.dart';
+//import 'package:qhire/q&a.dart';
+//import 'package:qhire/editpost.dart';
+//import 'package:qhire/viewprofile.dart';
 //import 'package:qhire/user.dart';
 //import 'package:qhire/add%20post.dart';
 //import 'package:qhire/home.dart';
-//import 'package:qhire/register.dart';
+import 'package:qhire/register.dart';
 
 //import 'login.dart';
 
@@ -21,7 +23,7 @@ class MyApp extends StatelessWidget {
       title: 'Qhire',
       theme: ThemeData(
       ),
-      home: ViewPro(),
+      home: Reg(),
     );
   }
 }

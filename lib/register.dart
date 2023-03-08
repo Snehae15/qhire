@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/login.dart';
 
@@ -11,16 +12,16 @@ class Reg extends StatefulWidget {
 }
 
 class _RegState extends State<Reg> {
+  String? employstatus;
   var firstname = TextEditingController();
   var lastname = TextEditingController();
   var email = TextEditingController();
   var username = TextEditingController();
   var password = TextEditingController();
   var conformpassword = TextEditingController();
-  var dob = TextEditingController();
+  TextEditingController dateinput = TextEditingController();
   var highestQualification = TextEditingController();
   var address = TextEditingController();
-  var employstatus = TextEditingController();
   void getData() {
     print(firstname.text);
     print(lastname.text);
@@ -28,11 +29,13 @@ class _RegState extends State<Reg> {
     print(username.text);
     print(password.text);
     print(conformpassword.text);
-    print(dob.text);
     print(highestQualification.text);
     print(address.text);
-    print(employstatus.text);
-
+  }
+  @override
+  void initState() {
+    dateinput.text = ""; //set the initial value of text field
+    super.initState();
   }
   @override
   Widget build(BuildContext context) {
@@ -122,59 +125,85 @@ class _RegState extends State<Reg> {
                     obscureText: true,
                   ),
                 ),
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                  child: TextField(
-                    controller: dob,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-
-                      labelText:"DOB",hintText: "Enter date of birth",
-                    ),
-                  ),
-                ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: highestQualification,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-
-                      labelText:"Highest Qualification",hintText: "",
-                    ),
-                  ),
-                ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                  child: TextField(
-                    controller: address,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-
-                      labelText:"Address",hintText: "Enter address",
-                    ),
-                  ),
-                ),
-
-              Padding(
-                padding: EdgeInsets.all(10.0),
-                  child: TextField(
-                    controller: employstatus,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-
-                      labelText:"Current Employment Status",hintText: ""
-                    ),
-                  ),
-                ),
-              ElevatedButton(onPressed: (){
-                getData();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-              }, child: Text("Register")),
-
-],
+          TextField(
+              keyboardType : TextInputType.datetime,
+      decoration : InputDecoration(
+        border: OutlineInputBorder(
+          borderRadius: BorderRadius.only(),
+        ),
+          labelText:"DOB",hintText: " Enter DOB",
         ),
       ),
-      );
-  }
+
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextField(
+                          controller: highestQualification,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+
+                            labelText:"Highest Qualification",hintText: "",
+                          ),
+                        ),
+      ),
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: TextField(
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 4,
+                    decoration: InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText:"Address",hintText: "Enter your Address",
+                        focusedBorder: OutlineInputBorder(
+                            borderSide: BorderSide(width: 1, color: Colors.redAccent)
+                        )
+                    ),
+                  ),
+              ),
+      // Container(
+      //   child:
+                Column(
+          // mainAxisAlignment: MainAxisAlignment.start,
+          children: [
+           Column(
+             children: [
+           Text("Current employment Status"),
+             ],
+           ),
+            RadioListTile(
+                title:Text("Employed"),
+                value: 'Employed', groupValue: employstatus, onChanged: (rad){
+              setState(() {
+                employstatus = rad;
+              });
+            }),
+            RadioListTile(
+                title:Text("UnEmployed"),
+                value: 'UnEmployed', groupValue: employstatus, onChanged: (rad){
+              setState(() {
+                employstatus = rad;
+              });
+            }),
+
+            RadioListTile(
+                title:Text("Self Employed"),
+                value: 'Self Employed', groupValue: employstatus, onChanged: (rad){
+              setState(() {
+                employstatus = rad;
+              });
+            }),
+
+
+            ElevatedButton(onPressed: (){
+                getData();
+                Fluttertoast.showToast(msg: "Successfully registered");
+                Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
+              }, child: Text("Register")),
+    ],
+    ),
+      ],
+    ),
+    ),
+    );
+}
 }

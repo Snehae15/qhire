@@ -1,150 +1,66 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qhire/home.dart';
+import 'package:qhire/viewpost.dart';
 
-class ViewPro extends StatefulWidget {
-  const ViewPro({Key? key}) : super(key: key);
+void main() => runApp(const Viewpro());
 
-  @override
-  State<ViewPro> createState() => _ViewProState();
-}
+class Viewpro extends StatelessWidget {
+  const Viewpro({super.key});
 
-class _ViewProState extends State<ViewPro> {
-  var firstname = TextEditingController();
-  var lastname = TextEditingController();
-  var email = TextEditingController();
-  var username = TextEditingController();
-  var password = TextEditingController();
-  var conformpassword = TextEditingController();
-  var dob = TextEditingController();
-  var highestQualification = TextEditingController();
-  var address = TextEditingController();
-  var employstatus = TextEditingController();
-  void getData() {
-    print(firstname.text);
-    print(lastname.text);
-    print(email.text);
-    print(username.text);
-    print(password.text);
-    print(conformpassword.text);
-    print(dob.text);
-    print(highestQualification.text);
-    print(address.text);
-    print(employstatus.text);
+  static const String _title = 'View ';
 
-  }
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text("Edit or Update Profile"),
-        centerTitle: true,
-        leading: Icon(
-            Icons.home
-        ),
-        actions: [Icon(Icons.more_vert,),
-        ],
+    return MaterialApp(
+      title: _title,
+      home: Scaffold(
+        appBar: AppBar(title: const Text(_title)),
+        body: const MyStatelessWidget(),
       ),
-      body:
-      Center(
-        child: ListView(
-          children:  [
-            Padding(
-              padding:const EdgeInsets.all(8.0),
-              child: TextField(
-                controller: firstname,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"First name",hintText: "Enter your first name",
-                ),
-              ),
-            ),
+    );
+  }
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
+}
 
-            Padding(
+class MyStatelessWidget extends StatelessWidget {
+  const MyStatelessWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Center(
+      child: Card(
+        elevation: 0,
+        // clipBehavior is necessary because, without it, the InkWell's animation
+        // will extend beyond the rounded edges of the [Card]
+        // (see https://github.com/flutter/flutter/issues/109776)
+        // This comes with a small performance cost, and you should not set [clipBehavior]
+        // unless you need it.
+        clipBehavior: Clip.hardEdge,
+        child: InkWell(
+          splashColor: Colors.blue.withAlpha(50),
+          onTap: () {
+            debugPrint('Card tapped.');
+          },
+          child: const SizedBox(
+            width: 500,
+            height: 800,
+            child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: lastname,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Last Name",hintText: "Enter your last name",
-                ),
-              ),
+              child: Text('View Profiel\n'
+                  'First name\n'
+                  'Last name\n'
+                  'Email id\n'
+                  'Username\n'
+                  'DOB\n'
+                  'Highest Qualification\n'
+                  'Address\n'
+                  'Current employment Status\n'),
+
             ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: email,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Email id",hintText: "Enter Email id",
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-
-              child: TextField(
-                controller: username,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-
-                  labelText:"User name",hintText: "Enter Username",
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: TextField(
-                controller: dob,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-
-                  labelText:"DOB",hintText: "Enter date of birth",
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: highestQualification,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-
-                  labelText:"Highest Qualification",hintText: "",
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: address,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-
-                  labelText:"Address",hintText: "Enter address",
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(10.0),
-              child: TextField(
-                controller: employstatus,
-                decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-
-                    labelText:"Current Employment Status",hintText: ""
-                ),
-              ),
-            ),
-            ElevatedButton(onPressed: (){
-              getData();
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-            }, child: Text("Edit Profile")),
-
-          ],
+          ),
         ),
       ),
     );

@@ -15,7 +15,7 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Home page"),
+        title: Text("Q-Hire"),
         centerTitle: true,
         leading: Icon(Icons.person),
         actions: [IconButton(onPressed: (){},
@@ -26,6 +26,7 @@ class _HomeState extends State<Home> {
 
       bottomNavigationBar: BottomNavigationBar(items: [
         BottomNavigationBarItem(icon: Icon(Icons.person
+
         ),
             label: "Contact"
         ),
@@ -41,39 +42,39 @@ class _HomeState extends State<Home> {
       ),
       body: ListView(
         children: [
-          Card(
-            child: ListTile(
-              title: Text("Login"),
-              tileColor: Colors.blueGrey,
-              trailing: Icon(
-                  Icons.arrow_forward_ios
-              ),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text("Registration"),
-              tileColor: Colors.blue,
-              trailing: Icon(
-                  Icons.arrow_forward_ios
-              ),
-              onTap: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Reg()));
-              },
-            ),
-          ),
-          Card(
-            child: ListTile(
-              title: Text("number 2"),
-              tileColor: Colors.amber,
-              trailing: Icon(
-                  Icons.arrow_forward_ios
-              ),
-            ),
-          ),
+          // Card(
+          //   child: ListTile(
+          //     title: Text("Login"),
+          //     tileColor: Colors.blueGrey,
+          //     trailing: Icon(
+          //         Icons.arrow_forward_ios
+          //     ),
+          //     onTap: (){
+          //       Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
+          //     },
+          //   ),
+          // ),
+          // Card(
+          //   child: ListTile(
+          //     title: Text("Registration"),
+          //     tileColor: Colors.blue,
+          //     trailing: Icon(
+          //         Icons.arrow_forward_ios
+          //     ),
+          //     onTap: (){
+          //       Navigator.push(context, MaterialPageRoute(builder: (context)=>Reg()));
+          //     },
+          //   ),
+          // ),
+          // Card(
+          //   child: ListTile(
+          //     title: Text("number 2"),
+          //     tileColor: Colors.amber,
+          //     trailing: Icon(
+          //         Icons.arrow_forward_ios
+          //     ),
+          //   ),
+          // ),
         ],
       ),
     );

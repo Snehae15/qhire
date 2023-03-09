@@ -125,15 +125,18 @@ class _RegState extends State<Reg> {
                     obscureText: true,
                   ),
                 ),
-          TextField(
-              keyboardType : TextInputType.datetime,
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: TextField(
+                keyboardType : TextInputType.datetime,
       decoration : InputDecoration(
         border: OutlineInputBorder(
-          borderRadius: BorderRadius.only(),
+            borderRadius: BorderRadius.only(),
         ),
-          labelText:"DOB",hintText: " Enter DOB",
+            labelText:"DOB",hintText: " Enter DOB",
         ),
       ),
+          ),
 
       Padding(
         padding: const EdgeInsets.all(8.0),
@@ -160,16 +163,10 @@ class _RegState extends State<Reg> {
                     ),
                   ),
               ),
-      // Container(
-      //   child:
-                Column(
-          // mainAxisAlignment: MainAxisAlignment.start,
-          children: [
-           Column(
-             children: [
-           Text("Current employment Status"),
-             ],
-           ),
+              ListTile(
+                title: Text("Current employment Status:"),
+              ),
+
             RadioListTile(
                 title:Text("Employed"),
                 value: 'Employed', groupValue: employstatus, onChanged: (rad){
@@ -193,7 +190,6 @@ class _RegState extends State<Reg> {
               });
             }),
 
-
             ElevatedButton(onPressed: (){
                 getData();
                 Fluttertoast.showToast(msg: "Successfully registered");
@@ -201,8 +197,7 @@ class _RegState extends State<Reg> {
               }, child: Text("Register")),
     ],
     ),
-      ],
-    ),
+
     ),
     );
 }

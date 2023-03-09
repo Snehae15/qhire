@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/viewpost.dart';
 
-void main() => runApp(const Qa());
+void main() => runApp(const Viewnotification());
 
-class Qa extends StatelessWidget {
-  const Qa({super.key});
+class Viewnotification extends StatelessWidget {
+  const Viewnotification({super.key});
 
-  static const String _title = 'Q & A Section';
+  static const String _title = 'View post';
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +18,11 @@ class Qa extends StatelessWidget {
       ),
     );
   }
-@override
-State<StatefulWidget> createState() {
-  // TODO: implement createState
-  throw UnimplementedError();
-}
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
 }
 
 class MyStatelessWidget extends StatelessWidget {
@@ -48,13 +49,12 @@ class MyStatelessWidget extends StatelessWidget {
             height: 800,
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Q & A Section'
-                  '..................................'
-                  '.......................................'
-                  '................................'
-                  '.....................................'
-                  '..............................'
-                  '...............................'),
+              child: Text('View notification\n'
+                  '\n'
+                  'image/logo\n'
+                  'company name\n'
+                  'content of notification'
+                  '\n'),
 
             ),
           ),

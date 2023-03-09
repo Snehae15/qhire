@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/view%20news.dart';
+import 'package:qhire/viewpost.dart';
 
-void main() => runApp(const Qa());
+void main() => runApp(const Viewnews());
 
-class Qa extends StatelessWidget {
-  const Qa({super.key});
+class Viewnews extends StatelessWidget {
+  const Viewnews({super.key});
 
-  static const String _title = 'Q & A Section';
+  static const String _title = 'View post';
 
   @override
   Widget build(BuildContext context) {
@@ -17,11 +19,11 @@ class Qa extends StatelessWidget {
       ),
     );
   }
-@override
-State<StatefulWidget> createState() {
-  // TODO: implement createState
-  throw UnimplementedError();
-}
+  @override
+  State<StatefulWidget> createState() {
+    // TODO: implement createState
+    throw UnimplementedError();
+  }
 }
 
 class MyStatelessWidget extends StatelessWidget {
@@ -48,13 +50,9 @@ class MyStatelessWidget extends StatelessWidget {
             height: 800,
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('Q & A Section'
-                  '..................................'
-                  '.......................................'
-                  '................................'
-                  '.....................................'
-                  '..............................'
-                  '...............................'),
+              child: Text('View news:\n'
+                  'title\n'
+                  'content\n'),
 
             ),
           ),

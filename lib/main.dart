@@ -1,11 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/chatboat.dart';
+//import 'package:qhire/addabout.dart';
+//import 'package:qhire/addeducation.dart';
+//import 'package:qhire/chatboat.dart';
+import 'package:qhire/viewpost.dart';
 //import 'package:qhire/q&a.dart';
+//import 'package:qhire/view%20news.dart';
+//import 'package:qhire/home.dart';
 //import 'package:qhire/editpost.dart';
 //import 'package:qhire/viewprofile.dart';
 //import 'package:qhire/user.dart';
 //import 'package:qhire/add%20post.dart';
 //import 'package:qhire/home.dart';
-import 'package:qhire/register.dart';
+//import 'package:qhire/register.dart';
+//import 'package:qhire/view%20news.dart';
 
 //import 'login.dart';
 
@@ -23,7 +31,7 @@ class MyApp extends StatelessWidget {
       title: 'Qhire',
       theme: ThemeData(
       ),
-      home: Reg(),
+       home: Viewpost(),
     );
   }
 }

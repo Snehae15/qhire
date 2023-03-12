@@ -1,20 +1,29 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/viewpost.dart';
+import 'package:qhire/home.dart';
+import 'package:qhire/homepage.dart';
 
 void main() => runApp(const Viewpro());
 
 class Viewpro extends StatelessWidget {
   const Viewpro({super.key});
 
-  static const String _title = 'View ';
+  static const String _title = 'View Profile';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+     title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MyStatelessWidget(),
+        appBar: AppBar(
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+          onPressed:(){
+    Navigator.push(context,
+    MaterialPageRoute(builder: (context) => Homepage()));
+    },
+        ),
+        ),
+       body: const MyStatelessWidget(),
       ),
     );
   }
@@ -24,45 +33,53 @@ class Viewpro extends StatelessWidget {
     throw UnimplementedError();
   }
 }
-
 class MyStatelessWidget extends StatelessWidget {
   const MyStatelessWidget({super.key});
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 0,
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card]
-        // (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(50),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: const SizedBox(
-            width: 500,
-            height: 800,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('View Profiel\n'
-                  'First name\n'
-                  'Last name\n'
-                  'Email id\n'
-                  'Username\n'
-                  'DOB\n'
-                  'Highest Qualification\n'
-                  'Address\n'
-                  'Current employment Status\n'),
-
+    return MaterialApp(
+        home: Scaffold(
+          body:
+          ListView(
+              children: [
+              Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: Container(
+                padding: EdgeInsets.fromLTRB(10,10,10,0),
+          height: 220,
+          width: double.maxFinite,
+          child: Card(
+            child: Column(
+              children: [
+              SizedBox(
+              height: 200.0,
+              child: Image.asset(
+                'assets/drop.png',
+                fit: BoxFit.cover,
+              ),
             ),
+               Padding(
+                 padding: EdgeInsets.all(8.0),
+                      child: Text('View Profile pic\n'
+                          'First name\n'
+                          'Last name\n'
+                          'Email id\n'
+                          'Username\n'
+                          'DOB\n'
+                          'Highest Qualification\n'
+                          'Address\n'
+                          'Current employment Status\n'),
           ),
-        ),
+            ],
+          ),
+
       ),
+    ),
+              ),
+    ],
+    ),
+        ),
     );
+
   }
 }

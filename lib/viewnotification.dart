@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/viewpost.dart';
+//import 'package:qhire/viewpost.dart';
 
 void main() => runApp(const Viewnotification());
 
@@ -53,8 +53,8 @@ class MyStatelessWidget extends StatelessWidget {
                   '\n'
                   'image/logo\n'
                   'company name\n'
-                  'content of notification'
-                  '\n'),
+                  'content of notification\n'
+                  'job status\n'),
 
             ),
           ),

@@ -1,64 +1,107 @@
 import 'package:flutter/material.dart';
 
-void main() => runApp(const Qa());
+class ChatMessage {
+  final String messageContent;
+  final String messageType;
 
-class Qa extends StatelessWidget {
-  const Qa({super.key});
+  ChatMessage({required this.messageContent, required this.messageType});
+}
 
-  static const String _title = 'Q & A Section';
-
+class ChatScreen extends StatefulWidget {
   @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-      title: _title,
-      home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
-        body: const MyStatelessWidget(),
+  _ChatScreenState createState() => _ChatScreenState();
+}
+
+class _ChatScreenState extends State<ChatScreen> {
+  final List<ChatMessage> _messages = [];
+
+  final TextEditingController _textController = TextEditingController();
+
+  void _addMessage(String text) {
+    setState(() {
+      _messages.add(ChatMessage(messageContent: text, messageType: 'sent'));
+    });
+    _textController.clear();
+  }
+
+  Widget _buildTextComposer() {
+    return Container(
+      margin: EdgeInsets.symmetric(horizontal: 8.0),
+      child: Row(
+        children: [
+          Flexible(
+            child: TextField(
+              controller: _textController,
+              decoration: InputDecoration.collapsed(
+                hintText: 'Type your message...',
+              ),
+            ),
+          ),
+          IconButton(
+            icon: Icon(Icons.send),
+            onPressed: () => _addMessage(_textController.text),
+          ),
+        ],
       ),
     );
   }
-@override
-State<StatefulWidget> createState() {
-  // TODO: implement createState
-  throw UnimplementedError();
-}
-}
-
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 0,
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card]
-        // (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(50),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: const SizedBox(
-            width: 500,
-            height: 800,
-            child: Padding(
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Chat App'),
+      ),
+      body: Column(
+        children: [
+          Flexible(
+            child: ListView.builder(
               padding: EdgeInsets.all(8.0),
-              child: Text('Q & A Section'
-                  '..................................'
-                  '.......................................'
-                  '................................'
-                  '.....................................'
-                  '..............................'
-                  '...............................'),
-
+              reverse: true,
+              itemBuilder: (_, int index) => ChatMessageListItem(
+                chatMessage: _messages[index],
+              ),
+              itemCount: _messages.length,
             ),
           ),
-        ),
+          Divider(height: 1.0),
+          Container(
+            decoration: BoxDecoration(color: Theme.of(context).cardColor),
+            child: _buildTextComposer(),
+          ),
+        ],
+      ),
+    );
+  }
+}
+
+class ChatMessageListItem extends StatelessWidget {
+  final ChatMessage chatMessage;
+
+  ChatMessageListItem({required this.chatMessage});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      margin: EdgeInsets.symmetric(vertical: 10.0),
+      child: Row(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Container(
+            margin: EdgeInsets.only(right: 16.0),
+            child: CircleAvatar(child: Text('Me')),
+          ),
+          Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text('Me', style: Theme.of(context).textTheme.subtitle1),
+              Container(
+                margin: EdgeInsets.only(top: 5.0),
+                child: Text(chatMessage.messageContent),
+              ),
+            ],
+          ),
+        ],
       ),
     );
   }

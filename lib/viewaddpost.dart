@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/home.dart';
 import 'package:qhire/viewpost.dart';
 
 void main() => runApp(const Viewpost());
@@ -13,7 +14,14 @@ class Viewpost extends StatelessWidget {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(title: const Text(_title),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed:(){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Home()));
+            },
+          ),),
         body: const MyStatelessWidget(),
       ),
     );

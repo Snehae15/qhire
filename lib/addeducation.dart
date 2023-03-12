@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qhire/home.dart';
 
 class Addeducation extends StatefulWidget {
   const Addeducation({Key? key}) : super(key: key);
@@ -40,11 +41,13 @@ class _AddeducationState extends State<Addeducation> {
       appBar: AppBar(
         title: Text("Add Education"),
         centerTitle: true,
-        leading: Icon(
-            Icons.home
+        leading: IconButton(
+          icon: Icon(Icons.arrow_back),
+          onPressed:(){
+            Navigator.push(context,
+                MaterialPageRoute(builder: (context) => Home()));
+          },
         ),
-        actions: [Icon(Icons.more_vert,),
-        ],
       ),
       body:
       Center(

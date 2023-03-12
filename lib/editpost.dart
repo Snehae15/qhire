@@ -25,7 +25,7 @@ class _EditpostState extends State<Editpost> {
                 //controller: user,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Post name",hintText: "Enter post Nname",
+                  labelText:"Post name",hintText: "Enter post Name",
                 ),
               ),
             ),

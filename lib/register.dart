@@ -189,7 +189,6 @@ class _RegState extends State<Reg> {
                 employstatus = rad;
               });
             }),
-
             ElevatedButton(onPressed: (){
                 getData();
                 Fluttertoast.showToast(msg: "Successfully registered");

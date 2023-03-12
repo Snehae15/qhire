@@ -1,4 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/home.dart';
+import 'package:qhire/homepage.dart';
 import 'package:qhire/view%20news.dart';
 import 'package:qhire/viewpost.dart';
 
@@ -7,14 +9,22 @@ void main() => runApp(const Viewnews());
 class Viewnews extends StatelessWidget {
   const Viewnews({super.key});
 
-  static const String _title = 'View post';
+  static const String _title = 'View news';
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title)),
+        appBar: AppBar(title: const Text(_title),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed:(){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Homepage()));
+            },
+          ),
+        ),
         body: const MyStatelessWidget(),
       ),
     );
@@ -47,7 +57,7 @@ class MyStatelessWidget extends StatelessWidget {
           },
           child: const SizedBox(
             width: 500,
-            height: 800,
+            height: 500,
             child: Padding(
               padding: EdgeInsets.all(8.0),
               child: Text('View news:\n'

@@ -1,5 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
+import 'package:qhire/home.dart';
 import 'package:qhire/register.dart';
 
 class Log extends StatefulWidget {
@@ -32,7 +34,7 @@ class _LogState extends State<Log> {
                 controller: user,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"First name",hintText: "Enter your first name",
+                  labelText:"User name",hintText: "Enter your user name",
                 ),
               ),
             ),
@@ -43,22 +45,23 @@ class _LogState extends State<Log> {
                 controller: password,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Last Name",hintText: "Enter your last name",
+                  labelText:"Password",hintText: "Enter password",
                 ),
               ),
             ),
             ElevatedButton(onPressed: (){
               getData();
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>Reg()));
+              Fluttertoast.showToast(msg: "Successfully Logined");
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
             }, child: Text("LOGIN")),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Text("Dont have an account?"),
             ),
-              ElevatedButton(onPressed: (){
-                getData();
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Reg()));
-              }, child: Text("Register")),
+            ElevatedButton(onPressed: (){
+              getData();
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>Reg()));
+            }, child: Text("Register")),
           ],
         ),
       ),

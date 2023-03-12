@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/homepage.dart';
+import 'package:qhire/home.dart';
 import 'package:qhire/viewpost.dart';
 
-void main() => runApp(const Suggestion());
+void main() => runApp(const Vieweducation());
 
-class Suggestion extends StatelessWidget {
-  const Suggestion({super.key});
+class Vieweducation extends StatelessWidget {
+  const Vieweducation({super.key});
 
-  static const String _title = 'View suggestion';
+  static const String _title = 'View Education';
 
   @override
   Widget build(BuildContext context) {
@@ -15,13 +15,13 @@ class Suggestion extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title),
-        leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed:(){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Homepage()));
-          },
-        ),),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back),
+            onPressed:(){
+              Navigator.push(context,
+                  MaterialPageRoute(builder: (context) => Home()));
+            },
+          ),),
         body: const MyStatelessWidget(),
       ),
     );
@@ -54,14 +54,19 @@ class MyStatelessWidget extends StatelessWidget {
           },
           child: const SizedBox(
             width: 500,
-            height: 800,
+            height: 500,
             child: Padding(
               padding: EdgeInsets.all(8.0),
-              child: Text('View Suggestion\n'
-                  'Job type\n'
-                  'Details of job\n'
-                  'Based on your interest\n'
-                  '\n'),
+              child: Text('View Educationt\n'
+                  'center name\n'
+                  'degree\n'
+                  'Field of Study\n'
+                  'Start date\n'
+                  'End date\n'
+                  'Grade\n'
+                  'Activity\n'
+                  'Description'),
+
             ),
           ),
         ),

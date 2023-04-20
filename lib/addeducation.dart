@@ -1,7 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:http/http.dart';
+import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
+import 'package:qhire/homepage.dart';
 
 class Addeducation extends StatefulWidget {
   const Addeducation({Key? key}) : super(key: key);
@@ -20,21 +25,42 @@ class _AddeducationState extends State<Addeducation> {
   var activity = TextEditingController();
   var description = TextEditingController();
   TextEditingController dateinput = TextEditingController();
-  void getData() {
-    print(centername.text);
-    print(degree.text);
-    print(fieldstudy.text);
-    print(startdate.text);
-    print(enddate.text);
-    print(grade.text);
-    print(activity.text);
-    print(description.text);
+  TextEditingController dateinputs = TextEditingController();
+  Future<void> getData() async {
+    var data = {
+    "centername":centername.text,
+    "degree":degree.text,
+    "fieldstudy":fieldstudy.text,
+    "dateinput":dateinput.text,
+    "dateinputs":dateinputs.text,
+    "grade":grade.text,
+   "activity":activity.text,
+   "description":description.text,
+  };
+    print(data);
+  var response = await post(Uri.parse('${Con.url}addeducation.php'),body: data);
+  print(response.body);
+  if(response.statusCode==200){
+  var res = jsonDecode(response.body)["message"];
+  if(res=='Added'){
+  const snackBar = SnackBar(
+  content: Text('added'),
+  );
+  ScaffoldMessenger.of(context).showSnackBar(snackBar);
+  Fluttertoast.showToast(msg:"added");
+  Navigator.push(context, MaterialPageRoute(
+  builder: (context) {
+  return Homepage();
+  },
+  ));
   }
-  @override
-  void initState() {
-    dateinput.text = ""; //set the initial value of text field
-    super.initState();
+
   }
+  else {
+  Fluttertoast.showToast(msg: 'Something went wrong!');
+  }
+}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,40 +81,59 @@ class _AddeducationState extends State<Addeducation> {
           children:  [
             Padding(
               padding:const EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: centername,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Center name",hintText: "Enter Center name",
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your name';
+                  }
+                  return null;
+                },
               ),
-            ),
+              ),
 
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: degree,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Degree",hintText: "Enter Degree type",
                 ),
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter';
+                  }
+                  return null;
+                },
               ),
-            ),
+              ),
 
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: fieldstudy,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Field of Study",hintText: "Enter Field of Study",
                 ),
-              ),
-            ),
+                    validator: (value) {
+                    if (value == null || value.isEmpty) {
+                    return 'Please enter';
+                    }
+                    return null;
+                    },
+                    ),
+                              ),
+
 
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 keyboardType : TextInputType.datetime,
                 decoration : InputDecoration(
                   border: OutlineInputBorder(
@@ -96,11 +141,30 @@ class _AddeducationState extends State<Addeducation> {
                   ),
                   labelText:"Start date",
                 ),
+                onTap: () async {
+                  DateTime? date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+                  if (date != null) {
+                    dateinputs.text = date.toString().split(' ')[0];
+                  }
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter';
+                  }
+                  // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
+                  return null;
+                },
               ),
             ),
+
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 keyboardType : TextInputType.datetime,
                 decoration : InputDecoration(
                   border: OutlineInputBorder(
@@ -108,6 +172,24 @@ class _AddeducationState extends State<Addeducation> {
                   ),
                   labelText:"End date",
                 ),
+                onTap: () async {
+                  DateTime? date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+                  if (date != null) {
+                    dateinput.text = date.toString().split(' ')[0];
+                  }
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter';
+                  }
+                  // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
+                  return null;
+                },
               ),
             ),
 

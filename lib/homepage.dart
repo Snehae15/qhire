@@ -1,6 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qhire/editprofile.dart';
 import 'package:qhire/home.dart';
+import 'package:qhire/homepage1.dart';
+import 'package:qhire/pagehome.dart';
+import 'package:qhire/q&a.dart';
 import 'package:qhire/suggestion.dart';
 import 'package:qhire/view%20news.dart';
 import 'package:qhire/viewpost.dart';
@@ -14,163 +18,62 @@ class Homepage extends StatefulWidget {
 }
 
 class _HomeState extends State<Homepage> {
-  int _selectedIndex = 0;
-
-  static List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Text('Message'),
-    Text('Notification'),
-    Text('Profile')
+  int currentindex=0;
+  final pages=[
   ];
-
-  void _onItemTapped(int index) {
-    setState(() {
-      _selectedIndex = index;
-    });
-  }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text("Q-Hire"),
-        centerTitle: true,
-        leading: GestureDetector(
-          onTap: () {
-            Navigator.push(
-              context,
-              MaterialPageRoute(builder: (context) => Viewpro()),
-            );
-          },
-          child: Icon(
-            Icons.person,
-          ),
-        ),
-      ),
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
+      // appBar: AppBar(
+      //   title: Text("Q-Hire"),
+      //   centerTitle: true,
+      //   leading: GestureDetector(
+      //     onTap: () {
+      //       Navigator.push(
+      //         context,
+      //         MaterialPageRoute(builder: (context) => Viewpro()),
+      //       );
+      //     },
 
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: "Message",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
+    body: pages[currentindex],
+            bottomNavigationBar: BottomNavigationBar(
+            currentIndex: currentindex,
+            onTap: (newIndex){
+            setState(() {
+            currentindex=newIndex;
+            });
+    },
+      items:[
+                  BottomNavigationBarItem(
+                  icon: Icon(Icons.person),
+                    label: "Profile",
+                  ),
+                  BottomNavigationBarItem(
+                  icon: Icon(Icons.home),
 
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-
-      backgroundColor: Colors.blueGrey, // Change the color here
-      selectedItemColor: Colors.black, // Change the color of the selected item here
-      unselectedItemColor: Colors.grey, // Change the color of the unselected items here
-
-      ),
-
-      body:
-      ListView(
-          children: [
-            Column(
-              mainAxisAlignment: MainAxisAlignment.start,
-              children: <Widget>[
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: EdgeInsets.all(10.0),
-                  padding: EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.blue.shade200,
+                  label: "Home",
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'News',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 16),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Viewnews()));
-                        },
-                        icon: Icon(Icons.arrow_forward),
-                        color: Colors.blue,
-                      ),
-                    ],
+                  // BottomNavigationBarItem(
+                  // icon: Icon(Icons.add),
+                  //
+                  // label: "More",
+                  // ),
+                  BottomNavigationBarItem(
+                  icon: Icon(Icons.message),
+                  label: "Message",
                   ),
-                ),
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: EdgeInsets.all(10.0),
-                  padding: EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.blue.shade200,
+                  BottomNavigationBarItem(
+                  icon: Icon(Icons.notifications),
+                  label: 'Notifications',
                   ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Posts',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 16),
-                      IconButton(
-                        onPressed: () {
-                  Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Viewpost()));
-                        },
-                        icon: Icon(Icons.arrow_forward),
-                        color: Colors.blue,
-                      ),
-                    ],
-                  ),
-                ),
-                Container(
-                  height: 300,
-                  width: double.infinity,
-                  margin: EdgeInsets.all(10.0),
-                  padding: EdgeInsets.all(12.0),
-                  decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: Colors.blue.shade200,
-                  ),
-                  child: Column(
-                    mainAxisAlignment: MainAxisAlignment.start,
-                    children: [
-                      Text(
-                        'Suggestion',
-                        style: TextStyle(fontSize: 18),
-                      ),
-                      SizedBox(height: 16),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) => Suggestion()));
-                        },
-                        icon: Icon(Icons.arrow_forward),
-                        color: Colors.blue,
-                      ),
-                    ],
-                  ),
-                ),
-              ],
-            ),
-      ],
-      ),
+                  ],
+                  // currentIndex: _selectedIndex,
+                  // onTap: _onItemTapped,
+       backgroundColor: Colors.blueGrey,
+       selectedItemColor: Colors.black,
+       unselectedItemColor: Colors.grey,
+    ),
     );
   }
 }

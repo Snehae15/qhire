@@ -98,6 +98,7 @@ class ChatMessageListItem extends StatelessWidget {
               Container(
                 margin: EdgeInsets.only(top: 5.0),
                 child: Text(chatMessage.messageContent),
+
               ),
             ],
           ),

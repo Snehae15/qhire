@@ -1,85 +1,134 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
-
-void main() => runApp(const Viewpro());
+import 'package:qhire/pagehome.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Viewpro extends StatelessWidget {
-  const Viewpro({super.key});
+  const Viewpro({Key? key}) : super(key: key);
 
   static const String _title = 'View Profile';
+
+  Future<dynamic> profileView() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('emp_id');
+    print(sp);
+
+    var data = {
+      "id": sp,
+    };
+    print('>>>>>>>>>>>>$data');
+
+    var response = await post(Uri.parse('${Con.url}viewempre.php'), body: data);
+    print(response.body);
+    var res = jsonDecode(response.body);
+    return res;
+    // print(res);
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-     title: _title,
+      title: _title,
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-          onPressed:(){
-    Navigator.push(context,
-    MaterialPageRoute(builder: (context) => Homepage()));
-    },
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Pagehome()));
+            },
+          ),
         ),
-        ),
-       body: const MyStatelessWidget(),
-      ),
-    );
-  }
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
-  @override
-  Widget build(BuildContext context) {
-    return MaterialApp(
-        home: Scaffold(
-          body:
-          ListView(
-              children: [
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: FutureBuilder(
+            future: profileView(),
+            builder: (context,snapshot) {
+              if(!snapshot.hasData){
+                return Center(child: CircularProgressIndicator());
+              }
+              else if (snapshot.data[0]['message'] == 'failed') {
+              return Center(child: Text('no data'));
+              } else
+              return ListView(
+                children: [
               Padding(
-                padding: const EdgeInsets.all(8.0),
-                child: Container(
-                padding: EdgeInsets.fromLTRB(10,10,10,0),
-          height: 220,
-          width: double.maxFinite,
-          child: Card(
-            child: Column(
+              padding: const EdgeInsets.all(16.0),
+              child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-              SizedBox(
-              height: 200.0,
-              child: Image.asset(
-                'assets/drop.png',
-                fit: BoxFit.cover,
+              CircleAvatar(
+              radius: 50.0,
+              // backgroundImage: AssetImage('asset/profilepic.jpg'),
               ),
-            ),
-               Padding(
-                 padding: EdgeInsets.all(8.0),
-                      child: Text('View Profile pic\n'
-                          'First name\n'
-                          'Last name\n'
-                          'Email id\n'
-                          'Username\n'
-                          'DOB\n'
-                          'Highest Qualification\n'
-                          'Address\n'
-                          'Current employment Status\n'),
-          ),
-            ],
-          ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Text('Name',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    Text(snapshot.data![0]['name']),
+                  ]),
 
-      ),
-    ),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Text('DOB',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    Text(snapshot.data![0]['dob']),
+                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Text('Phone no',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    Text(snapshot.data![0]['phone_no']),
+                  ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                    Text('Gender',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    Text(snapshot.data![0]['gender']),
+                  ]),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Address',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                      Text(snapshot.data![0]['address'])
+                    ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Qualification',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        Text(snapshot.data![0]['qualification'])
+                      ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Username',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        Text(snapshot.data![0]['username'].toString())
+                      ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Email',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        Text(snapshot.data![0]['email'].toString())
+                      ]),
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Text('Employment Status',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        Text(snapshot.data![0]['ep_status'].toString())
+                      ]),
+                ],
               ),
-    ],
-    ),
+              ),
+            ]);
+            }
+          ),
         ),
+      ),
     );
-
   }
 }

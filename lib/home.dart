@@ -5,9 +5,12 @@ import 'package:qhire/addabout.dart';
 import 'package:qhire/addeducation.dart';
 import 'package:qhire/addskill.dart';
 import 'package:qhire/editprofile.dart';
-import 'package:qhire/login.dart';
-import 'package:qhire/register.dart';
+import 'package:qhire/homepage.dart';
+import 'package:qhire/homepage1.dart';
+import 'package:qhire/q&a.dart';
 import 'package:qhire/skillassessnment1.dart';
+import 'package:qhire/suggestion.dart';
+import 'package:qhire/updateprofile.dart';
 import 'package:qhire/viewabout.dart';
 import 'package:qhire/vieweducation.dart';
 import 'package:qhire/viewinterest.dart';
@@ -26,10 +29,7 @@ class _HomeState extends State<Home> {
   int _selectedIndex = 0;
 
   static List<Widget> _widgetOptions = <Widget>[
-    Home(),
-    Text('Message'),
-    Text('Notification'),
-    Text('Profile')
+
   ];
 
   void _onItemTapped(int index) {
@@ -41,83 +41,30 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Q-Hire"),
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) =>
-                Viewpro())); /* Write listener code here */
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Viewpro())); /* Write listener code here */
           },
           child: Icon(
             Icons.person, // add custom icons also
           ),
         ),
-        //     actions: <Widget>[
-        //     IconButton(
-        //     icon: const Icon(Icons.person),
-        //     Navigator.push(context, MaterialPageRoute(builder: (context)=> Viewpro()));
-        //     onPressed: (){
-        //       Navigator.push(context, MaterialPageRoute(builder: (context)=> Viewpro()));
-        //     },
-        // ),
-        //       IconButton(
-        //         icon: Icon(Icons.home),
-        //         onPressed: (){
-        //           Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-        //         },
-        //       ),
-
-      ),
-
-
-      bottomNavigationBar: BottomNavigationBar(
-        items: const <BottomNavigationBarItem>[
-          BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.home),
-
-            label: "Home",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.add),
-
-            label: "More",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: "Message",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
-          ),
-
-        ],
-        currentIndex: _selectedIndex,
-        onTap: _onItemTapped,
-
-        backgroundColor: Colors.blueGrey, // Change the color here
-        selectedItemColor: Colors.black, // Change the color of the selected item here
-        unselectedItemColor: Colors.grey, // Change the color of the unselected items here
-
       ),
       body: ListView(
         children: [
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 160,
+              height: 170,
               width: 1000,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.blue,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
                 children: [
@@ -125,67 +72,17 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'Username\n'
-                              'Email',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => Viewpro()));
-                          },
-                          child: Text('View more'),
-                        ),
-                      ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Editreg ()));
-                        },
-                        icon: Icon(Icons.edit),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 160,
-              width: 1000,
-              padding: EdgeInsets.all(10),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.blue,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(8.0),
-                        child: Text(
-                          'View about\n',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'View about\n',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
                         ),
                       ),
                       SizedBox(height: 10),
@@ -203,7 +100,7 @@ class _HomeState extends State<Home> {
                       IconButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addabout ()));
+                              context) =>Addabout()));
                         },
                         icon: Icon(Icons.add),
                       ),
@@ -213,14 +110,69 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
-
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 160,
+              height: 170,
               width: 1000,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(8.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.blue,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(8),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'View profile\n',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(context, MaterialPageRoute(builder: (
+                                context) => Viewpro()));
+                          },
+                          child: Text('View profile'),
+                        ),
+                      ),
+
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (
+                              context) =>Editpro()));
+                        },
+                        icon: Icon(Icons.edit),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 180,
+              width: 1000,
+              padding: EdgeInsets.all(8),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.blue,
@@ -234,7 +186,7 @@ class _HomeState extends State<Home> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Text(
                           'Postname\n'
                               'Description',
@@ -244,7 +196,7 @@ class _HomeState extends State<Home> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 10),
+                      SizedBox(height: 15),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: ElevatedButton(
@@ -255,7 +207,6 @@ class _HomeState extends State<Home> {
                           child: Text('View All posts'),
                         ),
                       ),
-
                       IconButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (
@@ -272,7 +223,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 160,
+              height: 180,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -327,7 +278,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 160,
+              height: 180,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -395,7 +346,7 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 160,
+              height: 180,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
@@ -448,7 +399,7 @@ class _HomeState extends State<Home> {
           ),
                 ],
               ),
-            );
+    );
   }
 }
 

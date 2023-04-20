@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/login.dart';
+import 'package:qhire/splash.dart';
+import 'package:qhire/viewprofile.dart';
+//import 'package:qhire/homepage.dart';
+//import 'package:qhire/home.dart';
+//import 'package:qhire/homepage.dart';
+//import 'package:qhire/login.dart';
 //import 'package:qhire/tests.dart';
 //import 'package:qhire/viewprofile.dart';
 //import 'package:qhire/homepage.dart';
@@ -21,7 +26,7 @@ import 'package:qhire/login.dart';
 //import 'package:qhire/add%20post.dart';
 //import 'package:qhire/register.dart';
 //import 'package:qhire/view%20news.dart';
-//import 'login.dart';
+import 'login.dart';
 
 void main() {
   runApp(const MyApp());
@@ -37,7 +42,7 @@ class MyApp extends StatelessWidget {
       title: 'Qhire',
       theme: ThemeData(
       ),
-       home: Log(),
+       home: Splash(),
     );
   }
 }

@@ -76,38 +76,6 @@ class _AddpostState extends State<Addpost> {
                       ),
                     ),
                   ),
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left:20.0,right: 20.0,top:10.0),
-                  //   child: Container(
-                  //     width: 100,
-                  //     child: TextField(
-                  //       controller: uploadfile,
-                  //       decoration: InputDecoration(
-                  //         border: OutlineInputBorder(
-                  //         ),
-                  //         labelText:"Upload file",hintText: "Category",
-                  //       ),
-                  //       keyboardType: TextInputType.name,
-                  //     ),
-                  //   ),
-                  // ),
-
-                  // Padding(
-                  //   padding: const EdgeInsets.only(left:20.0,right: 20.0,top:10.0),
-                  //   child: Container(
-                  //     width: 100,
-                  //     child: TextField(
-                  //       decoration: InputDecoration(
-                  //         border: OutlineInputBorder(
-                  //
-                  //         ),
-                  //         labelText:"Photo",hintText: "Photo",
-                  //       ),
-                  //       keyboardType: TextInputType.number,
-                  //     ),
-                  //   ),
-                  // ),
-
                   Padding(
                     padding: const EdgeInsets.only(left:20.0,right: 20.0,top:10.0),
                     child: Container(

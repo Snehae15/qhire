@@ -40,8 +40,8 @@ class _LogState extends State<Log> {
       "email": email.text,
       "password": password.text,
     };
-    var response = await post(Uri.parse('${Con.url}view_emp.php'), body: data);
-    print('>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>>${response.body}');
+    var response = await post(Uri.parse('${Con.url}login.php'), body: data);
+    print('>>>>>>>>${response.body}');
     var res = jsonDecode(response.body);
     print(res);
     if (response.statusCode == 200) {
@@ -71,7 +71,7 @@ class _LogState extends State<Log> {
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/bg1.jpg"),
+            image: AssetImage("assets/Free Instagram Story Template.jpg"),
             fit: BoxFit.fill,
           ),
         ),

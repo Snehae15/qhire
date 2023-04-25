@@ -221,17 +221,34 @@ class _AddeducationState extends State<Addeducation> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: description,
+                keyboardType: TextInputType.multiline,
+                maxLines: 10,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Description",
                 ),
               ),
             ),
-            ElevatedButton(onPressed: (){
-              getData();
-              Fluttertoast.showToast(msg: "Education Successfully saved");
-             // Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-            }, child: Text("Save")),
+            SizedBox(height: 10,),
+            InkWell(
+              onTap: () {
+                getData();
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
+              },
+              child: Padding(
+                padding: const EdgeInsets.only(left: 88.0,right: 90.0),
+                child: Container(
+                  child: Center(child: Text('SAVE')),
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    color: Colors.blueGrey,
+                  ),
+                  height: 50,
+                  width: 50,
+
+                ),
+              ),
+            ),
           ],
         ),
       ),

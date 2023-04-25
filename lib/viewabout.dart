@@ -56,31 +56,20 @@ class Viewabout extends StatelessWidget {
                     else if (snapshot.data[0]['message'] == 'failed') {
                       return Center(child: Text('no data'));
                     } else {
-                      return ListView(
-                        children: [
-                          Padding(
-                            padding: const EdgeInsets.only(left: 12,right: 12),
-                            child: Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('ABOUT'),
-                                  Text(snapshot.data![0]['about']),
-                                ]),
-                          ),
-                          // Row(
-                          //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          //     children: [
-                          //       Text('about'),
-                          //       Text(snapshot.data![0]['about']),
-                          //     ])
-
-                        ],
-                      );
+                      return ListView.builder(
+                      itemCount: snapshot.data.length,
+                      itemBuilder:(context,index) {
+                        return ListTile(
+                          title: Text('ABOUT'),
+                          trailing: Text(snapshot.data![index]['about']),
+                        );
+                      }
+                         );
+                      }
+                      }),
+                        ),
+                      ),
+    );
                     }
                   }
-              ),
-             ),
-                ),
-              );
-    }
-}
+

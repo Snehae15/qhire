@@ -20,6 +20,11 @@ class Homepage extends StatefulWidget {
 class _HomeState extends State<Homepage> {
   int currentindex=0;
   final pages=[
+    // Home(),
+    // Homepage1(),
+    // Home(),
+    // ChatScreen(),
+    // Suggestion(),
   ];
 
   @override

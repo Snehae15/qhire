@@ -17,6 +17,7 @@ class _RegState extends State<Editpro> {
   var lastname = TextEditingController();
   var email = TextEditingController();
   var username = TextEditingController();
+  var dob = TextEditingController();
   TextEditingController dateinput = TextEditingController();
   var highestQualification = TextEditingController();
   var address = TextEditingController();
@@ -25,6 +26,7 @@ class _RegState extends State<Editpro> {
     print(lastname.text);
     print(email.text);
     print(username.text);
+    print(dob.text);
     print(highestQualification.text);
     print(address.text);
   }
@@ -55,18 +57,7 @@ class _RegState extends State<Editpro> {
                 controller: firstname,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"First name",hintText: "Enter your first name",
-                ),
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: lastname,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Last Name",hintText: "Enter your last name",
+                  labelText:"Name",hintText: "Enter your Name",
                 ),
               ),
             ),
@@ -96,15 +87,31 @@ class _RegState extends State<Editpro> {
             ),
 
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextField(
-                keyboardType : TextInputType.datetime,
-                decoration : InputDecoration(
-                  border: OutlineInputBorder(
-                    borderRadius: BorderRadius.only(),
-                  ),
-                  labelText:"DOB",hintText: " Enter DOB",
+              padding: EdgeInsets.all(8.0),
+              child: TextFormField(
+                controller: dob,
+                decoration: InputDecoration(
+                  border: OutlineInputBorder(),
+                  labelText:"dob",hintText: "Enter your dob name",
                 ),
+                onTap: () async {
+                  DateTime? date = await showDatePicker(
+                    context: context,
+                    initialDate: DateTime.now(),
+                    firstDate: DateTime(1900),
+                    lastDate: DateTime.now(),
+                  );
+                  if (date != null) {
+                    dob.text = date.toString().split(' ')[0];
+                  }
+                },
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return 'Please enter your date of birth';
+                  }
+                  // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
+                  return null;
+                },
               ),
             ),
 

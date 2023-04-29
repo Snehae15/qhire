@@ -4,6 +4,7 @@ import 'package:qhire/editprofile.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
 import 'package:qhire/homepage1.dart';
+import 'package:qhire/newpage.dart';
 import 'package:qhire/q&a.dart';
 import 'package:qhire/suggestion.dart';
 import 'package:qhire/view%20news.dart';
@@ -22,7 +23,7 @@ class _HomeState extends State<Pagehome> {
   final pages=[
     Home(),
     Homepage1(),
-    Home(),
+    More(),
     ChatScreen(),
     Suggestion(),
   ];

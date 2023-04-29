@@ -7,6 +7,8 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
+import 'package:qhire/vieweducation.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Addeducation extends StatefulWidget {
   const Addeducation({Key? key}) : super(key: key);
@@ -18,7 +20,7 @@ class Addeducation extends StatefulWidget {
 class _AddeducationState extends State<Addeducation> {
   var centername = TextEditingController();
   var degree = TextEditingController();
-  var fieldstudy = TextEditingController();
+  var field = TextEditingController();
   var startdate = TextEditingController();
   var enddate = TextEditingController();
   var grade = TextEditingController();
@@ -27,12 +29,15 @@ class _AddeducationState extends State<Addeducation> {
   TextEditingController dateinput = TextEditingController();
   TextEditingController dateinputs = TextEditingController();
   Future<void> getData() async {
-    var data = {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
+    var data ={
+      "id":sp,
     "centername":centername.text,
     "degree":degree.text,
-    "fieldstudy":fieldstudy.text,
-    "dateinput":dateinput.text,
-    "dateinputs":dateinputs.text,
+    "field":field.text,
+    "startdate":startdate.text,
+    "enddate":enddate.text,
     "grade":grade.text,
    "activity":activity.text,
    "description":description.text,
@@ -50,7 +55,7 @@ class _AddeducationState extends State<Addeducation> {
   Fluttertoast.showToast(msg:"added");
   Navigator.push(context, MaterialPageRoute(
   builder: (context) {
-  return Homepage();
+  return Vieweducation();
   },
   ));
   }
@@ -116,7 +121,7 @@ class _AddeducationState extends State<Addeducation> {
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
-                controller: fieldstudy,
+                controller: field,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Field of Study",hintText: "Enter Field of Study",

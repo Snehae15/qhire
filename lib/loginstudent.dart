@@ -7,16 +7,17 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/pagehome.dart';
 import 'package:qhire/register.dart';
+import 'package:qhire/regstudent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 
-class Log extends StatefulWidget {
-  const Log({Key? key}) : super(key: key);
+class Logstudent extends StatefulWidget {
+  const Logstudent({Key? key}) : super(key: key);
 
   @override
-  State<Log> createState() => _LogState();
+  State<Logstudent> createState() => _LogstudentState();
 }
-class _LogState extends State<Log> {
+class _LogstudentState extends State<Logstudent> {
   var email = TextEditingController();
   var password = TextEditingController();
   var type = TextEditingController();
@@ -41,7 +42,7 @@ class _LogState extends State<Log> {
       "password": password.text,
       "type":type.text,
     };
-    var response = await post(Uri.parse('${Con.url}login.php'), body: data);
+    var response = await post(Uri.parse('${Con.url}logstd.php'), body: data);
     print('>>>>>>>>${response.body}');
     var res = jsonDecode(response.body);
     print(res);
@@ -125,7 +126,7 @@ class _LogState extends State<Log> {
                 ),
                 TextButton(onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (
-                      context) => Reg()));
+                      context) => Regstudent()));
                 }, child: Text("Don't have any account please login her!"))
               ],
             ),

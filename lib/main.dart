@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/q.dart';
 import 'package:qhire/splash.dart';
 import 'package:qhire/viewprofile.dart';
 //import 'package:qhire/homepage.dart';

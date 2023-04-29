@@ -1,10 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
 import 'package:qhire/pagehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -15,7 +12,7 @@ class Viewpro extends StatelessWidget {
 
   Future<dynamic> profileView() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
-    var sp = spref.getString('emp_id');
+    var sp = spref.getString('log_id');
     print(sp);
 
     var data = {
@@ -23,11 +20,11 @@ class Viewpro extends StatelessWidget {
     };
     print('>>>>>>>>>>>>$data');
 
-    var response = await post(Uri.parse('${Con.url}viewempre.php'), body: data);
+    var response = await post(Uri.parse('${Con.url}viewstudent.php'), body: data);
     print(response.body);
     var res = jsonDecode(response.body);
     return res;
-    // print(res);
+     //print(res);
   }
 
   @override
@@ -101,14 +98,14 @@ class Viewpro extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Qualification',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                        Text(snapshot.data![0]['qualification'])
+                        Text(snapshot.data![0]['qualification'].toString())
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Username',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                        Text(snapshot.data![0]['username'].toString())
-                      ]),
+                Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text('Username',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                      Text(snapshot.data![0]['username'].toString())
+                    ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -119,7 +116,7 @@ class Viewpro extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                         Text('Employment Status',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                        Text(snapshot.data![0]['ep_status'].toString())
+                        Text(snapshot.data![0]['status'].toString())
                       ]),
                 ],
               ),

@@ -7,6 +7,8 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
+import 'package:qhire/viewabout.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Addabout extends StatefulWidget {
   const Addabout({Key? key}) : super(key: key);
@@ -17,8 +19,12 @@ class Addabout extends StatefulWidget {
 
 class _AddaboutState extends State<Addabout> {
   var about = TextEditingController();
+
   Future<void> getData() async{
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
     var data ={
+      "id":sp,
     "about": about.text,
   };
     print(data);
@@ -31,7 +37,7 @@ class _AddaboutState extends State<Addabout> {
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
         Navigator.push(context,MaterialPageRoute(builder: (context){
-          return Homepage();
+          return Viewabout();
         },
         ));
       }

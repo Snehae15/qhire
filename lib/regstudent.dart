@@ -7,15 +7,17 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 
 import 'package:qhire/login.dart';
+import 'package:qhire/loginstudent.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
-class Reg extends StatefulWidget {
-  const Reg({Key? key}) : super(key: key);
+class Regstudent extends StatefulWidget {
+  const Regstudent({Key? key}) : super(key: key);
 
   @override
-  State<Reg> createState() => _RegState();
+  State<Regstudent> createState() => _RegstudentState();
 }
 
-class _RegState extends State<Reg> {
+class _RegstudentState extends State<Regstudent> {
   // String? employstatus;
   String? genders;
   var name = TextEditingController();
@@ -27,12 +29,12 @@ class _RegState extends State<Reg> {
   var username = TextEditingController();
   var password = TextEditingController();
   var email = TextEditingController();
-  var resume = TextEditingController();
+
   var type = TextEditingController();
 
   TextEditingController dateinput = TextEditingController();
   var highestQualification = TextEditingController();
-  final TextEditingController upload_resume = TextEditingController();
+  final TextEditingController resume = TextEditingController();
   // File? _file;
 
   // Future<void> _pickFile() async {
@@ -45,7 +47,10 @@ class _RegState extends State<Reg> {
   //   }
   // }
   Future<void> getData() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
     var data = {
+      "id":sp,
       "name":name.text,
       "dob":dob.text,
       "phone_no":phone_no.text,
@@ -55,11 +60,13 @@ class _RegState extends State<Reg> {
       "username":username.text,
       "password":password.text,
       "email":email.text,
+
       "resume":resume.text,
-      "type":'employee'
+      "type":'student'
     };
-    // print(data);
-    var response = await post(Uri.parse('${Con.url}reg_employee.php'),body: data);
+    print(data);
+
+    var response = await post(Uri.parse('${Con.url}register_student.php'),body: data);
     print(response.body);
     if(response.statusCode==200){
       var res = jsonDecode(response.body)["message"];
@@ -71,7 +78,7 @@ class _RegState extends State<Reg> {
         Fluttertoast.showToast(msg:"successfully registered");
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return Log();
+            return Logstudent();
           },
         ));
       }
@@ -284,6 +291,8 @@ class _RegState extends State<Reg> {
                 // },
               ),
             ),
+
+
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(

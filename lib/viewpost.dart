@@ -1,15 +1,15 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart';
+import 'package:http/http.dart' as http;
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
 import 'package:qhire/pagehome.dart';
-import 'package:qhire/viewpost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(const Viewpost());
+void main() => runApp(Viewpost());
 
 class Viewpost extends StatelessWidget {
   const Viewpost({Key? key}) : super(key: key);
@@ -18,18 +18,27 @@ class Viewpost extends StatelessWidget {
 
   Future<dynamic> viewPost() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
-    var sp = spref.getString('emp_id');
+    var sp = spref.getString('log_id');
     print(sp);
 
     var data = {
-      "id": sp,
+      "id": sp, // add a null check here
     };
     print('>>>>>>>>>>>>>>>>>>>>$data');
 
-    var response = await post(Uri.parse('${Con.url}viewonpost.php'), body: data);
+    var response = await http.post(Uri.parse('${Con.url}viewonpost.php'), body: data);
     print(response.body);
     var res = jsonDecode(response.body);
     return res;
+  }
+
+  Future<Uint8List?> getImage(String uploadfile) async {
+    var response = await http.get(Uri.parse('${Con.url}$uploadfile'));
+    if (response.statusCode == 200) {
+      return response.bodyBytes;
+    } else {
+      return null;
+    }
   }
 
   @override
@@ -57,7 +66,7 @@ class Viewpost extends StatelessWidget {
                 return Center(child: CircularProgressIndicator());
               } else if (snapshot.data[0]['message'] == 'failed') {
                 return Center(child: Text('No data'));
-              } else {
+              }
                 return ListView.builder(
                   itemCount: snapshot.data.length,
                   itemBuilder: (context, index) {
@@ -80,7 +89,7 @@ class Viewpost extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Text(
-                            snapshot.data![index]['postname'],
+                            snapshot.data[index]['postname'],
                             style: TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
@@ -88,8 +97,26 @@ class Viewpost extends StatelessWidget {
                           ),
                           SizedBox(height: 8),
                           Text(
-                            snapshot.data![index]['description'],
+                            snapshot.data[index]['description'],
                             style: TextStyle(fontSize: 16),
+                          ),
+                          SizedBox(height: 8),
+                          FutureBuilder(
+                            future: getImage(snapshot.data[index]['uploadfile']),
+                            builder: (context, imageSnapshot) {
+                              if (imageSnapshot.hasData) {
+                                return SizedBox(
+                                  width: double.infinity,
+                                  height: 200,
+                                  child: Image.memory(
+                                    imageSnapshot.data!,
+                                    fit: BoxFit.cover,
+                                  ),
+                                );
+                              } else {
+                                return Container();
+                              }
+                            },
                           ),
                         ],
                       ),
@@ -97,7 +124,7 @@ class Viewpost extends StatelessWidget {
                   },
                 );
               }
-            },
+
           ),
         ),
       ),

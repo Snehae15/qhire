@@ -17,6 +17,7 @@ import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewpost.dart';
 import 'package:qhire/viewprofile.dart';
 import 'package:qhire/viewskill.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);
@@ -37,6 +38,15 @@ class _HomeState extends State<Home> {
       _selectedIndex = index;
     });
   }
+  // Future<dynamic> getData() async {
+  //   SharedPreferences spref=await SharedPreferences.getInstance();
+  //   var sp=spref.getString('log_id');
+  //   print(sp);
+
+    // var data={
+    //   "id":sp,
+    //
+    // };
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -119,7 +129,8 @@ class _HomeState extends State<Home> {
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.blue,
-                  width: 1,
+                  width:
+                  1,
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
@@ -210,7 +221,7 @@ class _HomeState extends State<Home> {
                       IconButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addpost ()));
+                              context) =>AddPost()));
                         },
                         icon: Icon(Icons.add),
                       ),

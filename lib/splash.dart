@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_i18n/flutter_i18n.dart';
+import 'package:qhire/first.dart';
 import 'login.dart';
 
 class Splash extends StatefulWidget {
@@ -14,7 +15,7 @@ class _SplashState extends State<Splash> {
   void initState(){
     super.initState();
     Timer(Duration(seconds: 4),
-            ()=>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>Log())));
+            ()=>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>First())));
 
   }
   @override

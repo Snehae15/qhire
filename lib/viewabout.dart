@@ -8,16 +8,14 @@ import 'package:qhire/home.dart';
 import 'package:qhire/viewpost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-// void main() => runApp(const Viewabout());
-
 class Viewabout extends StatelessWidget {
   const Viewabout({Key? key}) : super(key: key);
 
-  static const String _title = 'View post';
+  static const String _title = 'View about';
 
-  Future<dynamic> viewAbout() async {
+  Future<List<dynamic>> viewAbout() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
-    var sp = spref.getString('emp_id');
+    var sp = spref.getString('log_id');
     print(sp);
 
     var data = {
@@ -25,7 +23,7 @@ class Viewabout extends StatelessWidget {
     };
     print('>>>>>>>$data');
 
-    var response = await post(Uri.parse('${Con.url}viewabout.php'), body: data);
+    var response = await post(Uri.parse('${Con.url}viewaboutstudent.php'), body: data);
     print(response.body);
     var res = jsonDecode(response.body);
     return res;
@@ -45,31 +43,45 @@ class Viewabout extends StatelessWidget {
             },
           ),
         ),
-             body: Padding(
-              padding: const EdgeInsets.all(20.0),
-                  child: FutureBuilder(
-                  future: viewAbout(),
-                  builder: (context,snapshot) {
-                    if (!snapshot.hasData) {
-                      return Center(child: CircularProgressIndicator());
-                    }
-                    else if (snapshot.data[0]['message'] == 'failed') {
-                      return Center(child: Text('no data'));
-                    } else {
-                      return ListView.builder(
-                      itemCount: snapshot.data.length,
-                      itemBuilder:(context,index) {
-                        return ListTile(
-                          title: Text('ABOUT'),
-                          trailing: Text(snapshot.data![index]['about']),
-                        );
-                      }
-                         );
-                      }
-                      }),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: FutureBuilder(
+            future: viewAbout(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                if (snapshot.data![0]['message'] == 'failed') {
+                  return Center(child: Text('no data'));
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.all(16.0),
+                        margin: EdgeInsets.only(bottom: 16.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8.0),
                         ),
-                      ),
-    );
-                    }
-                  }
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('ABOUT', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8.0),
+                            Text(snapshot.data![index]['about'] ?? ''),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
 
+            },
+          ),
+        ),
+      ),
+    );
+  }
+}

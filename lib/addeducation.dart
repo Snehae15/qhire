@@ -28,6 +28,7 @@ class _AddeducationState extends State<Addeducation> {
   var description = TextEditingController();
   TextEditingController dateinput = TextEditingController();
   TextEditingController dateinputs = TextEditingController();
+
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
@@ -139,7 +140,7 @@ class _AddeducationState extends State<Addeducation> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType : TextInputType.datetime,
+                controller: dateinput,
                 decoration : InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.only(),
@@ -154,7 +155,7 @@ class _AddeducationState extends State<Addeducation> {
                     lastDate: DateTime.now(),
                   );
                   if (date != null) {
-                    dateinputs.text = date.toString().split(' ')[0];
+                    dateinput.text = date.toString().split(' ')[0];
                   }
                 },
                 validator: (value) {
@@ -170,7 +171,7 @@ class _AddeducationState extends State<Addeducation> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
-                keyboardType : TextInputType.datetime,
+                controller: dateinputs,
                 decoration : InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.only(),
@@ -185,7 +186,7 @@ class _AddeducationState extends State<Addeducation> {
                     lastDate: DateTime.now(),
                   );
                   if (date != null) {
-                    dateinput.text = date.toString().split(' ')[0];
+                    dateinputs.text = date.toString().split(' ')[0];
                   }
                 },
                 validator: (value) {

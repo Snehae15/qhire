@@ -60,7 +60,6 @@ class _RegstudentState extends State<Regstudent> {
       "username":username.text,
       "password":password.text,
       "email":email.text,
-
       "resume":resume.text,
       "type":'student'
     };

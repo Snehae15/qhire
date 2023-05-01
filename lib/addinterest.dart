@@ -7,18 +7,24 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
+import 'package:qhire/pagehome.dart';
+import 'package:qhire/viewinterest.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Addinterest extends StatefulWidget {
   const Addinterest({Key? key}) : super(key: key);
 
   @override
-  State<Addinterest> createState() => _AddaboutState();
+  State<Addinterest> createState() => _AddinterestState();
 }
 
-class _AddaboutState extends State<Addinterest> {
+class _AddinterestState extends State<Addinterest> {
   var interest = TextEditingController();
   Future<void> getData() async{
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
     var data ={
+      "id":sp,
     "interest": interest.text,
   };
     print(data);
@@ -30,8 +36,9 @@ class _AddaboutState extends State<Addinterest> {
         const snackBar = SnackBar(content: Text("added"),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Fluttertoast.showToast(msg:"added");
         Navigator.push(context,MaterialPageRoute(builder: (context){
-          return Homepage();
+          return Viewinterest();
         },
         ));
       }
@@ -53,7 +60,7 @@ class _AddaboutState extends State<Addinterest> {
           children: [
             Padding(
               padding: const EdgeInsets.all(8.0),
-              child: Text("You can write about your years of experience, industry, or skills. \n People also talk about their achievements or previous job experiences."),
+              child: Text("You can write about your skills and interests."),
             ),
             Padding(
               padding: const EdgeInsets.all(8.0),
@@ -64,7 +71,7 @@ class _AddaboutState extends State<Addinterest> {
                     border: OutlineInputBorder(),
                     labelText:"Add interest",hintText: "Enter interests",
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Colors.redAccent)
+                        borderSide: BorderSide(width: 1, color: Colors.lightBlue)
                     )
                 ),
               ),

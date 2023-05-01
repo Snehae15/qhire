@@ -4,9 +4,9 @@ import 'package:qhire/datascience.dart';
 import 'package:qhire/flutter.dart';
 import 'package:qhire/login.dart';
 import 'package:qhire/mern.dart';
-import 'package:qhire/php.dart';
+import 'package:qhire/coursepage.dart';
 
-class Course extends StatelessWidget {
+class Courses extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +20,7 @@ class Course extends StatelessWidget {
           onTap: () {
     Navigator.push(
               context,
-              MaterialPageRoute(builder: (context) => Phps()),
+              MaterialPageRoute(builder: (context) => Coursepage()),
               );
               },
       child: Row(

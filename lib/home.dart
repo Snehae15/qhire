@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:qhire/add%20post.dart';
 import 'package:qhire/addabout.dart';
 import 'package:qhire/addeducation.dart';
+import 'package:qhire/addinterest.dart';
 import 'package:qhire/addskill.dart';
 import 'package:qhire/editprofile.dart';
 import 'package:qhire/homepage.dart';
@@ -307,8 +308,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Skill\n'
-                              'Teamwork',
+                          'Skill',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -375,8 +375,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Interests\n'
-                              'Drawing',
+                          'Interests\n',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -398,7 +397,7 @@ class _HomeState extends State<Home> {
                       IconButton(
                         onPressed: () {
                           Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Editreg ()));
+                              context) =>Addinterest ()));
                         },
                         icon: Icon(Icons.add),
                       ),

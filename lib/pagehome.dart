@@ -1,9 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qhire/chatboat.dart';
 import 'package:qhire/editprofile.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage.dart';
 import 'package:qhire/homepage1.dart';
+import 'package:qhire/more.dart';
 import 'package:qhire/newpage.dart';
 import 'package:qhire/q&a.dart';
 import 'package:qhire/suggestion.dart';
@@ -23,8 +25,8 @@ class _HomeState extends State<Pagehome> {
   final pages=[
     Home(),
     Homepage1(),
-    More(),
-    ChatScreen(),
+    Morepage(),
+    ChatbotPage(),
     Suggestion(),
   ];
 

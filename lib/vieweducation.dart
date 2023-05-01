@@ -1,6 +1,12 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
+import 'package:qhire/pagehome.dart';
 import 'package:qhire/viewpost.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const Vieweducation());
 
@@ -8,69 +14,131 @@ class Vieweducation extends StatelessWidget {
   const Vieweducation({super.key});
 
   static const String _title = 'View Education';
+  Future<dynamic> viewEducation() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
+    print(sp);
+
+    var data = {
+      "id": sp,
+    };
+    print('>>>>>>>>>>>>$data');
+
+    var response = await post(Uri.parse('${Con.url}vieweducation.php'), body: data);
+    print(response.body);
+    var res = jsonDecode(response.body);
+    return res;
+    //print(res);
+  }
+
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title),
+        appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed:(){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Home()));
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Pagehome()));
             },
-          ),),
-        body: const MyStatelessWidget(),
-      ),
-    );
-  }
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
+          ),
+        ),
+        body:Center(
+          child: Padding(
+            padding: const EdgeInsets.all(20.0),
+            child: Container(
+              width: double.infinity,
+              height: double.infinity,
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+                color: Colors.blueGrey,
+                boxShadow: [
+                  BoxShadow(
+                    color: Colors.grey.withOpacity(0.3),
+                    spreadRadius: 2,
+                    blurRadius: 5,
+                    offset: Offset(0, 2),
+                  ),
+                ],
+              ),
+              child: Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: FutureBuilder(
+                    future: viewEducation(),
+                    builder: (context,snapshot) {
+                      if(!snapshot.hasData){
+                        return Center(child: CircularProgressIndicator());
+                      }
+                      else if (snapshot.data[0]['message'] == 'failed') {
+                        return Center(child: Text('no data'));
+                      } else
+                        return ListView.builder(
+                            itemCount: snapshot.data.length,
+                            itemBuilder: (context, index) {
+                              return Column(
+                                children: [
+                                  SizedBox(height: 10),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('CENTER NAME',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['centername']),
+                                      ]),
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 0,
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card]
-        // (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(50),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: const SizedBox(
-            width: 500,
-            height: 500,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('View Educationt\n'
-                  'center name\n'
-                  'degree\n'
-                  'Field of Study\n'
-                  'Start date\n'
-                  'End date\n'
-                  'Grade\n'
-                  'Activity\n'
-                  'Description'),
-
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('DEGREE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['degree']),
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('FIELD',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['field']),
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('START DATE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['startdate']),
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('END DATE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['enddate'])
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('GRADE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['grade'].toString())
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('ACTIVITY',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['activity'].toString())
+                                      ]),
+                                  Row(
+                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                      children: [
+                                        Text('DESCRIPTION',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                                        Text(snapshot.data![index]['description'].toString())
+                                      ]),
+                                ],
+                                );
+                                }
+                      );
+                  }),
             ),
           ),
         ),
       ),
+    ),
     );
   }
 }

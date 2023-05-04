@@ -6,7 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
 import 'package:qhire/vieweducation.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

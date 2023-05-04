@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:url_launcher/url_launcher.dart';
+
 
 class Url3 extends StatelessWidget {
   @override
@@ -12,7 +12,7 @@ class Url3 extends StatelessWidget {
         body: Padding(
           padding: const EdgeInsets.all(8.0),
           child: GestureDetector(
-            onTap: () => launch('https://youtu.be/1ukSR1GRtMU'),
+            // onTap: () => launch('https://youtu.be/1ukSR1GRtMU'),
             child: Container(
               height: 90,
               width: 1000,

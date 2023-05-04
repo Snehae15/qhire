@@ -3,9 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/home.dart';
+
 import 'package:qhire/pagehome.dart';
-import 'package:qhire/viewpost.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const Vieweducation());
@@ -53,7 +53,7 @@ class Vieweducation extends StatelessWidget {
               height: double.infinity,
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.blueGrey,
+                color: Colors.white70,
                 boxShadow: [
                   BoxShadow(
                     color: Colors.grey.withOpacity(0.3),
@@ -129,6 +129,7 @@ class Vieweducation extends StatelessWidget {
                                         Text('DESCRIPTION',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                                         Text(snapshot.data![index]['description'].toString())
                                       ]),
+                                  Divider(),
                                 ],
                                 );
                                 }

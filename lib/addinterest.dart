@@ -6,8 +6,6 @@ import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:qhire/viewinterest.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -65,6 +63,7 @@ class _AddinterestState extends State<Addinterest> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextField(
+                controller: interest,
                 keyboardType: TextInputType.multiline,
                 maxLines: 10,
                 decoration: InputDecoration(

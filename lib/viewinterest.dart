@@ -4,16 +4,14 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/pagehome.dart';
-import 'package:qhire/viewpost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const Viewinterest());
 
 class Viewinterest extends StatelessWidget {
-  const Viewinterest({super.key});
+  const Viewinterest({Key? key}) : super(key: key);
 
   static const String _title = 'View interest';
-
 
   Future<dynamic> viewInterest() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
@@ -31,6 +29,7 @@ class Viewinterest extends StatelessWidget {
     return res;
     //print(res);
   }
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
@@ -39,7 +38,7 @@ class Viewinterest extends StatelessWidget {
         appBar: AppBar(
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
-            onPressed:(){
+            onPressed: () {
               Navigator.push(context,
                   MaterialPageRoute(builder: (context) => Pagehome()));
             },
@@ -49,28 +48,25 @@ class Viewinterest extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: FutureBuilder(
               future: viewInterest(),
-              builder: (context,snapshot) {
+              builder: (context, snapshot) {
                 if (!snapshot.hasData) {
                   return Center(child: CircularProgressIndicator());
-                }
-                else if (snapshot.data[0]['message'] == 'failed') {
-                  return Center(child: Text('no data'));
-                } else
+                } else if (snapshot.data[0]['message'] == 'failed') {
+                  return Center(child: Text('No data'));
+                } else {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
-                            Row(
-                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text('INTEREST'),
-                                  Text(snapshot.data![index]['interest']),
-                                ]),
+                            ListTile(
+                              title: Text(snapshot.data![index]['interest']),
+                            ),
+                            Divider(),
                           ],
                         );
-                      }
-                  );
+                      });
+                }
               }),
         ),
       ),

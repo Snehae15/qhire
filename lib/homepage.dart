@@ -1,14 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qhire/editprofile.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/homepage1.dart';
-import 'package:qhire/pagehome.dart';
-import 'package:qhire/q&a.dart';
-import 'package:qhire/suggestion.dart';
-import 'package:qhire/view%20news.dart';
-import 'package:qhire/viewpost.dart';
-import 'package:qhire/viewprofile.dart';
 
 class Homepage extends StatefulWidget {
   const Homepage({Key? key}) : super(key: key);
@@ -69,8 +60,8 @@ class _HomeState extends State<Homepage> {
                   label: "Message",
                   ),
                   BottomNavigationBarItem(
-                  icon: Icon(Icons.notifications),
-                  label: 'Notifications',
+                  icon: Icon(Icons.shopping_bag),
+                  label: 'Jobs',
                   ),
                   ],
                   // currentIndex: _selectedIndex,

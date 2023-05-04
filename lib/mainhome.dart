@@ -1,11 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qhire/editprofile.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
-import 'package:qhire/homepage1.dart';
-import 'package:qhire/q&a.dart';
-import 'package:qhire/suggestion.dart';
 
 class Mainhome extends StatefulWidget {
   const Mainhome({Key? key}) : super(key: key);

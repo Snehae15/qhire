@@ -1,8 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qhire/coursepage.dart';
-import 'package:qhire/viewabout.dart';
-import 'package:qhire/viewcourse.dart';
 import 'package:qhire/vieweducation.dart';
 import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewinterviewpreparation.dart';

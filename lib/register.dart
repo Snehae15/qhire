@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 
 import 'package:qhire/login.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Reg extends StatefulWidget {
   const Reg({Key? key}) : super(key: key);
@@ -16,7 +17,7 @@ class Reg extends StatefulWidget {
 }
 
 class _RegState extends State<Reg> {
-  // String? employstatus;
+  String? employstatus;
   String? genders;
   var name = TextEditingController();
   var dob = TextEditingController();
@@ -27,12 +28,13 @@ class _RegState extends State<Reg> {
   var username = TextEditingController();
   var password = TextEditingController();
   var email = TextEditingController();
-  var resume = TextEditingController();
+  var ep_status = TextEditingController();
+  var upload_resume = TextEditingController();
   var type = TextEditingController();
 
   TextEditingController dateinput = TextEditingController();
   var highestQualification = TextEditingController();
-  final TextEditingController upload_resume = TextEditingController();
+  // final TextEditingController upload_resume = TextEditingController();
   // File? _file;
 
   // Future<void> _pickFile() async {
@@ -45,7 +47,10 @@ class _RegState extends State<Reg> {
   //   }
   // }
   Future<void> getData() async {
+      SharedPreferences spref = await SharedPreferences.getInstance();
+      var sp = spref.getString('log_id');
     var data = {
+      "id":sp,
       "name":name.text,
       "dob":dob.text,
       "phone_no":phone_no.text,
@@ -55,7 +60,8 @@ class _RegState extends State<Reg> {
       "username":username.text,
       "password":password.text,
       "email":email.text,
-      "resume":resume.text,
+      "ep_status":employstatus,
+      "upload_resume":upload_resume.text,
       "type":'employee'
     };
     // print(data);
@@ -86,7 +92,7 @@ class _RegState extends State<Reg> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: Text("Register Employee"),
         centerTitle: true,
         leading: Icon(
             Icons.home
@@ -151,6 +157,7 @@ class _RegState extends State<Reg> {
                   labelText: "phone_no",
                   hintText: "Enter your Phone number",
                 ),
+                keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your phone number';
@@ -234,7 +241,7 @@ class _RegState extends State<Reg> {
                   border: OutlineInputBorder(),
                   labelText:"User name",
                   hintText: "Enter Username",
-                ),
+                ),keyboardType: TextInputType.name,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter a username';
@@ -252,7 +259,7 @@ class _RegState extends State<Reg> {
                   border: OutlineInputBorder(),
                   labelText:"Password",
                   hintText: "Enter Password",
-                ),
+                ),keyboardType: TextInputType.visiblePassword,
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -284,10 +291,37 @@ class _RegState extends State<Reg> {
                 // },
               ),
             ),
+
+            ListTile(
+              title: Text("Employment status:"),
+            ),
+
+            RadioListTile(
+                title:Text("Unemployed"),
+                value: 'Unemployed', groupValue: employstatus , onChanged: (radio){
+              setState(() {
+                employstatus = radio;
+              });
+            }),
+            RadioListTile(
+                title:Text("Employed"),
+                value: 'Employed', groupValue: employstatus, onChanged: (radio){
+              setState(() {
+                employstatus = radio;
+              });
+            }),
+
+            RadioListTile(
+                title:Text("Self Employed"),
+                value: 'Selfemployed', groupValue: employstatus, onChanged: (radio){
+              setState(() {
+                employstatus = radio;
+              });
+            }),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextField(
-                controller: resume,
+                controller: upload_resume,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Upload_resume",hintText: "Enter Upload_resume",

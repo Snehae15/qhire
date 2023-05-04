@@ -5,8 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-
-import 'package:qhire/login.dart';
 import 'package:qhire/loginstudent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

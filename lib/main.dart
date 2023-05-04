@@ -1,33 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/q.dart';
 import 'package:qhire/splash.dart';
-import 'package:qhire/viewprofile.dart';
-//import 'package:qhire/homepage.dart';
-//import 'package:qhire/home.dart';
-//import 'package:qhire/homepage.dart';
-//import 'package:qhire/login.dart';
-//import 'package:qhire/tests.dart';
-//import 'package:qhire/viewprofile.dart';
-//import 'package:qhire/homepage.dart';
-//import 'package:qhire/profile_picture.dart';
-//import 'package:qhire/viewprofile.dart';
-//import 'package:qhire/skillassessnment1.dart';
-//import 'package:qhire/chatboat.dart';
-//import 'package:qhire/viewnotification.dart';
-//import 'package:qhire/addabout.dart';
-//import 'package:qhire/addeducation.dart';
-//import 'package:qhire/chatboat.dart';
-//import 'package:qhire/viewpost.dart';
-//import 'package:qhire/q&a.dart';
-//import 'package:qhire/view%20news.dart';
-//import 'package:qhire/home.dart';
-//import 'package:qhire/editpost.dart';
-//import 'package:qhire/viewprofile.dart';
-//import 'package:qhire/user.dart';
-//import 'package:qhire/add%20post.dart';
-//import 'package:qhire/register.dart';
-//import 'package:qhire/view%20news.dart';
-import 'login.dart';
+
 
 void main() {
   runApp(const MyApp());

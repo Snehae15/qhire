@@ -1,8 +1,7 @@
 import 'dart:async';
 import 'package:flutter/material.dart';
-import 'package:flutter_i18n/flutter_i18n.dart';
 import 'package:qhire/first.dart';
-import 'login.dart';
+
 
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);

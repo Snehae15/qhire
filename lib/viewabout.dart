@@ -1,11 +1,9 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:http/http.dart' as http;
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/viewpost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Viewabout extends StatelessWidget {

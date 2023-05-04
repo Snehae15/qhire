@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-//import 'package:qhire/viewpost.dart';
+
 
 void main() => runApp(const Viewnotification());
 

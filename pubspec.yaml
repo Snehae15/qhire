@@ -37,6 +37,7 @@ dependencies:
   file_picker: ^5.2.8
   image_picker: ^0.8.4+4
   url_launcher: ^6.1.10
+#  flutter_dialogflow: ^0.1.1
 
 
 

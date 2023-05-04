@@ -1,14 +1,24 @@
 import 'dart:convert';
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/pagehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class Viewpro extends StatelessWidget {
+class Viewpro extends StatefulWidget {
   const Viewpro({Key? key}) : super(key: key);
 
   static const String _title = 'View Profile';
+
+  @override
+  State<Viewpro> createState() => _ViewproState();
+}
+
+class _ViewproState extends State<Viewpro> {
+  late File _image;
 
   Future<dynamic> profileView() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
@@ -20,17 +30,31 @@ class Viewpro extends StatelessWidget {
     };
     print('>>>>>>>>>>>>$data');
 
-    var response = await post(Uri.parse('${Con.url}viewstudent.php'), body: data);
+    var response =
+    await post(Uri.parse('${Con.url}viewstudent.php'), body: data);
     print(response.body);
     var res = jsonDecode(response.body);
     return res;
-     //print(res);
+  }
+
+  Future<void> _getImage() async {
+    final imagePicker = ImagePicker();
+    final pickedFile = await imagePicker.pickImage(
+      source: ImageSource.gallery,
+    );
+    setState(() {
+      if (pickedFile != null) {
+        _image = File(pickedFile.path);
+      } else {
+        print('No image selected.');
+      }
+    });
   }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: _title,
+      title: Viewpro._title,
       home: Scaffold(
         appBar: AppBar(
           leading: IconButton(
@@ -45,25 +69,37 @@ class Viewpro extends StatelessWidget {
           padding: const EdgeInsets.all(20.0),
           child: FutureBuilder(
             future: profileView(),
-            builder: (context,snapshot) {
-              if(!snapshot.hasData){
+            builder: (context, snapshot) {
+              if (!snapshot.hasData) {
                 return Center(child: CircularProgressIndicator());
-              }
-              else if (snapshot.data[0]['message'] == 'failed') {
-              return Center(child: Text('no data'));
-              } else
-              return ListView(
-                children: [
-              Padding(
-              padding: const EdgeInsets.all(16.0),
-              child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-              CircleAvatar(
-              radius: 50.0,
-              // backgroundImage: AssetImage('asset/profilepic.jpg'),
-              ),
-                  Row(
+              } else if (snapshot.data[0]['message'] == 'failed') {
+                return Center(child: Text('no data'));
+              } else {
+                return ListView(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(16.0),
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Stack(
+                          children: [
+                            CircleAvatar(
+                              radius: 50.0,
+                              backgroundImage:
+                              AssetImage('asset/profilepic.jpg'),
+                            ),
+                            Positioned(
+                              left: 70,
+                              right: 0,
+                              bottom: 0,
+                              child: IconButton(
+                                icon: Icon(Icons.add_a_photo_outlined),
+                                onPressed: _getImage,
+                              ),
+                            ),
+                          ],
+                        ),
+                            Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
                     Text('Name',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
@@ -123,9 +159,10 @@ class Viewpro extends StatelessWidget {
               ),
             ]);
             }
-          ),
+          },
         ),
       ),
+    ),
     );
   }
 }

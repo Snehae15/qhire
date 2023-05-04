@@ -2,7 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/login.dart';
+
 
 class Editreg extends StatefulWidget {
   const Editreg({Key? key}) : super(key: key);

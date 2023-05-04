@@ -4,8 +4,6 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qhire/const.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
 import 'package:qhire/pagehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

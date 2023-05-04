@@ -1,11 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qhire/editprofile.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
-import 'package:qhire/q&a.dart';
+
 import 'package:qhire/suggestion.dart';
-import 'package:qhire/tests.dart';
+
 import 'package:qhire/view%20news.dart';
 import 'package:qhire/viewpost.dart';
 import 'package:qhire/viewprofile.dart';
@@ -33,7 +30,7 @@ class _HomeState extends State<Homepage1> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
+     appBar: AppBar(
         title: Text("Q-Hire"),
         centerTitle: true,
         leading: GestureDetector(
@@ -47,7 +44,16 @@ class _HomeState extends State<Homepage1> {
             Icons.person,
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              // Add your search functionality here
+            },
+            icon: Icon(Icons.search),
+          ),
+        ],
       ),
+
       body:
       ListView(
         children: [
@@ -78,7 +84,9 @@ class _HomeState extends State<Homepage1> {
                       },
                       icon: Icon(Icons.arrow_forward),
                       color: Colors.blue,
+
                     ),
+
                   ],
                 ),
               ),

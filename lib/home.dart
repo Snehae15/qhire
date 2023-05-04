@@ -5,12 +5,9 @@ import 'package:qhire/addabout.dart';
 import 'package:qhire/addeducation.dart';
 import 'package:qhire/addinterest.dart';
 import 'package:qhire/addskill.dart';
-import 'package:qhire/editprofile.dart';
-import 'package:qhire/homepage.dart';
-import 'package:qhire/homepage1.dart';
-import 'package:qhire/q&a.dart';
+
 import 'package:qhire/skillassessnment1.dart';
-import 'package:qhire/suggestion.dart';
+
 import 'package:qhire/updateprofile.dart';
 import 'package:qhire/viewabout.dart';
 import 'package:qhire/vieweducation.dart';
@@ -18,7 +15,7 @@ import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewpost.dart';
 import 'package:qhire/viewprofile.dart';
 import 'package:qhire/viewskill.dart';
-import 'package:shared_preferences/shared_preferences.dart';
+
 
 class Home extends StatefulWidget {
   const Home({Key? key}) : super(key: key);

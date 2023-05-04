@@ -1,17 +1,12 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qhire/chatboat.dart';
-import 'package:qhire/editprofile.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/homepage.dart';
 import 'package:qhire/homepage1.dart';
 import 'package:qhire/more.dart';
-import 'package:qhire/newpage.dart';
-import 'package:qhire/q&a.dart';
-import 'package:qhire/suggestion.dart';
-import 'package:qhire/view%20news.dart';
-import 'package:qhire/viewpost.dart';
-import 'package:qhire/viewprofile.dart';
+import 'package:qhire/viewjob.dart';
+
+
 
 class Pagehome extends StatefulWidget {
   const Pagehome({Key? key}) : super(key: key);
@@ -26,8 +21,8 @@ class _HomeState extends State<Pagehome> {
     Home(),
     Homepage1(),
     Morepage(),
-    ChatbotPage(),
-    Suggestion(),
+    ChatPage(),
+    Viewjob(),
   ];
 
   @override
@@ -62,8 +57,8 @@ class _HomeState extends State<Pagehome> {
             label: "Message",
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.notifications),
-            label: 'Notifications',
+            icon: Icon(Icons.shopping_bag),
+            label: 'Jobs',
           ),
         ],
         // currentIndex: _selectedIndex,

@@ -3,11 +3,10 @@ import 'package:flutter/material.dart';
 import 'package:qhire/add%20post.dart';
 import 'package:qhire/addabout.dart';
 import 'package:qhire/addeducation.dart';
+import 'package:qhire/addinnovativeidea.dart';
 import 'package:qhire/addinterest.dart';
 import 'package:qhire/addskill.dart';
-
 import 'package:qhire/skillassessnment1.dart';
-
 import 'package:qhire/updateprofile.dart';
 import 'package:qhire/viewabout.dart';
 import 'package:qhire/vieweducation.dart';
@@ -197,8 +196,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          'Postname\n'
-                              'Description',
+                          'Postname\n',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -250,8 +248,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Education\n'
-                              'School',
+                          'Education\n',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -404,7 +401,74 @@ class _HomeState extends State<Home> {
               ),
             ),
           ),
+
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 180,
+              width: 1000,
+              padding: EdgeInsets.all(10),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.blue,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(8.0),
+                        child: Text(
+                          'INNOVATIVE IDEA',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
+                      Row(
+                        children: [
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Viewonidea()));
+                              },
+                              child: Text('View on ideas'),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Viewallidea()));
+                              },
+                              child: Text('View all idea'),
+                            ),
+                          ),
+                        ],
+                      ),
+
+                      IconButton(
+                        onPressed: () {
+                          Navigator.push(context, MaterialPageRoute(builder: (
+                              context) =>Addidea()));
+                        },
+                        icon: Icon(Icons.add),
+                      ),
+                    ],
+                  ),
                 ],
+              ),
+            ),
+          ),
+
+        ],
               ),
     );
   }

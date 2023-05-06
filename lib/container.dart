@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:qhire/login.dart';
 
-void main() => runApp(MyApps());
+void main() => runApp(Task());
 
-class MyApps extends StatelessWidget {
+class Task extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       // title: 'Centered Containers',
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Centered Containers'),
+          title: Text('Exam'),
         ),
         body: Center(
           child: Row(
@@ -29,7 +29,7 @@ class MyApps extends StatelessWidget {
                   color: Colors.blue,
                   child: Center(
                     child: Text(
-                      'Container 1',
+                      'Task 1',
                       style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 24,
@@ -51,7 +51,7 @@ class MyApps extends StatelessWidget {
                   color: Colors.white24,
                   child: Center(
                     child: Text(
-                      'Container 2',
+                      'Task 2',
                       style: TextStyle(
                         color: Colors.blueGrey,
                         fontSize: 24,

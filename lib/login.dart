@@ -55,15 +55,19 @@ class _LogState extends State<Log> {
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
             return Pagehome();
-          },
-        ));
-      } else {
+            }
+            ));
+
+          } else if (res['message'] == 'Failed to LogIn') {
+        Fluttertoast.showToast(msg: 'Please wait until you get accepted');
+        } else {
         Fluttertoast.showToast(msg: 'Invalid email or password');
-      }
-    } else {
-      Fluttertoast.showToast(msg: 'Something went wrong!');
-    }
-  }
+        }
+            } else {
+            Fluttertoast.showToast(msg: 'Something went wrong!');
+            }
+
+        }
 
   @override
   Widget build(BuildContext context) {

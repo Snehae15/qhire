@@ -20,7 +20,7 @@ class Viewpost extends StatelessWidget {
     print(sp);
 
     var data = {
-      "id": sp, // add a null check here
+      "id": sp,
     };
     print('>>>>>>>>>>>>>>>>>>>>$data');
 
@@ -60,72 +60,63 @@ class Viewpost extends StatelessWidget {
           child: FutureBuilder(
             future: viewPost(),
             builder: (context, snapshot) {
-              if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
-              } else if (snapshot.data[0]['message'] == 'failed') {
-                return Center(child: Text('No data'));
-              }
-                return ListView.builder(
-                  itemCount: snapshot.data.length,
-                  itemBuilder: (context, index) {
-                    return Container(
-                      margin: const EdgeInsets.only(bottom: 12),
-                      padding: const EdgeInsets.all(12),
-                      decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: Colors.white,
-                        boxShadow: [
-                          BoxShadow(
-                            color: Colors.grey.withOpacity(0.5),
-                            spreadRadius: 2,
-                            blurRadius: 5,
-                            offset: Offset(0, 3),
-                          ),
-                        ],
-                      ),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          Text(
-                            snapshot.data[index]['postname'],
-                            style: TextStyle(
-                              fontSize: 20,
-                              fontWeight: FontWeight.bold,
-                            ),
-                          ),
-                          SizedBox(height: 8),
-                          Text(
-                            snapshot.data[index]['description'],
-                            style: TextStyle(fontSize: 16),
-                          ),
-                          SizedBox(height: 8),
-                          FutureBuilder(
-                            future: getImage(snapshot.data[index]['uploadfile']),
-                            builder: (context, imageSnapshot) {
-                              if (imageSnapshot.hasData) {
-                                return SizedBox(
-                                  width: double.infinity,
-                                  height: 200,
-                                  child: Image.memory(
-                                    imageSnapshot.data!,
-                                    fit: BoxFit.cover,
-                                  ),
-                                );
-                              } else {
-                                return Container();
-                              }
-                            },
-                          ),
-                        ],
-                      ),
-                    );
-                  },
-                );
-              }
-
-          ),
-        ),
-      ),
+    if (!snapshot.hasData) {
+    return Center(child: CircularProgressIndicator());
+    } else if (snapshot.data[0]['message'] == 'failed') {
+    return Center(child: Text('No data'));
+    }
+    return ListView.builder(
+    itemCount: snapshot.data.length,
+    itemBuilder: (context, index) {
+    return Container(
+    margin: const EdgeInsets.only(bottom: 12),
+    padding: const EdgeInsets.all(12),
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(8),
+    color: Colors.white,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.grey.withOpacity(0.5),
+    spreadRadius: 2,
+    blurRadius: 5,
+    offset: Offset(0, 3),
+    ),
+    ],
+    ),
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+    Text(
+    snapshot.data[index]['postname'],
+    style: TextStyle(
+    fontSize: 20,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 8),
+    Text(
+    snapshot.data[index]['description'],
+    style: TextStyle(fontSize: 16),
+    ),
+    Container(
+    height: 350,
+    width: 350,
+    color: Colors.grey,
+    child: Image.network(Con.img+snapshot.data[index]['uploadfile'],
+    fit:BoxFit.fill,
+    ),
+    ),
+    ],
+    ),
     );
-  }
+
+    }
+    );
+    },
+    ),
+    ),
+    ),
+    );
+    }
+
 }

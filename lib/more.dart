@@ -1,10 +1,11 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:qhire/aluminitalk.dart';
 import 'package:qhire/coursepage.dart';
+import 'package:qhire/gd.dart';
 import 'package:qhire/vieweducation.dart';
 import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewinterviewpreparation.dart';
-import 'package:qhire/viewpost.dart';
 import 'package:qhire/viewprofile.dart';
 import 'package:qhire/viewskill.dart';
 
@@ -129,7 +130,7 @@ class _MorepageState extends State<Morepage> {
       onPressed: () {
       Navigator.push(
       context,
-      MaterialPageRoute(builder: (context) => InterviewPreparationPage()),
+      MaterialPageRoute(builder: (context) => Interview()),
       );
       },
       child: Text('View All'),
@@ -175,7 +176,7 @@ class _MorepageState extends State<Morepage> {
                       ElevatedButton(
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Viewpost()));
+                                builder: (context) => Aluminitalk()));
                           },
                           child: Text('View'),
                         ),
@@ -217,7 +218,7 @@ class _MorepageState extends State<Morepage> {
                      ElevatedButton(
                           onPressed: () {
                             Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Vieweducation()));
+                                builder: (context) => Groupdiscuttion()));
                           },
                           child: Text('View'),
                         ),

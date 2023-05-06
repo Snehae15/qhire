@@ -15,7 +15,7 @@ class Viewpost extends StatelessWidget {
 
   Future<dynamic> viewPost() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
-    var sp = spref.getString('emp_id');
+    var sp = spref.getString('log_id');
     print(sp);
 
     var data = {
@@ -59,6 +59,14 @@ class Viewpost extends StatelessWidget {
                       itemBuilder: (context, index) {
                         return Column(
                           children: [
+                            Container(
+                              height: 100,
+                              width: 100,
+                              color: Colors.green,
+                              child: Image.network(Con.img+snapshot.data![index]['uploadfile'],
+                                fit:BoxFit.fill,
+                              ),
+                            ),
                             Row(
                                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                                 children: [

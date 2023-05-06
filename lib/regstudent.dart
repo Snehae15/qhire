@@ -269,7 +269,7 @@ class _RegstudentState extends State<Regstudent> {
 
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: email,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -277,22 +277,22 @@ class _RegstudentState extends State<Regstudent> {
                   hintText: "Enter Email id",
                 ),
                 keyboardType: TextInputType.emailAddress,
-                // validator: (value) {
-                //   if (value.isEmpty) {
-                //     return "Please enter your email";
-                //   }
-                //   if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").hasMatch(value)) {
-                //     return "Please enter a valid email address";
-                //   }
-                //   return null;
-                // },
+                validator: (value) {
+                  if (value!.isEmpty) {
+                    return "Please enter your email";
+                  }
+                  if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").hasMatch(value)) {
+                    return "Please enter a valid email address";
+                  }
+                  return null;
+                },
               ),
             ),
 
 
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: resume,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -300,21 +300,22 @@ class _RegstudentState extends State<Regstudent> {
                 ),
               ),
             ),
-            //   Padding(
-            //     padding: EdgeInsets.all(8.0),
-            //     child: GestureDetector(
-            //       onTap: _pickFile,
-            //       child: AbsorbPointer(
-            //         child: TextField(
-            //           controller: upload_resume,
-            //           decoration: InputDecoration(
-            //             border: OutlineInputBorder(),
-            //             labelText: "Upload_resume",
-            //             hintText: "Enter Upload_resume",
-            //           ),
-            //         ),
-            //       ),
-            //     ),
+              // Padding(
+              //   padding: EdgeInsets.all(8.0),
+              //   child: GestureDetector(
+              //     onTap: _pickFile,
+              //     child: AbsorbPointer(
+              //       child: TextField(
+              //         controller: upload_resume,
+              //         decoration: InputDecoration(
+              //           border: OutlineInputBorder(),
+              //           labelText: "Upload_resume",
+              //           hintText: "Enter Upload_resume",
+              //         ),
+              //       ),
+              //     ),
+              //   ),
+              // ),
             ElevatedButton(onPressed: (){
               getData();
               //Fluttertoast.showToast(msg: "Successfully registered");

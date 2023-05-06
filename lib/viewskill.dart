@@ -1,68 +1,82 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:qhire/const.dart';
 import 'package:qhire/home.dart';
-
-
-void main() => runApp(const Viewskill());
+import 'package:shared_preferences/shared_preferences.dart';
 
 class Viewskill extends StatelessWidget {
-  const Viewskill({super.key});
+  const Viewskill({Key? key}) : super(key: key);
 
   static const String _title = 'View skill';
+
+  Future<List<dynamic>> viewSkill() async {
+    SharedPreferences spref = await SharedPreferences.getInstance();
+    var sp = spref.getString('log_id');
+    print(sp);
+
+    var data = {
+      "id": sp,
+    };
+    print('>>>>>>>$data');
+
+    var response = await post(Uri.parse('${Con.url}viewskill.php'), body: data);
+    print(response.body);
+    var res = jsonDecode(response.body);
+    return res;
+  }
 
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: _title,
       home: Scaffold(
-        appBar: AppBar(title: const Text(_title),
+        appBar: AppBar(
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
-            onPressed:(){
-              Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Home()));
+            icon: const Icon(Icons.arrow_back),
+            onPressed: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (context) => Home()));
             },
-          ),),
-        body: const MyStatelessWidget(),
-      ),
-    );
-  }
-  @override
-  State<StatefulWidget> createState() {
-    // TODO: implement createState
-    throw UnimplementedError();
-  }
-}
+          ),
+        ),
+        body: Padding(
+          padding: const EdgeInsets.all(20.0),
+          child: FutureBuilder(
+            future: viewSkill(),
+            builder: (context, snapshot) {
+              if (snapshot.hasData && snapshot.data != null) {
+                if (snapshot.data![0]['message'] == 'failed') {
+                  return Center(child: Text('no data'));
+                } else {
+                  return ListView.builder(
+                    itemCount: snapshot.data!.length,
+                    itemBuilder: (context, index) {
+                      return Container(
+                        padding: EdgeInsets.all(16.0),
+                        margin: EdgeInsets.only(bottom: 16.0),
+                        decoration: BoxDecoration(
+                          border: Border.all(color: Colors.grey),
+                          borderRadius: BorderRadius.circular(8.0),
+                        ),
+                        child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Text('SKILL', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            SizedBox(height: 8.0),
+                            Text(snapshot.data![index]['skill'] ?? ''),
+                          ],
+                        ),
+                      );
+                    },
+                  );
+                }
+              } else {
+                return Center(child: CircularProgressIndicator());
+              }
 
-class MyStatelessWidget extends StatelessWidget {
-  const MyStatelessWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Card(
-        elevation: 0,
-        // clipBehavior is necessary because, without it, the InkWell's animation
-        // will extend beyond the rounded edges of the [Card]
-        // (see https://github.com/flutter/flutter/issues/109776)
-        // This comes with a small performance cost, and you should not set [clipBehavior]
-        // unless you need it.
-        clipBehavior: Clip.hardEdge,
-        child: InkWell(
-          splashColor: Colors.blue.withAlpha(50),
-          onTap: () {
-            debugPrint('Card tapped.');
-          },
-          child: const SizedBox(
-            width: 500,
-            height: 500,
-            child: Padding(
-              padding: EdgeInsets.all(8.0),
-              child: Text('View skill\n'
-                  'interpersonal skill\n'
-                  ''
-                  'organising skill\n'
-                  'html\n'),
-            ),
+            },
           ),
         ),
       ),

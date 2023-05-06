@@ -54,14 +54,6 @@ class Vieweducation extends StatelessWidget {
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
                 color: Colors.white70,
-                boxShadow: [
-                  BoxShadow(
-                    color: Colors.grey.withOpacity(0.3),
-                    spreadRadius: 2,
-                    blurRadius: 5,
-                    offset: Offset(0, 2),
-                  ),
-                ],
               ),
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
@@ -74,72 +66,121 @@ class Vieweducation extends StatelessWidget {
                       else if (snapshot.data[0]['message'] == 'failed') {
                         return Center(child: Text('no data'));
                       } else
-                        return ListView.builder(
-                            itemCount: snapshot.data.length,
-                            itemBuilder: (context, index) {
-                              return Column(
-                                children: [
-                                  SizedBox(height: 10),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('CENTER NAME',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['centername']),
-                                      ]),
+    return ListView.builder(
+    itemCount: snapshot.data!.length,
+    itemBuilder: (context, index) {
+    var jobData = snapshot.data![index];
+    return Container(
+    margin: EdgeInsets.symmetric(vertical: 8.0),
+    padding: EdgeInsets.all(12.0),
+    decoration: BoxDecoration(
+    borderRadius: BorderRadius.circular(10),
+    color: Colors.white70,
+    boxShadow: [
+    BoxShadow(
+    color: Colors.grey.withOpacity(0.3),
+    spreadRadius: 2,
+    blurRadius: 5,
+    offset: Offset(0, 2),
+    ),
+    ],
+    ),
+    child: Column(
+    crossAxisAlignment: CrossAxisAlignment.start,
+    children: [
+    Text(
+    'Center Name',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['centername']),
+    SizedBox(height: 12.0),
+    Text(
+    'Degree',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['degree']),
+    SizedBox(height: 12.0),
+    Text(
+    'Field',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['field']),
+    Text(
+    'Start Date',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['startdate']),
+    SizedBox(height: 12.0),
+    Text(
+    'End Date',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['enddate']),
+    SizedBox(height: 12.0),
+    Text(
+    'Grade',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['grade']),
+    SizedBox(height: 12.0),
+    Text(
+    'Activity',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['activity']),SizedBox(height: 12.0),
+    Text(
+    'Description',
+    style: TextStyle(
+    fontSize: 16.0,
+    fontWeight: FontWeight.bold,
+    ),
+    ),
+    SizedBox(height: 4.0),
+    Text(jobData['description']),
 
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('DEGREE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['degree']),
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('FIELD',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['field']),
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('START DATE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['startdate']),
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('END DATE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['enddate'])
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('GRADE',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['grade'].toString())
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('ACTIVITY',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['activity'].toString())
-                                      ]),
-                                  Row(
-                                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                      children: [
-                                        Text('DESCRIPTION',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                                        Text(snapshot.data![index]['description'].toString())
-                                      ]),
-                                  Divider(),
-                                ],
-                                );
-                                }
-                      );
-                  }),
-            ),
-          ),
-        ),
-      ),
+
+    ],
     ),
     );
-  }
+
+    }
+    );
+  },
+  ),
+  ),
+
+  ),
+  ),
+  ),
+  ),
+  );
+}
 }

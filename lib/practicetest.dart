@@ -30,7 +30,7 @@ class _Skill1State extends State<Practice> {
                   'you can check your answer after each question.\n'),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 180.0),
+              padding: const EdgeInsets.only(left: 150.0),
               child: Row(
                 children: [
                   ElevatedButton(onPressed: (){

@@ -17,7 +17,7 @@ const backgroundColor = Colors.blueAccent;
 const botBackgroundColor = Color.fromARGB(246, 22, 24, 24);
 
 Future<String> generateResponse(String prompt) async {
-  const apiKey = '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';
+  const apiKey = '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';
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(

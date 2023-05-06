@@ -7,6 +7,7 @@ import 'package:http/http.dart';
 import 'package:qhire/const.dart';
 
 import 'package:qhire/login.dart';
+import 'package:qhire/payment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Reg extends StatefulWidget {
@@ -77,7 +78,7 @@ class _RegState extends State<Reg> {
         Fluttertoast.showToast(msg:"successfully registered");
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return Log();
+            return PaymentPage();
           },
         ));
       }

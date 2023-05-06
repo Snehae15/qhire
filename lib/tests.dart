@@ -1,46 +1,47 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
+import 'package:http/http.dart';
+import 'package:qhire/const.dart';
 import 'package:qhire/skillassessnment1.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 class Question {
-  final String questionText;
-  final List<String> options;
+  final String name;
+  final String link;
+  final String content;
 
-  Question({required this.questionText, required this.options});
+  Question({required this.name, required this.link,required this.content});
+  factory Question.fromJson(Map<String, dynamic> json) {
+    return Question(
+      name: json['name'],
+      link: json['link'],
+      content: json['content'],
+    );
+  }
 }
 
+
 class Questionnaire extends StatefulWidget {
+  Questionnaire({Key? key}) : super(key: key);
   @override
   _QuestionnaireState createState() => _QuestionnaireState();
 }
 
 class _QuestionnaireState extends State<Questionnaire> {
-  int _currentQuestionIndex = 0;
-  List<String> _selectedAnswers = [];
+  var _link ;
 
-  final List<Question> _questions = [    Question(      questionText: 'What is your favorite color?',      options: ['Red', 'Blue', 'Green', 'Yellow'],
-  ),
-    Question(
-      questionText: 'What is your favorite animal?',
-      options: ['Dog', 'Cat', 'Bird', 'Fish'],
-    ),
-    Question(
-      questionText: 'What is your favorite food?',
-      options: ['Pizza', 'Burger', 'Pasta', 'Rice'],
-    ),
-  ];
-
-  void _selectAnswer(String answer) {
-    setState(() {
-      _selectedAnswers.add(answer);
-      _currentQuestionIndex++;
-    });
-  }
-
-  void _resetQuestionnaire() {
-    setState(() {
-      _currentQuestionIndex = 0;
-      _selectedAnswers = [];
-    });
+  Future<dynamic> viewCourse() async {
+    var data;
+    var response = await post(Uri.parse('${Con.url}viewquestionair.php'), body: data);
+    if (response.statusCode == 200) {
+      var coursesJson = jsonDecode(response.body);
+      print(coursesJson);
+      // List<Course> courses = coursesJson.map((courseJson) => Course.fromJson(courseJson)).toList();
+      return coursesJson;
+    } else {
+      throw Exception('Failed to fetch questionair');
+    }
   }
 
   @override
@@ -50,55 +51,86 @@ class _QuestionnaireState extends State<Questionnaire> {
         title: Text('Questionnaire'),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
-          onPressed:(){
+          onPressed: () {
             Navigator.push(context,
                 MaterialPageRoute(builder: (context) => Skill1()));
           },
         ),
       ),
-      body: _currentQuestionIndex < _questions.length
-          ? Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            _questions[_currentQuestionIndex].questionText,
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 20),
-          ..._questions[_currentQuestionIndex].options.map(
-                (option) => ElevatedButton(
-              onPressed: () => _selectAnswer(option),
-              child: Text(option),
-            ),
-          ),
-        ],
-      )
-          : Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          Text(
-            'Thank you for completing the questionnaire!',
-            style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
-            ),
-          ),
-          SizedBox(height: 20),
-          Row(
-            children: [
-              ElevatedButton(
-                onPressed: _resetQuestionnaire,
-                child: Text('Restart'),
-              ),
-              ElevatedButton(onPressed: (){
-                Navigator.push(context, MaterialPageRoute(builder: (context)=>Skill1()));
-              }, child: Text("Finish")),
-            ],
-          ),
-        ],
+
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: FutureBuilder<dynamic>(
+          future: viewCourse(),
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                itemCount: snapshot.data!.length,
+                itemBuilder: (context, index) {
+                  // Course course = snapshot.data!['name'];
+                  return Container(
+                    height: 90,
+                    width: 1000,
+                    padding: EdgeInsets.all(8.0),
+                    decoration: BoxDecoration(
+                      border: Border.all(
+                        color: Colors.blue,
+                        width: 1,
+                      ),
+                      borderRadius: BorderRadius.circular(8),
+                    ),
+                    child: Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.all(5.0),
+                              child: Row(
+                                children: [
+                                  Text('${snapshot.data[index]['name']}',  // displays the name of the item from the snapshot data
+                                    style: TextStyle(
+                                      fontSize: 15,  // sets font size to 15
+                                      fontWeight: FontWeight.normal,  // sets font weight to normal
+                                    ),
+                                  ),
+
+                                  Text('${snapshot.data[index]['content']}',
+                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                ],
+                              ),
+                            ),
+                          ],
+                        ),
+                        InkWell(
+                            onTap: (){
+                              setState(() {
+                                _link = snapshot.data![index]['link'];
+                              });
+                              print(_link);
+                              print('....$_link');
+                              launchUrl(Uri.parse(_link),
+                                  mode: LaunchMode.externalApplication
+                              );
+                            },
+                            child: Icon(Icons.play_arrow)),
+                      ],
+                    ),
+                  );
+                },
+              );
+            } else if (snapshot.hasError) {
+              return Center(
+                child: Text('Failed to fetch courses'),
+              );
+            } else {
+              return Center(
+                child: CircularProgressIndicator(),
+              );
+            }
+          },
+        ),
       ),
     );
   }

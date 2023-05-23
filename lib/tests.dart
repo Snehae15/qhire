@@ -3,6 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
+import 'package:qhire/home.dart';
+import 'package:qhire/homepage1.dart';
 import 'package:qhire/skillassessnment1.dart';
 import 'package:url_launcher/url_launcher.dart';
 
@@ -48,17 +50,19 @@ class _QuestionnaireState extends State<Questionnaire> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Questionnaire'),
+        backgroundColor: Colors.black,
+        title: Text('Questionnaire page '),
         leading: IconButton(
           icon: Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Skill1()));
+                MaterialPageRoute(builder: (context) => Homepage1()));
           },
         ),
       ),
 
-      body: Padding(
+      body:
+      Padding(
         padding: const EdgeInsets.all(8.0),
         child: FutureBuilder<dynamic>(
           future: viewCourse(),

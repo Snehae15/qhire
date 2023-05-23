@@ -33,6 +33,7 @@ class Viewabout extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {

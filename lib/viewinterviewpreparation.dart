@@ -2,7 +2,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
+import 'package:qhire/homepage1.dart';
+import 'package:qhire/pagehome.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'home.dart';
 
 class Inter {
   final String name;
@@ -21,7 +25,7 @@ class Inter {
 }
 
 class Interview extends StatefulWidget {
-  Interview({Key? key}) : super(key: key);
+  const Interview({Key? key}) : super(key: key);
 
   @override
   State<Interview> createState() => _InterviewState();
@@ -49,10 +53,11 @@ class _InterviewState extends State<Interview> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Interview preparation'),
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
-              // Navigator.push(context, MaterialPageRoute(builder: (context) => More()));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => Pagehome()));
             },
           ),
         ),
@@ -72,7 +77,7 @@ class _InterviewState extends State<Interview> {
                       padding: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.blue,
+                          color: Colors.black,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
@@ -120,7 +125,7 @@ class _InterviewState extends State<Interview> {
                 );
               } else if (snapshot.hasError) {
                 return Center(
-                  child: Text('Failed to fetch courses'),
+                  child: Text('Failed to fetch Interview preparation'),
                 );
               } else {
                 return Center(

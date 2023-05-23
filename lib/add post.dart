@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:io';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
@@ -60,7 +61,7 @@ class _AddPostState extends State<AddPost> {
           ),
         );
       } else {
-        Fluttertoast.showToast(msg: 'Complaint registered');
+        Fluttertoast.showToast(msg: 'Post added');
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
             return Pagehome();
@@ -74,8 +75,8 @@ class _AddPostState extends State<AddPost> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Color.fromARGB(255, 107, 162, 222),
+      appBar: AppBar(title: Text("Add Post"),
+        backgroundColor: CupertinoColors.black,
       ),
       body: SingleChildScrollView(
         child: Form(
@@ -117,13 +118,13 @@ class _AddPostState extends State<AddPost> {
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please enter Complaint Subject';
+                      return 'Please enter Postname';
                     }
                     return null;
                   },
                   controller: post,
                   decoration: InputDecoration(
-                      labelText: 'Subject', border: OutlineInputBorder()),
+                      labelText: 'Postname', border: OutlineInputBorder()),
                 ),
               ),
               Padding(
@@ -131,7 +132,7 @@ class _AddPostState extends State<AddPost> {
                 child: TextFormField(
                   validator: (value) {
                     if (value == null || value.isEmpty) {
-                      return 'Please Complaint description';
+                      return 'Please post description';
                     }
                     return null;
                   },
@@ -170,16 +171,17 @@ class _AddPostState extends State<AddPost> {
                                   color: Colors.white,
                                 )
                               ],
-                            )),
+                            )
+                        ),
                         height: 50,
                         width: 320,
                         decoration: BoxDecoration(
-                          color: Color.fromARGB(255, 107, 162, 222),
                           borderRadius: BorderRadius.circular(50),
+                          color: Colors.black, // <-- Add this line
                         ),
                       ),
                     ),
-                  ),
+                  )
                 ],
               ),
             ],

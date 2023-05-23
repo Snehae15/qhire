@@ -31,6 +31,8 @@ class _MorepageState extends State<Morepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Explore "),
+        backgroundColor: Colors.black,
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
@@ -43,116 +45,120 @@ class _MorepageState extends State<Morepage> {
         ),
       ),
       body: ListView(
-          children: [
-            Padding(
-              padding: const EdgeInsets.all(5.0),
-              child: Container(
-                height: 100,
-                width: 1000,
-                padding: EdgeInsets.all(2.0),
-                decoration: BoxDecoration(
-                  border: Border.all(
-                    color: Colors.blue,
-                    width: 1,
-                  ),
-                  borderRadius: BorderRadius.circular(2),
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 100,
+              width: 100,
+              padding: EdgeInsets.all(2.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
                 ),
-                child: Row(
-                  children: [
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Padding(
-                          padding: const EdgeInsets.all(2.0),
-                          child: Row(
-                            children: [
-                              Text(
-                                'Course',
-                                style: TextStyle(
-                                  fontSize: 15,
-                                  fontWeight: FontWeight.normal,
-                                ),
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Course',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
                               ),
-                            ],
-                          ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 5),
-                        ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(
-                              context,
-                              MaterialPageRoute(builder: (context) => Coursepage()),
-                            );
-                          },
-                          child: Text('View All'),
-                        ),
-                      ],
-                    ),
-                  ],
-                ),
+                      ),
+                      SizedBox(height: 2),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Coursepage()),
+                          );
+                        },
+                        child: Text('View All'),
+                      style: ElevatedButton.styleFrom(
+                        primary: Colors.black,
+                      ),
+                      ),
+            ],
+                  ),
+                ],
               ),
             ),
-
-      Padding(
-      padding: const EdgeInsets.all(5.0),
-      child: Container(
-      height: 100,
-      width: 1000,
-      padding: EdgeInsets.all(2.0),
-      decoration: BoxDecoration(
-      border: Border.all(
-      color: Colors.blue,
-      width: 1,
-      ),
-      borderRadius: BorderRadius.circular(2),
-      ),
-      child: Row(
-      children: [
-      Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-      Padding(
-      padding: const EdgeInsets.all(2.0),
-      child: Row(
-      children: [
-      Text(
-      'Interview preparation',
-      style: TextStyle(
-      fontSize: 15,
-      fontWeight: FontWeight.normal,
-      ),
-      ),
-      ],
-      ),
-      ),
-      SizedBox(height: 5),
-      ElevatedButton(
-      onPressed: () {
-      Navigator.push(
-      context,
-      MaterialPageRoute(builder: (context) => Interview()),
-      );
-      },
-      child: Text('View All'),
-      ),
-      ],
-      ),
-      ],
-      ),
-      ),
-      ),
-
-    Padding(
-    padding: const EdgeInsets.all(5.0),
-
-
-    child: Container(
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
               height: 100,
-              width: 1000,
+              width: 100,
+              padding: EdgeInsets.all(2.0),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(2),
+              ),
+              child: Row(
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: Row(
+                          children: [
+                            Text(
+                              'Interview preparation',
+                              style: TextStyle(
+                                fontSize: 15,
+                                fontWeight: FontWeight.normal,
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                      SizedBox(height: 5),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(
+                                builder: (context) => Interview()),
+                          );
+                        },
+                        child: Text('View All') ,
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                        ),
+                      ),
+                    ],
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 100,
+              width: 100,
               padding: EdgeInsets.all(2),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(5),
@@ -174,12 +180,17 @@ class _MorepageState extends State<Morepage> {
                       ),
                       SizedBox(height: 5),
                       ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Aluminitalk()));
-                          },
-                          child: Text('View'),
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Aluminitalk()));
+                        },
+                        child: Text('View'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
                         ),
+                      ),
                     ],
                   ),
                 ],
@@ -187,14 +198,14 @@ class _MorepageState extends State<Morepage> {
             ),
           ),
           Padding(
-            padding: const EdgeInsets.all(5.0),
+            padding: const EdgeInsets.all(8.0),
             child: Container(
               height: 100,
               width: 100,
               padding: EdgeInsets.all(2),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(2),
@@ -215,111 +226,26 @@ class _MorepageState extends State<Morepage> {
                         ),
                       ),
                       SizedBox(height: 5),
-                     ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Groupdiscuttion()));
-                          },
-                          child: Text('View'),
+                      ElevatedButton(
+                        onPressed: () {
+                          Navigator.push(
+                              context,
+                              MaterialPageRoute(
+                                  builder: (context) => Groupdiscuttion()));
+                        },
+                        child: Text('View'),
+                        style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
                         ),
-
+                      ),
                     ],
                   ),
                 ],
               ),
             ),
           ),
-
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              height: 100,
-              width: 100,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.blue,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Text(
-                          'Skill Assessment',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 5),
-                          Padding(
-                            padding: const EdgeInsets.all(2.0),
-                            child: ElevatedButton(
-                              onPressed: () {
-                                Navigator.push(context, MaterialPageRoute(
-                                    builder: (context) => Viewskill()));
-                              },
-                              child: Text('View'),
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-            ),
-              ),
-
-          Padding(
-            padding: const EdgeInsets.all(5.0),
-            child: Container(
-              height: 100,
-              width: 100,
-              padding: EdgeInsets.all(2),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.blue,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(2),
-              ),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: Text(
-                          'Interests',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.normal,
-                          ),
-                        ),
-                      ),
-                      SizedBox(height: 2),
-                       ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(
-                                builder: (context) => Viewinterest()));
-                          },
-                          child: Text('All interest'),
-                        ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-      ],
-    ),
+        ],
+      ),
     );
   }
 }

@@ -1,6 +1,4 @@
 import 'dart:convert';
-
-
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
@@ -13,7 +11,7 @@ class ChatPage extends StatefulWidget {
   State<ChatPage> createState() => _ChatPageState();
 }
 
-const backgroundColor = Colors.blueAccent;
+const backgroundColor = Colors.black;
 const botBackgroundColor = Color.fromARGB(246, 22, 24, 24);
 
 Future<String> generateResponse(String prompt) async {
@@ -62,6 +60,7 @@ class _ChatPageState extends State<ChatPage> {
     return Scaffold(
       appBar: AppBar(
         title: Text("CHAT HERE"),
+        backgroundColor: Colors.black,
         centerTitle: true,
       ),
       backgroundColor: Colors.white,

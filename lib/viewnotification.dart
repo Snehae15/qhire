@@ -14,6 +14,7 @@ class Viewnotification extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(title: const Text(_title)),
+        backgroundColor: Colors.black,
         body: const MyStatelessWidget(),
       ),
     );

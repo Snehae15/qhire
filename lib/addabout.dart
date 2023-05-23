@@ -20,62 +20,80 @@ class Addabout extends StatefulWidget {
 class _AddaboutState extends State<Addabout> {
   var about = TextEditingController();
 
-  Future<void> getData() async{
+  Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
-    var data ={
-      "id":sp,
-    "about": about.text,
-  };
+    var data = {
+      "id": sp,
+      "about": about.text,
+    };
     print(data);
-    var response = await post(Uri.parse('${Con.url}addabout.php'),body : data);
+    var response = await post(Uri.parse('${Con.url}addabout.php'), body: data);
     print(response.body);
     if (response.statusCode == 200) {
       var res = jsonDecode(response.body)["message"];
       if (res == 'Added') {
-        const snackBar = SnackBar(content: Text("added"),
+        const snackBar = SnackBar(
+          content: Text("added"),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Navigator.push(context,MaterialPageRoute(builder: (context){
-          return Viewabout();
-        },
-        ));
+        Navigator.push(
+          context,
+          MaterialPageRoute(builder: (context) {
+            return Viewabout();
+          }),
+        );
       }
-    }
-    else {
+    } else {
       Fluttertoast.showToast(msg: "something went wrong");
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        appBar: AppBar(
-        title: Text("Add about",style: TextStyle(color: Colors.black),),
-      backgroundColor: Colors.blueGrey, centerTitle: true,),
+      appBar: AppBar(
+        title: Text(
+          "Add about",
+          style: TextStyle(color: Colors.white),
+        ),
+        backgroundColor: Colors.black87,
+        centerTitle: true,
+      ),
       body: SafeArea(
-        child:Center(
-        child: ListView(
+        child: Center(
+          child: ListView(
             children: [
-                 Padding(
-                   padding: const EdgeInsets.only(left:20.0,right: 20.0,top:10.0),
-                   child: Text("You can write about your years of experience, industry, or skills. \n People also talk about their achievements or previous job experiences."),
-                 ),
-                        Padding(
-                              padding: const EdgeInsets.only(left:20.0,right: 20.0,top:10.0),
-                              child: TextField(
-                                controller: about,
-                            keyboardType: TextInputType.multiline,
-                            maxLines: 10,
-                            decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                            labelText:"Add about",hintText: "Enter about",
-                            focusedBorder: OutlineInputBorder(
-                            borderSide: BorderSide(width: 1, color: Colors.white30)
-                        )
-                        ),
-
-                        ),
-                        ),
+              Padding(
+                padding:
+                const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                child: Text(
+                  "You can write about your years of experience, industry, or skills. \n People also talk about their achievements or previous job experiences.",
+                ),
+              ),
+              Padding(
+                padding:
+                const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                child: Container(
+                  decoration: BoxDecoration(
+                    border: Border.all(color: Colors.black), // Add black border
+                    borderRadius: BorderRadius.circular(5.0),
+                  ),
+                  child: TextField(
+                    controller: about,
+                    keyboardType: TextInputType.multiline,
+                    maxLines: 5,
+                    decoration: InputDecoration(
+                      border: InputBorder.none, // Remove default border
+                      labelText: "Add about",
+                      hintText: "Enter about",
+                      focusedBorder: OutlineInputBorder(
+                        borderSide: BorderSide(width: 1, color: Colors.white30),
+                      ),
+                    ),
+                  ),
+                ),
+              ),
         SizedBox(height: 10,),
         InkWell(
           onTap: () {
@@ -86,16 +104,18 @@ class _AddaboutState extends State<Addabout> {
           child: Padding(
             padding: const EdgeInsets.only(left: 88.0,right: 90.0),
             child: Container(
-              child: Center(child: Text('ADD')),
+              child: Center(
+                child: Text("ADD", style: TextStyle(color: Colors.white),),
+              ),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(10),
-                color: Colors.blueGrey,
+                color: Colors.black87,
               ),
               height: 50,
               width: 50,
-
             ),
           ),
+
         ),
             ],
     ),

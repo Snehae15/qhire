@@ -36,6 +36,8 @@ class Viewinterest extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(
+          title: Text("View interests"),
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

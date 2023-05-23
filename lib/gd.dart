@@ -46,6 +46,7 @@ class _GroupdiscuttionState extends State<Groupdiscuttion> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          backgroundColor: Colors.black,
           title: Text('GD'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
@@ -70,7 +71,7 @@ class _GroupdiscuttionState extends State<Groupdiscuttion> {
                       padding: EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.blue,
+                          color: Colors.black,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),

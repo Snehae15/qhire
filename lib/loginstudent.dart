@@ -68,11 +68,11 @@ class _LogstudentState extends State<Logstudent> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.grey.shade400,
+      backgroundColor: Colors.black87,
       body: Container(
         decoration: BoxDecoration(
           image: DecorationImage(
-            image: AssetImage("assets/Free Instagram Story Template.jpg"),
+            image: AssetImage("assets/Wallpaper.jpeg"),
             fit: BoxFit.fill,
           ),
         ),
@@ -94,17 +94,22 @@ class _LogstudentState extends State<Logstudent> {
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Email", hintText: "Enter Email",
+                        prefixIcon: Icon(Icons.email)
                     ),
+                      // prefixIcon: Icon(Icons.email)
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.all(8.0),
                   child: TextField(
+                    obscureText: true,
                     controller: password,
                     decoration: InputDecoration(
                       border: OutlineInputBorder(),
                       labelText: "Password", hintText: "Enter password",
+                        prefixIcon: Icon(Icons.lock)
                     ),
+
                   ),
                 ),
                 SizedBox(height: 10,),
@@ -113,20 +118,19 @@ class _LogstudentState extends State<Logstudent> {
                     getData();
                   },
                   child: Container(
-                    child: Center(child: Text('Login')),
+                    child: Center(child: Text('Login', style: TextStyle(color: Colors.white))),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
-                      color: Color(0xFF78A9DA),
+                      color: Colors.black,
                     ),
                     height: 50,
                     width: 300,
-
                   ),
                 ),
                 TextButton(onPressed: () {
                   Navigator.push(context, MaterialPageRoute(builder: (
                       context) => Regstudent()));
-                }, child: Text("Don't have any account please login her!"))
+                }, child: Text("Don't have any account please login her!", style: TextStyle(color: Colors.black87)))
               ],
             ),
           ),

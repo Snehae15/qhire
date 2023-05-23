@@ -57,6 +57,8 @@ class _ViewproState extends State<Viewpro> {
       title: Viewpro._title,
       home: Scaffold(
         appBar: AppBar(
+          title: Text("Profile"),
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -81,24 +83,6 @@ class _ViewproState extends State<Viewpro> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Stack(
-                          children: [
-                            CircleAvatar(
-                              radius: 50.0,
-                              backgroundImage:
-                              AssetImage('asset/profilepic.jpg'),
-                            ),
-                            Positioned(
-                              left: 70,
-                              right: 0,
-                              bottom: 0,
-                              child: IconButton(
-                                icon: Icon(Icons.add_a_photo_outlined),
-                                onPressed: _getImage,
-                              ),
-                            ),
-                          ],
-                        ),
                             Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -148,12 +132,12 @@ class _ViewproState extends State<Viewpro> {
                         Text('Email',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                         Text(snapshot.data![0]['email'].toString())
                       ]),
-                  Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text('Employment Status',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
-                        Text(snapshot.data![0]['status'].toString())
-                      ]),
+                  // Row(
+                  //     mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //     children: [
+                  //       Text('Employment Status',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                  //       Text(snapshot.data![0]['status'].toString())
+                  //     ]),
                 ],
               ),
               ),
@@ -161,7 +145,17 @@ class _ViewproState extends State<Viewpro> {
             }
           },
         ),
-      ),
+        ),
+             floatingActionButton: Padding(
+               padding: const EdgeInsets.only(bottom:500,right:10),
+               child: FloatingActionButton(
+                    onPressed: () {
+
+                    },
+                    child: Icon(Icons.edit), // Change the icon here
+                    backgroundColor: Colors.black,
+    ),
+             ),
     ),
     );
   }

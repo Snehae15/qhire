@@ -70,6 +70,7 @@ class _AddeducationState extends State<Addeducation> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: Colors.black,
         title: Text("Add Education"),
         centerTitle: true,
         leading: IconButton(
@@ -227,7 +228,7 @@ class _AddeducationState extends State<Addeducation> {
               child: TextField(
                 controller: description,
                 keyboardType: TextInputType.multiline,
-                maxLines: 10,
+                maxLines: 5,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Description",
@@ -243,10 +244,11 @@ class _AddeducationState extends State<Addeducation> {
               child: Padding(
                 padding: const EdgeInsets.only(left: 88.0,right: 90.0),
                 child: Container(
-                  child: Center(child: Text('SAVE')),
+                  child: Center(child: Text('SAVE',
+                    style: TextStyle(color: Colors.white),),),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueGrey,
+                    color: Colors.black87,
                   ),
                   height: 50,
                   width: 50,

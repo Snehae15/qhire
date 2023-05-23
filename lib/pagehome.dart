@@ -21,14 +21,12 @@ class _HomeState extends State<Pagehome> {
     Home(),
     Homepage1(),
     Morepage(),
-    ChatPage(),
     Viewjob(),
   ];
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-
       body: pages[currentindex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentindex,
@@ -39,8 +37,8 @@ class _HomeState extends State<Pagehome> {
         },
         items:[
           BottomNavigationBarItem(
-            icon: Icon(Icons.person),
-            label: "Profile",
+            icon: Icon(Icons.local_activity),
+            label: "Activity",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
@@ -51,10 +49,6 @@ class _HomeState extends State<Pagehome> {
             icon: Icon(Icons.add),
 
             label: "More",
-          ),
-          BottomNavigationBarItem(
-            icon: Icon(Icons.message),
-            label: "Message",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.shopping_bag),

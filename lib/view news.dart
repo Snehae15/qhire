@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
@@ -31,6 +32,7 @@ class _ViewnewsState extends State<Viewnews> {
     return Scaffold(
       appBar: AppBar(
         title: Text("View News"),
+        backgroundColor: Colors.black,
         centerTitle: true,
       ),
       body: Padding(
@@ -45,14 +47,23 @@ class _ViewnewsState extends State<Viewnews> {
             } else if (snapshot.data[0]['message'] == 'failed') {
               return Center(child: Text('No items added'));
             } else {
-              return ListView.builder(
-                padding: const EdgeInsets.symmetric(horizontal: 10),
-                scrollDirection: Axis.horizontal,
+              return CarouselSlider.builder(
                 itemCount: snapshot.data.length,
-                itemBuilder: (context, index) {
+                options: CarouselOptions(
+                  height: 1000,
+                  aspectRatio: 10 / 9,
+                  viewportFraction: 0.8,
+                  initialPage: 0,
+                  enableInfiniteScroll: true,
+                  autoPlay: true,
+                  autoPlayInterval: Duration(seconds: 3),
+                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayCurve: Curves.easeInOutCubic,
+                ),
+                itemBuilder: (context, index, realIndex) {
                   return Container(
-                    width: 350,
-                    height: 100,
+                    width: 380,
+                    height: 200,
                     margin: const EdgeInsets.only(right: 20),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),

@@ -1,112 +1,103 @@
 import 'dart:convert';
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
+import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/login.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(PaymentPage());
 
-class PaymentPage extends StatefulWidget {
+class Payments extends StatefulWidget {
+  String id;
+  String amnt;
+  Payments({required this.id, Key? key, required this.amnt}) : super(key: key);
+
   @override
-  _PaymentPageState createState() => _PaymentPageState();
+  State<Payments> createState() => _PaymentsState();
 }
 
-class _PaymentPageState extends State<PaymentPage> {
-  var dt = TextEditingController();
-
-  TextEditingController dateinput = TextEditingController();
-  Future<void> getData() async {
+class _PaymentsState extends State<Payments> {
+  Future<String?> getSave() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
-    var data = {
-      "id":sp,
-      "dt":dt.text,
-    };
-    var response = await post(Uri.parse('${Con.url}payment.php'),body: data);
-    print(response.body);
-    if(response.statusCode==200){
-      var res = jsonDecode(response.body)["message"];
-      if(res=='Added'){
-        const snackBar = SnackBar(
-          content: Text('Successfully Registered'),
-        );
-        ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Fluttertoast.showToast(msg:"successfully registered");
-        Navigator.push(context, MaterialPageRoute(
-          builder: (context) {
-            return Log();
-          },
-        ));
-      }
 
-    }
-    else {
-      Fluttertoast.showToast(msg: 'Something went wrong!');
+    var data = {
+      "id": sp,
+      "amount": widget.amnt,
+    };
+    print(data);
+    var response = await post(Uri.parse('${Con.url}payment.php'), body: data);
+    var res = jsonDecode(response.body);
+    print(response.body);
+    if (response.statusCode == 200) {
+      if (res['message'] == 'Added') {
+        Fluttertoast.showToast(msg: "@payment added");
+        // Navigator.push(context,MaterialPageRoute(builder:(context){
+        //   return Stdhome();
+        // }));
+        return "upi://pay?pa=name@oksbi&pn=qhire&am=${widget.amnt}.00&cu=INR";
+      }
+    } else {
+      Fluttertoast.showToast(msg: "something went wrong");
     }
   }
+
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      title: 'Payment Page',
-      home: Scaffold(
-        appBar: AppBar(
-          title: Text('Payment Page'),
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Payments",
+          style: TextStyle(color: Colors.black),
         ),
-        body: Padding(
-          padding: EdgeInsets.all(16.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.stretch,
-            children: [
-              Text(
-                'Payment Amount - 200',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              SizedBox(height: 16.0),
-              Text(
-                'UPI- #######7889',
-                style: TextStyle(fontSize: 20.0),
-              ),
-              Padding(
-                padding: EdgeInsets.all(8.0),
-                child: TextFormField(
-                  controller: dt,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(),
-                    labelText:"Date",
-                  ), onTap: () async {
-          DateTime? date = await showDatePicker(
-            context: context,
-            initialDate: DateTime.now(),
-            firstDate: DateTime(1900),
-            lastDate: DateTime.now(),
-          );
-          if (date != null) {
-            dt.text = date.toString().split(' ')[0];
-          }
-        },
-          validator: (value) {
-            if (value == null || value.isEmpty) {
-              return 'Please select the date';
+        backgroundColor: Colors.lightBlue,
+        centerTitle: true,
+        leading: const Icon(
+          Icons.arrow_back,
+          color: Colors.black,
+        ),
+      ),
+      body: FutureBuilder(
+          future: getSave(),
+          builder: (context, AsyncSnapshot<String?> snapshot) {
+            if (!snapshot.hasData) {
+              return const Center(child: CircularProgressIndicator());
+            } else {
+              if (snapshot.data == null) {
+                return const Center(
+                  child: Text('Something went wrong'),
+                );
+              }
+              return ListView(children: [
+                Padding(
+                  padding:const EdgeInsets.all(8.0),
+                  child: Center(child: Text(snapshot.data!)),
+                ),
+                Padding(
+                  padding:const EdgeInsets.all(8.0),
+                  child: Text('price: ${widget.amnt}Rs'),
+                ),
+                Center(
+                  child: PrettyQr(
+                    size: 200,
+                    data: snapshot.data!,
+                    errorCorrectLevel: QrErrorCorrectLevel.M,
+                    roundEdges: true,
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.all(8.0),
+                  child: ElevatedButton(
+                      onPressed: () {
+                        getSave();
+                      },
+                      child: const Text("add")),
+                ),
+              ]);
             }
-            // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
-            return null;
-          },
-        ),
-      ),
-
-              SizedBox(height: 16.0),
-              ElevatedButton(onPressed: (){
-                //Fluttertoast.showToast(msg: "Successfully registered");
-                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
-              }, child: Text("PAY")),
-            ],
-          ),
-        ),
-      ),
+          }),
     );
   }
 }
-

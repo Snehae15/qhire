@@ -2,7 +2,6 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:qhire/first.dart';
 
-
 class Splash extends StatefulWidget {
   const Splash({Key? key}) : super(key: key);
 
@@ -25,9 +24,10 @@ class _SplashState extends State<Splash> {
         children: <Widget>[
           Container(
             decoration: BoxDecoration(
-              color: new Color(0xffc29a5c),
+              color: new Color(0xB101C),
               gradient: LinearGradient(
-                colors: [ new Color(0xff4a82b6), new Color(0xFF8080)],
+                colors: [ new Color(0xff101010),
+                 new Color(0xFF8080)],
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
               ),
@@ -38,7 +38,7 @@ class _SplashState extends State<Splash> {
             children: <Widget>[
               CircleAvatar(
                 radius: 80, // Adjust the radius as per your requirement
-                backgroundColor: Colors.grey[300],
+                backgroundColor: Colors.black87,
                 child: Padding(
                   padding: EdgeInsets.all(8),
                   child: ClipOval(

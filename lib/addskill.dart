@@ -50,8 +50,8 @@ class _AddskillState extends State<Addskill> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Add Skill",style: TextStyle(color: Colors.black),),
-        backgroundColor: Colors.blueGrey, centerTitle: true,),
+        title: Text("Add Skill",style: TextStyle(color: Colors.white),),
+        backgroundColor: Colors.black87, centerTitle: true,),
       body: SafeArea(
         child:Center(
           child: ListView(
@@ -86,10 +86,10 @@ class _AddskillState extends State<Addskill> {
                 child: Padding(
                   padding: const EdgeInsets.only(left: 88.0,right: 90.0),
                   child: Container(
-                    child: Center(child: Text('ADD')),
+                    child: Center(child: Text('ADD',style: TextStyle(color: Colors.white),),),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(10),
-                      color: Colors.blueGrey,
+                      color: Colors.black87,
                     ),
                     height: 50,
                     width: 50,

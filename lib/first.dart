@@ -6,6 +6,7 @@ class First extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor: Colors.black,
       body: Center(
         child: Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -15,8 +16,10 @@ class First extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => Logstudent()));
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Logstudent()),
+                    );
                     print('Student Clicked');
                   },
                   child: Container(
@@ -37,6 +40,7 @@ class First extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ],
@@ -46,9 +50,10 @@ class First extends StatelessWidget {
               children: [
                 GestureDetector(
                   onTap: () {
-                    Navigator.push(context, MaterialPageRoute(builder: (
-                        context) => Log()));
-
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => Log()),
+                    );
                     print('Employee Clicked');
                   },
                   child: Container(
@@ -69,6 +74,7 @@ class First extends StatelessWidget {
                   style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
                 ),
               ],

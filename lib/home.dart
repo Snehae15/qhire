@@ -7,9 +7,10 @@ import 'package:qhire/addinnovativeidea.dart';
 import 'package:qhire/addinterest.dart';
 import 'package:qhire/addskill.dart';
 import 'package:qhire/skillassessnment1.dart';
-import 'package:qhire/updateprofile.dart';
 import 'package:qhire/viewabout.dart';
+import 'package:qhire/viewallidea.dart';
 import 'package:qhire/vieweducation.dart';
+import 'package:qhire/viewidea.dart';
 import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewpost.dart';
 import 'package:qhire/viewprofile.dart';
@@ -48,10 +49,12 @@ class _HomeState extends State<Home> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text("Personal info"),
+        backgroundColor: Colors.black,
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Viewpro())); /* Write listener code here */
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Viewpro()));
           },
           child: Icon(
             Icons.person, // add custom icons also
@@ -63,132 +66,18 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 170,
+              height: 120,
               width: 1000,
               padding: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'View about\n',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => Viewabout()));
-                          },
-                          child: Text('View Abouts'),
-                        ),
-                      ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addabout()));
-                        },
-                        icon: Icon(Icons.add),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 170,
-              width: 1000,
-              padding: EdgeInsets.all(8.0),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.blue,
-                  width:
-                  1,
-                ),
-                borderRadius: BorderRadius.circular(8),
-              ),
-              child: Row(
-                children: [
-                  Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Padding(
-                        padding: const EdgeInsets.all(5.0),
-                        child: Row(
-                          children: [
-                            Text(
-                              'View profile\n',
-                              style: TextStyle(
-                                fontSize: 15,
-                                fontWeight: FontWeight.normal,
-                              ),
-                            ),
-                          ],
-                        ),
-                      ),
-                      SizedBox(height: 10),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => Viewpro()));
-                          },
-                          child: Text('View profile'),
-                        ),
-                      ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Editpro()));
-                        },
-                        icon: Icon(Icons.edit),
-                      ),
-                    ],
-                  ),
-                ],
-              ),
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Container(
-              height: 180,
-              width: 1000,
-              padding: EdgeInsets.all(8),
-              decoration: BoxDecoration(
-                border: Border.all(
-                  color: Colors.blue,
-                  width: 1,
-                ),
-                borderRadius: BorderRadius.circular(5),
-              ),
-              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -196,14 +85,74 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          'Postname\n',
+                          'View about',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
                           ),
                         ),
                       ),
-                      SizedBox(height: 15),
+                      SizedBox(height: 10),
+                      Padding(
+                        padding: const EdgeInsets.all(2.0),
+                        child: ElevatedButton(
+                          onPressed: () {
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Viewabout()),
+                            );
+                          },
+                          child: Text('View Abouts'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
+                        ),
+                      ),
+                    ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Addabout()),
+                      );
+                    },
+                    icon: Icon(Icons.add),
+                  ),
+                ],
+              ),
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Container(
+              height: 150,
+              width: 1000,
+              padding: EdgeInsets.all(8),
+              decoration: BoxDecoration(
+                border: Border.all(
+                  color: Colors.black,
+                  width: 1,
+                ),
+                borderRadius: BorderRadius.circular(5),
+              ),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Padding(
+                        padding: const EdgeInsets.all(5.0),
+                        child: Text(
+                          'Postname',
+                          style: TextStyle(
+                            fontSize: 15,
+                            fontWeight: FontWeight.normal,
+                          ),
+                        ),
+                      ),
+                      SizedBox(height: 10),
                       Padding(
                         padding: const EdgeInsets.all(2.0),
                         child: ElevatedButton(
@@ -211,17 +160,20 @@ class _HomeState extends State<Home> {
                             Navigator.push(context, MaterialPageRoute(builder: (
                                 context) => Viewpost()));
                           },
-                          child: Text('View All posts'),
+                          child: Text('View on posts'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
                         ),
                       ),
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>AddPost()));
-                        },
-                        icon: Icon(Icons.add),
-                      ),
                     ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) =>AddPost()));
+                    },
+                    icon: Icon(Icons.add),
                   ),
                 ],
               ),
@@ -230,17 +182,18 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 180,
+              height: 150,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -248,7 +201,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'Education\n',
+                          'Education',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -264,32 +217,33 @@ class _HomeState extends State<Home> {
                                 context) => Vieweducation()));
                           },
                           child: Text('All Education'),
+                          style: ElevatedButton.styleFrom(
+                            primary: Colors.black,
+                          ),
                         ),
                       ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addeducation ()));
-                        },
-                        icon: Icon(Icons.add),
-                      ),
                     ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) =>Addeducation ()));
+                    },
+                    icon: Icon(Icons.add),
                   ),
                 ],
               ),
             ),
           ),
-
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 180,
+              height: 120,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(5),
@@ -320,27 +274,34 @@ class _HomeState extends State<Home> {
                                     context) => Viewskill()));
                               },
                               child: Text('All skill'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.black,
+                              ),
                             ),
                           ),
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
-                        child: ElevatedButton(
-                          onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => Skill1()));
-                          },
-                          child: Text('Add skill Assessment'),
-                        ),
-                      ),
+                          SizedBox(width: 10),
+                          Padding(
+                            padding: const EdgeInsets.all(2.0),
+                            child: ElevatedButton(
+                              onPressed: () {
+                                Navigator.push(context, MaterialPageRoute(builder: (
+                                    context) => Skill1()));
+                              },
+                              child: Text('Skill Assessment'),
+                              style: ElevatedButton.styleFrom(
+                                primary: Colors.black,
+                              ),
+                            ),
+                          ),
+                          SizedBox(width: 10),
+                          IconButton(
+                            onPressed: () {
+                              Navigator.push(context, MaterialPageRoute(builder: (
+                                  context) =>Addskill ()));
+                            },
+                            icon: Icon(Icons.add),
+                          ),
                         ],
-                      ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addskill ()));
-                        },
-                        icon: Icon(Icons.add),
                       ),
                     ],
                   ),
@@ -351,25 +312,26 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 180,
+              height: 120,
               width: 1000,
-              padding: EdgeInsets.all(10),
+              padding: EdgeInsets.all(8.0),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
-                borderRadius: BorderRadius.circular(5),
+                borderRadius: BorderRadius.circular(8),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       Padding(
-                        padding: const EdgeInsets.all(8.0),
+                        padding: const EdgeInsets.all(5.0),
                         child: Text(
-                          'Interests\n',
+                          'Interests',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -381,21 +343,26 @@ class _HomeState extends State<Home> {
                         padding: const EdgeInsets.all(2.0),
                         child: ElevatedButton(
                           onPressed: () {
-                            Navigator.push(context, MaterialPageRoute(builder: (
-                                context) => Viewinterest()));
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => Viewinterest()),
+                            );
                           },
-                          child: Text('All interest'),
+                          child: Text('View Interests'),style: ElevatedButton.styleFrom(
+                          primary: Colors.black,
+                        ),
                         ),
                       ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addinterest ()));
-                        },
-                        icon: Icon(Icons.add),
-                      ),
                     ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(builder: (context) => Addinterest()),
+                      );
+                    },
+                    icon: Icon(Icons.add),
                   ),
                 ],
               ),
@@ -405,17 +372,18 @@ class _HomeState extends State<Home> {
           Padding(
             padding: const EdgeInsets.all(8.0),
             child: Container(
-              height: 180,
+              height: 120,
               width: 1000,
               padding: EdgeInsets.all(10),
               decoration: BoxDecoration(
                 border: Border.all(
-                  color: Colors.blue,
+                  color: Colors.black,
                   width: 1,
                 ),
                 borderRadius: BorderRadius.circular(5),
               ),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -423,7 +391,7 @@ class _HomeState extends State<Home> {
                       Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          'INNOVATIVE IDEA',
+                          'Innovative Idea',
                           style: TextStyle(
                             fontSize: 15,
                             fontWeight: FontWeight.normal,
@@ -437,31 +405,34 @@ class _HomeState extends State<Home> {
                             padding: const EdgeInsets.all(2.0),
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Viewonidea()));
+                                Navigator.push(context, MaterialPageRoute(builder: (context) => Viewidea()));
                               },
-                              child: Text('View on ideas'),
+                              child: Text('View on ideas'),style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
                             ),
                           ),
                           Padding(
                             padding: const EdgeInsets.all(2.0),
                             child: ElevatedButton(
                               onPressed: () {
-                                // Navigator.push(context, MaterialPageRoute(builder: (context) => Viewallidea()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => Viewallidea()));
                               },
-                              child: Text('View all idea'),
+                              child: Text('View all idea'),style: ElevatedButton.styleFrom(
+                              primary: Colors.black,
+                            ),
                             ),
                           ),
                         ],
                       ),
-
-                      IconButton(
-                        onPressed: () {
-                          Navigator.push(context, MaterialPageRoute(builder: (
-                              context) =>Addidea()));
-                        },
-                        icon: Icon(Icons.add),
-                      ),
                     ],
+                  ),
+                  IconButton(
+                    onPressed: () {
+                      Navigator.push(context, MaterialPageRoute(builder: (
+                          context) =>Addidea()));
+                    },
+                    icon: Icon(Icons.add),
                   ),
                 ],
               ),

@@ -5,9 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-
 import 'package:qhire/login.dart';
-import 'package:qhire/payment.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class Reg extends StatefulWidget {
@@ -18,6 +16,7 @@ class Reg extends StatefulWidget {
 }
 
 class _RegState extends State<Reg> {
+  final formkey = GlobalKey< FormState>();
   String? employstatus;
   String? genders;
   var name = TextEditingController();
@@ -78,7 +77,7 @@ class _RegState extends State<Reg> {
         Fluttertoast.showToast(msg:"successfully registered");
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return PaymentPage();
+            return Log();
           },
         ));
       }
@@ -94,6 +93,7 @@ class _RegState extends State<Reg> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Register Employee"),
+        backgroundColor: Colors.black,
         centerTitle: true,
         leading: Icon(
             Icons.home
@@ -103,8 +103,15 @@ class _RegState extends State<Reg> {
       Center(
         child: ListView(
           children:  [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+
+        Form(
+        key:formkey,
+          child: Column(
+              children: [
+          Padding(
+          padding: EdgeInsets.all(8.0),
+          child: Container(
+            width: 320,
               child: TextFormField(
                 controller: name,
                 decoration: InputDecoration(
@@ -117,10 +124,12 @@ class _RegState extends State<Reg> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your name';
                   }
+
                   return null;
                 },
               ),
             ),
+    ),
             Padding(
               padding: EdgeInsets.all(8.0),
               child: TextFormField(
@@ -144,8 +153,7 @@ class _RegState extends State<Reg> {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your date of birth';
                   }
-                  // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
-                  return null;
+                 return null;
                 },
               ),
             ),
@@ -158,16 +166,16 @@ class _RegState extends State<Reg> {
                   labelText: "phone_no",
                   hintText: "Enter your Phone number",
                 ),
+                maxLength: 10,
                 keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your phone number';
-                  }
-                  if (value.length != 10) {
-                    return 'Please enter a valid 10 digit phone number';
-                  }
-                  return null;
-                },
+    validator: (value) {
+    if (value == null || value.isEmpty) {
+    return 'Cannot be empty';
+    } else if (value.length != 10) {
+    return 'Must be 10 characters long';
+    }
+    return null;
+    },
               ),
             ),
 
@@ -197,25 +205,27 @@ class _RegState extends State<Reg> {
                 genders = rad;
               });
             }),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: address,
-                keyboardType: TextInputType.multiline,
-                maxLines: 10,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Address",
-                  hintText: "Enter Address",
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your address';
-                  }
-                  return null;
-                },
-              ),
-            ),
+      Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: TextFormField(
+          controller: address,
+          keyboardType: TextInputType.multiline,
+          maxLines: 10,
+          decoration: InputDecoration(
+            border: OutlineInputBorder(),
+            labelText: "Address",
+            hintText: "Enter Address",
+          ),
+          validator: (value) {
+            if (value == null || value.isEmpty) {
+              return 'Please enter your address';
+            }
+            return null;
+          },
+        ),
+      ),
+
+
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
@@ -261,6 +271,7 @@ class _RegState extends State<Reg> {
                   labelText:"Password",
                   hintText: "Enter Password",
                 ),keyboardType: TextInputType.visiblePassword,
+                maxLength: 10,
                 obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -273,7 +284,7 @@ class _RegState extends State<Reg> {
 
             Padding(
               padding: EdgeInsets.all(8.0),
-              child: TextField(
+              child: TextFormField(
                 controller: email,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
@@ -281,18 +292,18 @@ class _RegState extends State<Reg> {
                   hintText: "Enter Email id",
                 ),
                 keyboardType: TextInputType.emailAddress,
-                // validator: (value) {
-                //   if (value.isEmpty) {
-                //     return "Please enter your email";
-                //   }
-                //   if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").hasMatch(value)) {
-                //     return "Please enter a valid email address";
-                //   }
-                //   return null;
-                // },
+                validator: (value) {
+                if(value == null || value.isEmpty){
+                return 'Email is required';
+                }
+                final emailRegex = RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$');
+                if (!emailRegex.hasMatch(value)) {
+                return 'Please enter a valid email address';
+                }
+                return null;
+                },
               ),
             ),
-
             ListTile(
               title: Text("Employment status:"),
             ),
@@ -319,16 +330,16 @@ class _RegState extends State<Reg> {
                 employstatus = radio;
               });
             }),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextField(
-                controller: upload_resume,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Upload_resume",hintText: "Enter Upload_resume",
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: TextField(
+            //     controller: upload_resume,
+            //     decoration: InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText:"Upload_resume",hintText: "Enter Upload_resume",
+            //     ),
+            //   ),
+            // ),
             //   Padding(
             //     padding: EdgeInsets.all(8.0),
             //     child: GestureDetector(
@@ -344,15 +355,35 @@ class _RegState extends State<Reg> {
             //         ),
             //       ),
             //     ),
-            ElevatedButton(onPressed: (){
+        Padding(
+          padding: const EdgeInsets.only(left:100.0,right: 100.0,top: 8.0),
+          child: ElevatedButton(onPressed: (){
+            if(formkey.currentState!.validate()) {
+               debugPrint("Successfull");
               getData();
-              //Fluttertoast.showToast(msg: "Successfully registered");
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
-            }, child: Text("Register")),
-          ],
-        ),
+            };
 
+          },
+              child: Text(
+                "Register",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                textStyle: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+        ),
+        ],
       ),
+        ),
+    ],
+      ),
+    ),
     );
   }
 }

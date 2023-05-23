@@ -91,6 +91,7 @@ class _RegstudentState extends State<Regstudent> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Register"),
+        backgroundColor: Colors.black,
         centerTitle: true,
         leading: Icon(
             Icons.home
@@ -109,7 +110,8 @@ class _RegstudentState extends State<Regstudent> {
                   labelText: "Name",
                   hintText: "Enter your name",
                 ),
-                // obscureText: true,
+                 keyboardType: TextInputType.text,
+                 // obscureText: true,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your name';
@@ -154,7 +156,7 @@ class _RegstudentState extends State<Regstudent> {
                   border: OutlineInputBorder(),
                   labelText: "phone_no",
                   hintText: "Enter your Phone number",
-                ),
+                ), keyboardType: TextInputType.number,
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your phone number';
@@ -204,6 +206,7 @@ class _RegstudentState extends State<Regstudent> {
                   labelText: "Address",
                   hintText: "Enter Address",
                 ),
+
                 validator: (value) {
                   if (value == null || value.isEmpty) {
                     return 'Please enter your address';
@@ -289,17 +292,17 @@ class _RegstudentState extends State<Regstudent> {
               ),
             ),
 
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: resume,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Upload_resume",hintText: "Enter Upload_resume",
-                ),
-              ),
-            ),
+            //
+            // Padding(
+            //   padding: EdgeInsets.all(8.0),
+            //   child: TextFormField(
+            //     controller: resume,
+            //     decoration: InputDecoration(
+            //       border: OutlineInputBorder(),
+            //       labelText:"Upload_resume",hintText: "Enter Upload_resume",
+            //     ),
+            //   ),
+            // ),
               // Padding(
               //   padding: EdgeInsets.all(8.0),
               //   child: GestureDetector(
@@ -316,11 +319,26 @@ class _RegstudentState extends State<Regstudent> {
               //     ),
               //   ),
               // ),
-            ElevatedButton(onPressed: (){
-              getData();
-              //Fluttertoast.showToast(msg: "Successfully registered");
-              //Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
-            }, child: Text("Register")),
+            ElevatedButton(
+              onPressed: (){
+                getData();
+                //Fluttertoast.showToast(msg: "Successfully registered");
+                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
+              },
+              child: Text(
+                "Register",
+                style: TextStyle(fontSize: 20, color: Colors.white),
+              ),
+              style: ElevatedButton.styleFrom(
+                primary: Colors.black,
+                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
+                textStyle: TextStyle(
+                  fontSize: 24,
+                  fontWeight: FontWeight.bold,
+                ),
+              ),
+            )
+
           ],
         ),
 

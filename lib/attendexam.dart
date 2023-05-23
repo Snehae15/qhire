@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/newpage.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Exam {
@@ -10,13 +9,13 @@ class Exam {
   final String link;
   final String content;
 
-  Exam({required this.name, required this.link, required this.content, required description});
+  Exam({required this.name, required this.link, required this.content,});
 
   factory Exam.fromJson(Map<String, dynamic> json) {
     return Exam(
       name: json['name'],
       link: json['link'],
-      description: json['description'], content: '',
+      content: json['content'],
     );
   }
 }
@@ -50,6 +49,7 @@ class _AttendexamState extends State<Attendexam> {
       home: Scaffold(
         appBar: AppBar(
           title: Text('Exam'),
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {
@@ -58,7 +58,7 @@ class _AttendexamState extends State<Attendexam> {
           ),
         ),
         body: Padding(
-          padding: const EdgeInsets.all(8.0),
+          padding: const EdgeInsets.all(10.0),
           child: FutureBuilder<dynamic>(
             future: viewCourse(),
             builder: (context, snapshot) {
@@ -66,14 +66,14 @@ class _AttendexamState extends State<Attendexam> {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                    // Course course = snapshot.data!['name'];
+                     // Course course = snapshot.data!['name'];
                     return Container(
                       height: 90,
-                      width: 1000,
-                      padding: EdgeInsets.all(8.0),
+                      width: 100,
+                      padding: EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         border: Border.all(
-                          color: Colors.blue,
+                          color: Colors.black,
                           width: 1,
                         ),
                         borderRadius: BorderRadius.circular(8),
@@ -85,18 +85,26 @@ class _AttendexamState extends State<Attendexam> {
                             crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                               Padding(
-                                padding: const EdgeInsets.all(5.0),
+                                padding: const EdgeInsets.all(8.0),
                                 child: Row(
                                   children: [
-                                    Text('${snapshot.data[index]['name']}',  // displays the name of the item from the snapshot data
-                                      style: TextStyle(
-                                        fontSize: 15,  // sets font size to 15
-                                        fontWeight: FontWeight.normal,  // sets font weight to normal
-                                      ),
+                                    Column(
+                                      children: [
+                                        Text('${snapshot.data[index]['name']}',
+                                          style: TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
+                                      ],
                                     ),
 
-                                    Text('${snapshot.data[index]['description']}',
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                    Column(
+                                      children: [
+                                        Text('${snapshot.data[index]['description']}',
+                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                      ],
+                                    ),
                                   ],
                                 ),
                               ),

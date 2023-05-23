@@ -45,6 +45,8 @@ class Viewpost extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(
+          title: Text("View posts"),
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: Icon(Icons.arrow_back),
             onPressed: () {

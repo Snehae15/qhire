@@ -1,18 +1,17 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
+import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'package:qhire/attendexam.dart';
+import 'package:qhire/chatboat.dart';
 import 'package:qhire/const.dart';
 import 'package:qhire/pagehome.dart';
+import 'package:qhire/tests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 void main() => runApp(const Viewjob());
 
 class Viewjob extends StatelessWidget {
   const Viewjob({Key? key}) : super(key: key);
-
-  static const String _title = 'View Jobs';
 
   Future<List<dynamic>> viewJob() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
@@ -22,7 +21,7 @@ class Viewjob extends StatelessWidget {
     var data = {
       "id": sp,
     };
-    print('>>>>>>>>>>>>$data');
+    print('>>>>>>$data');
 
     var response =
         await post(Uri.parse('${Con.url}viewalljob.php'), body: data);
@@ -36,6 +35,9 @@ class Viewjob extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
+          title:Text("JOBS"),
+          centerTitle: true,
+          backgroundColor: Colors.black,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
@@ -44,7 +46,10 @@ class Viewjob extends StatelessWidget {
             },
           ),
         ),
-        body: Center(
+
+        body: Container(
+        color: Colors.black,  // Add black background color
+        child: Center(
           child: Padding(
             padding: const EdgeInsets.all(20.0),
             child: FutureBuilder<List<dynamic>>(
@@ -67,6 +72,7 @@ class Viewjob extends StatelessWidget {
           ),
         ),
       ),
+    ),
     );
   }
 }
@@ -129,7 +135,7 @@ class _SearchableListState extends State<SearchableList> {
                   padding: const EdgeInsets.all(12.0),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.white70,
+                    color: Colors.white,
                     boxShadow: [
                       BoxShadow(
                         color: Colors.grey.withOpacity(0.3),
@@ -171,8 +177,7 @@ class _SearchableListState extends State<SearchableList> {
                       ),
                       const SizedBox(height: 4.0),
                       Text(jobData['benefits']),
-                      const Text(
-                        'Experience',
+                      const Text('Experience',
                         style: TextStyle(
                           fontSize: 16.0,
                           fontWeight: FontWeight.bold,
@@ -230,12 +235,17 @@ class _SearchableListState extends State<SearchableList> {
                       const SizedBox(height: 4.0),
                       Text(jobData['salary']),
                       ElevatedButton(
-                          onPressed: () {
-                            update(id: '3');
-                            //Fluttertoast.showToast(msg: "Successfully registered");
-                            // Navigator.push(context, MaterialPageRoute(builder: (context)=>Attendexam()));
-                          },
-                          child: const Text("Apply")),
+                        onPressed: () {
+                          update(id: 'job_id');
+                          Fluttertoast.showToast(msg: "Applied for exam");
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Questionnaire()));
+                        },
+                        style: ButtonStyle(
+                          backgroundColor: MaterialStateProperty.all<Color>(Colors.black),
+                        ),
+                        child: const Text("Apply"),
+                      ),
+
                     ],
                   ),
                 );
@@ -247,7 +257,6 @@ class _SearchableListState extends State<SearchableList> {
 
   void update({required String id}) {
     var data = {"id": id};
-
     var response = post(Uri.parse('${Con.url}appliedjob.php'), body: data);
   }
 

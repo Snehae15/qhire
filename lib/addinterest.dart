@@ -50,6 +50,7 @@ class _AddinterestState extends State<Addinterest> {
     return Scaffold(
       appBar: AppBar(
         title: Text("Add Interests"),
+        backgroundColor: Colors.black,
         centerTitle: true,
       ),
       body: SafeArea(
@@ -70,7 +71,7 @@ class _AddinterestState extends State<Addinterest> {
                     border: OutlineInputBorder(),
                     labelText:"Add interest",hintText: "Enter interests",
                     focusedBorder: OutlineInputBorder(
-                        borderSide: BorderSide(width: 1, color: Colors.lightBlue)
+                        borderSide: BorderSide(width: 1, color: Colors.black87)
                     )
                 ),
               ),
@@ -88,7 +89,7 @@ class _AddinterestState extends State<Addinterest> {
                   child: Center(child: Text('SAVE')),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
-                    color: Colors.blueGrey,
+                    color: Colors.black87,
                   ),
                   height: 50,
                   width: 50,
@@ -103,3 +104,4 @@ class _AddinterestState extends State<Addinterest> {
     );
   }
 }
+

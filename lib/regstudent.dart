@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
@@ -16,6 +15,7 @@ class Regstudent extends StatefulWidget {
 }
 
 class _RegstudentState extends State<Regstudent> {
+  final formkey = GlobalKey<FormState>();
   // String? employstatus;
   String? genders;
   var name = TextEditingController();
@@ -33,55 +33,46 @@ class _RegstudentState extends State<Regstudent> {
   TextEditingController dateinput = TextEditingController();
   var highestQualification = TextEditingController();
   final TextEditingController resume = TextEditingController();
-  // File? _file;
 
-  // Future<void> _pickFile() async {
-  //   final file = await ImagePicker().pickImage(source: ImageSource.gallery);
-  //   if (file != null) {
-  //     setState(() {
-  //       _file = File(file.path);
-  //       upload_resume.text = basename(file.path);
-  //     });
-  //   }
-  // }
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
     var data = {
-      "id":sp,
-      "name":name.text,
-      "dob":dob.text,
-      "phone_no":phone_no.text,
-      "gender":genders,
-      "address":address.text,
-      "qualification":qualification.text,
-      "username":username.text,
-      "password":password.text,
-      "email":email.text,
-      "resume":resume.text,
-      "type":'student'
+      "id": sp,
+      "name": name.text,
+      "dob": dob.text,
+      "phone_no": phone_no.text,
+      "gender": genders,
+      "address": address.text,
+      "qualification": qualification.text,
+      "username": username.text,
+      "password": password.text,
+      "email": email.text,
+      "resume": resume.text,
+      "type": 'student'
     };
     print(data);
 
-    var response = await post(Uri.parse('${Con.url}register_student.php'),body: data);
+    var response =
+    await post(Uri.parse('${Con.url}register_student.php'), body: data);
     print(response.body);
-    if(response.statusCode==200){
+    if (response.statusCode == 200) {
       var res = jsonDecode(response.body)["message"];
-      if(res=='Added'){
+      if (res == 'Added') {
         const snackBar = SnackBar(
           content: Text('Successfully Registered'),
         );
         ScaffoldMessenger.of(context).showSnackBar(snackBar);
-        Fluttertoast.showToast(msg:"successfully registered");
+        Fluttertoast.showToast(msg: "successfully registered");
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return Logstudent();
+            return const Logstudent();
           },
         ));
+      } else if (res == 'Email already exists') {
+        Fluttertoast.showToast(msg: "Email already exists");
       }
-
-    }
-    else {
+    } else {
       Fluttertoast.showToast(msg: 'Something went wrong!');
     }
   }
@@ -90,258 +81,251 @@ class _RegstudentState extends State<Regstudent> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Register"),
+        title: const Text("Register Student"),
         backgroundColor: Colors.black,
         centerTitle: true,
-        leading: Icon(
-            Icons.home
-        ),
+        leading: const Icon(Icons.home),
       ),
-      body:
-      Center(
+      body: Center(
         child: ListView(
-          children:  [
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: name,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Name",
-                  hintText: "Enter your name",
-                ),
-                 keyboardType: TextInputType.text,
-                 // obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your name';
-                  }
-                  return null;
-                },
+          children: [
+            Form(
+              key: formkey,
+              child: Column(
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: name,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Name",
+                        hintText: "Enter your name",
+                      ),
+
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your name';
+                        }
+
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: dob,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "dob",
+                        hintText: "Enter your dob name",
+                      ),
+                      onTap: () async {
+                        DateTime? date = await showDatePicker(
+                          context: context,
+                          initialDate: DateTime.now(),
+                          firstDate: DateTime(1900),
+                          lastDate: DateTime.now(),
+                        );
+                        if (date != null) {
+                          dob.text = date.toString().split(' ')[0];
+                        }
+                      },
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your date of birth';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: phone_no,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "phone_no",
+                        hintText: "Enter your Phone number",
+                      ),
+                      maxLength: 10,
+                      keyboardType: TextInputType.number,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Cannot be empty';
+                        } else if (value.length != 10) {
+                          return 'Must be 10 characters long';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  const ListTile(
+                    title: Text("Gender:"),
+                  ),
+
+                  RadioListTile(
+                      title: const Text("Male"),
+                      value: 'Male',
+                      groupValue: genders,
+                      onChanged: (rad) {
+                        setState(() {
+                          genders = rad;
+                        });
+                      }),
+                  RadioListTile(
+                      title: const Text("Female"),
+                      value: 'Female',
+                      groupValue: genders,
+                      onChanged: (rad) {
+                        setState(() {
+                          genders = rad;
+                        });
+                      }),
+
+                  RadioListTile(
+                      title: const Text("Other"),
+                      value: 'Other',
+                      groupValue: genders,
+                      onChanged: (rad) {
+                        setState(() {
+                          genders = rad;
+                        });
+                      }),
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: address,
+                      keyboardType: TextInputType.multiline,
+                      maxLines: 5,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Address",
+                        hintText: "Enter Address",
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your address';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: qualification,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Highest Qualification",
+                        hintText: "Enter highest qualification",
+                      ),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your highest qualification';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: username,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "User name",
+                        hintText: "Enter Username",
+                      ),
+                      keyboardType: TextInputType.name,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a username';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: password,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Password",
+                        hintText: "Enter Password",
+                      ),
+                      keyboardType: TextInputType.visiblePassword,
+                      maxLength: 10,
+                      obscureText: true,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter a password';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: TextFormField(
+                      controller: email,
+                      decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Email id",
+                        hintText: "Enter Email id",
+                      ),
+                      keyboardType: TextInputType.emailAddress,
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Email is required';
+                        }
+                        final emailRegex =
+                        RegExp(r'^[\w-\.]+@([\w-]+\.)+[\w-]{2,}$');
+                        if (!emailRegex.hasMatch(value)) {
+                          return 'Please enter a valid email address';
+                        }
+                        return null;
+                      },
+                    ),
+                  ),
+
+                  Padding(
+                      padding: const EdgeInsets.only(
+                          left: 100.0, right: 100.0, top: 8.0),
+                      child: ElevatedButton(
+                        onPressed: () {
+                          if (formkey.currentState!.validate()) {
+                            debugPrint("Successfull");
+                            getData();
+                          }
+                        },
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                          padding: const EdgeInsets.symmetric(
+                              vertical: 15, horizontal: 20),
+                          textStyle: const TextStyle(
+                            fontSize: 24,
+                            fontWeight: FontWeight.bold,
+                          ),
+                        ),
+                        child: const Text(
+                          "Register",
+                          style: TextStyle(fontSize: 20, color: Colors.white),
+                        ),
+                      )),
+                ],
               ),
             ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: dob,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"dob",hintText: "Enter your dob name",
-                ),
-                onTap: () async {
-                  DateTime? date = await showDatePicker(
-                    context: context,
-                    initialDate: DateTime.now(),
-                    firstDate: DateTime(1900),
-                    lastDate: DateTime.now(),
-                  );
-                  if (date != null) {
-                    dob.text = date.toString().split(' ')[0];
-                  }
-                },
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your date of birth';
-                  }
-                  // You can add more validation here if necessary, for example checking that the date is in the correct format or range.
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: phone_no,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "phone_no",
-                  hintText: "Enter your Phone number",
-                ), keyboardType: TextInputType.number,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your phone number';
-                  }
-                  if (value.length != 10) {
-                    return 'Please enter a valid 10 digit phone number';
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            ListTile(
-              title: Text("Gender:"),
-            ),
-
-            RadioListTile(
-                title:Text("Male"),
-                value: 'Male', groupValue: genders, onChanged: (rad){
-              setState(() {
-                genders = rad;
-              });
-            }),
-            RadioListTile(
-                title:Text("Female"),
-                value: 'Female', groupValue: genders, onChanged: (rad){
-              setState(() {
-                genders = rad;
-              });
-            }),
-
-            RadioListTile(
-                title:Text("Other"),
-                value: 'Other', groupValue: genders, onChanged: (rad){
-              setState(() {
-                genders = rad;
-              });
-            }),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: address,
-                keyboardType: TextInputType.multiline,
-                maxLines: 10,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Address",
-                  hintText: "Enter Address",
-                ),
-
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your address';
-                  }
-                  return null;
-                },
-              ),
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: qualification,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Highest Qualification",
-                  hintText: "Enter highest qualification",
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter your highest qualification';
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: username,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"User name",
-                  hintText: "Enter Username",
-                ),
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a username';
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: password,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText:"Password",
-                  hintText: "Enter Password",
-                ),
-                obscureText: true,
-                validator: (value) {
-                  if (value == null || value.isEmpty) {
-                    return 'Please enter a password';
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            Padding(
-              padding: EdgeInsets.all(8.0),
-              child: TextFormField(
-                controller: email,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  labelText: "Email id",
-                  hintText: "Enter Email id",
-                ),
-                keyboardType: TextInputType.emailAddress,
-                validator: (value) {
-                  if (value!.isEmpty) {
-                    return "Please enter your email";
-                  }
-                  if (!RegExp(r"^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$").hasMatch(value)) {
-                    return "Please enter a valid email address";
-                  }
-                  return null;
-                },
-              ),
-            ),
-
-            //
-            // Padding(
-            //   padding: EdgeInsets.all(8.0),
-            //   child: TextFormField(
-            //     controller: resume,
-            //     decoration: InputDecoration(
-            //       border: OutlineInputBorder(),
-            //       labelText:"Upload_resume",hintText: "Enter Upload_resume",
-            //     ),
-            //   ),
-            // ),
-              // Padding(
-              //   padding: EdgeInsets.all(8.0),
-              //   child: GestureDetector(
-              //     onTap: _pickFile,
-              //     child: AbsorbPointer(
-              //       child: TextField(
-              //         controller: upload_resume,
-              //         decoration: InputDecoration(
-              //           border: OutlineInputBorder(),
-              //           labelText: "Upload_resume",
-              //           hintText: "Enter Upload_resume",
-              //         ),
-              //       ),
-              //     ),
-              //   ),
-              // ),
-            ElevatedButton(
-              onPressed: (){
-                getData();
-                //Fluttertoast.showToast(msg: "Successfully registered");
-                //Navigator.push(context, MaterialPageRoute(builder: (context)=>Log()));
-              },
-              child: Text(
-                "Register",
-                style: TextStyle(fontSize: 20, color: Colors.white),
-              ),
-              style: ElevatedButton.styleFrom(
-                primary: Colors.black,
-                padding: EdgeInsets.symmetric(vertical: 15, horizontal: 20),
-                textStyle: TextStyle(
-                  fontSize: 24,
-                  fontWeight: FontWeight.bold,
-                ),
-              ),
-            )
-
           ],
         ),
-
       ),
     );
   }

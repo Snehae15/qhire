@@ -1,13 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qhire/aluminitalk.dart';
 import 'package:qhire/coursepage.dart';
 import 'package:qhire/gd.dart';
-import 'package:qhire/vieweducation.dart';
-import 'package:qhire/viewinterest.dart';
 import 'package:qhire/viewinterviewpreparation.dart';
 import 'package:qhire/viewprofile.dart';
-import 'package:qhire/viewskill.dart';
 
 class Morepage extends StatefulWidget {
   const Morepage({Key? key}) : super(key: key);
@@ -19,7 +15,7 @@ class Morepage extends StatefulWidget {
 class _MorepageState extends State<Morepage> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[];
+  static final List<Widget> _widgetOptions = <Widget>[];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -31,15 +27,15 @@ class _MorepageState extends State<Morepage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Explore "),
+        title: const Text("Explore "),
         backgroundColor: Colors.black,
         centerTitle: true,
         leading: GestureDetector(
           onTap: () {
             Navigator.push(
-                context, MaterialPageRoute(builder: (context) => Viewpro()));
+                context, MaterialPageRoute(builder: (context) => const Viewpro()));
           },
-          child: Icon(
+          child: const Icon(
             Icons.person,
           ),
         ),
@@ -51,7 +47,7 @@ class _MorepageState extends State<Morepage> {
             child: Container(
               height: 100,
               width: 100,
-              padding: EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(2.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -64,8 +60,8 @@ class _MorepageState extends State<Morepage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
                         child: Row(
                           children: [
                             Text(
@@ -78,21 +74,21 @@ class _MorepageState extends State<Morepage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 2),
+                      const SizedBox(height: 2),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Coursepage()),
+                                builder: (context) => const Coursepage()),
                           );
                         },
-                        child: Text('View All'),
-                      style: ElevatedButton.styleFrom(
-                        primary: Colors.black,
+                        style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.black,
+                        ),
+                        child: const Text('View All'),
                       ),
-                      ),
-            ],
+                    ],
                   ),
                 ],
               ),
@@ -103,7 +99,7 @@ class _MorepageState extends State<Morepage> {
             child: Container(
               height: 100,
               width: 100,
-              padding: EdgeInsets.all(2.0),
+              padding: const EdgeInsets.all(2.0),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -116,8 +112,8 @@ class _MorepageState extends State<Morepage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
                         child: Row(
                           children: [
                             Text(
@@ -130,19 +126,19 @@ class _MorepageState extends State<Morepage> {
                           ],
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Interview()),
+                                builder: (context) => const Interview()),
                           );
                         },
-                        child: Text('View All') ,
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                         ),
+                        child: const Text('View All'),
                       ),
                     ],
                   ),
@@ -155,7 +151,7 @@ class _MorepageState extends State<Morepage> {
             child: Container(
               height: 100,
               width: 100,
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -168,8 +164,8 @@ class _MorepageState extends State<Morepage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
                         child: Text(
                           'Alumini talk',
                           style: TextStyle(
@@ -178,18 +174,18 @@ class _MorepageState extends State<Morepage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Aluminitalk()));
+                                  builder: (context) => const Aluminitalk()));
                         },
-                        child: Text('View'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                         ),
+                        child: const Text('View'),
                       ),
                     ],
                   ),
@@ -202,7 +198,7 @@ class _MorepageState extends State<Morepage> {
             child: Container(
               height: 100,
               width: 100,
-              padding: EdgeInsets.all(2),
+              padding: const EdgeInsets.all(2),
               decoration: BoxDecoration(
                 border: Border.all(
                   color: Colors.black,
@@ -215,8 +211,8 @@ class _MorepageState extends State<Morepage> {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Padding(
-                        padding: const EdgeInsets.all(2.0),
+                      const Padding(
+                        padding: EdgeInsets.all(2.0),
                         child: Text(
                           'Group Discussion',
                           style: TextStyle(
@@ -225,18 +221,18 @@ class _MorepageState extends State<Morepage> {
                           ),
                         ),
                       ),
-                      SizedBox(height: 5),
+                      const SizedBox(height: 5),
                       ElevatedButton(
                         onPressed: () {
                           Navigator.push(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => Groupdiscuttion()));
+                                  builder: (context) => const Groupdiscuttion()));
                         },
-                        child: Text('View'),
                         style: ElevatedButton.styleFrom(
-                          primary: Colors.black,
+                          backgroundColor: Colors.black,
                         ),
+                        child: const Text('View'),
                       ),
                     ],
                   ),

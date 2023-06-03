@@ -1,13 +1,13 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:qhire/register.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottom.dart';
 
 class Log extends StatefulWidget {
   const Log({Key? key}) : super(key: key);
@@ -60,7 +60,7 @@ class _LogState extends State<Log> {
         Fluttertoast.showToast(msg: 'Successfully Login...');
         Navigator.push(
           context,
-          MaterialPageRoute(builder: (context) => Pagehome()),
+          MaterialPageRoute(builder: (context) => const Pagehome()),
         );
       } else if (res['message'] == 'Failed to LogIn') {
         Fluttertoast.showToast(msg: 'Please wait until you get accepted');
@@ -77,7 +77,7 @@ class _LogState extends State<Log> {
     return Scaffold(
       backgroundColor: Colors.grey.shade400,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/Wallpaper.jpeg"),
             fit: BoxFit.fill,
@@ -88,40 +88,36 @@ class _LogState extends State<Log> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Sign In'),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: email,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Email",
-                      hintText: "Enter Email",
-                        prefixIcon: Icon(Icons.email)
-                    ),
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Email",
+                        hintText: "Enter Email",
+                        prefixIcon: Icon(Icons.email)),
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextField(
-
                     controller: password,
                     decoration: const InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Password",
-                      hintText: "Enter password",
-                      prefixIcon: Icon(Icons.lock)
-                    ),
+                        border: OutlineInputBorder(),
+                        labelText: "Password",
+                        hintText: "Enter password",
+                        prefixIcon: Icon(Icons.lock)),
                     obscureText: true,
-
                   ),
                 ),
-                SizedBox(
+                const SizedBox(
                   height: 10,
                 ),
                 InkWell(
@@ -129,20 +125,24 @@ class _LogState extends State<Log> {
                     getData();
                   },
                   child: Container(
-                    child: Center(child: Text('Login', style: TextStyle(color: Colors.white))),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       color: Colors.black,
                     ),
                     height: 50,
                     width: 300,
+                    child: const Center(
+                        child: Text('Login',
+                            style: TextStyle(color: Colors.white))),
                   ),
                 ),
-
-                TextButton(onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (
-                      context) => Reg()));
-                }, child: Text("Don't have any account please login her!", style: TextStyle(color: Colors.black87)))
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(context,
+                          MaterialPageRoute(builder: (context) => const Reg()));
+                    },
+                    child: const Text("Don't have any account please login here!",
+                        style: TextStyle(color: Colors.blue)))
               ],
             ),
           ),
@@ -151,4 +151,3 @@ class _LogState extends State<Log> {
     );
   }
 }
-

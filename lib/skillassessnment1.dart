@@ -1,10 +1,9 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:qhire/attendexam.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:qhire/practicetest.dart';
-import 'package:qhire/tests.dart';
+
+import 'bottom.dart';
 
 class Skill1 extends StatefulWidget {
   const Skill1({Key? key}) : super(key: key);
@@ -20,22 +19,22 @@ class _Skill1State extends State<Skill1> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-      title: Text("Skill Assessment"),
+      title: const Text("Skill Assessment"),
 backgroundColor: Colors.black,
     centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed:(){
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Pagehome()));
+                MaterialPageRoute(builder: (context) => const Pagehome()));
           },
         ),
       ),
       body: Center(
         child: Column(
             children: [
-                 Padding(
-                   padding: const EdgeInsets.all(8.0),
+                 const Padding(
+                   padding: EdgeInsets.all(8.0),
                    child: Text(
                        'Before you start\n'
                        'You must complete this assessment in one session — make sure your internet is reliable.\n'
@@ -44,12 +43,12 @@ backgroundColor: Colors.black,
                  ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Practice()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Practice()));
                 },
-                child: Text("Practice"),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
+                  backgroundColor: Colors.black,
                 ),
+                child: const Text("Practice"),
               ),
               Padding(
                 padding: const EdgeInsets.only(left: 250.0),
@@ -57,25 +56,25 @@ backgroundColor: Colors.black,
                   padding: const EdgeInsets.all(8.0),
                   child: ElevatedButton(
                     onPressed: () {
-                      Navigator.push(context, MaterialPageRoute(builder: (context) => Attendexam()));
+                      Navigator.push(context, MaterialPageRoute(builder: (context) => const Attendexam()));
                     },
-                    child: Text("Start"),
                     style: ElevatedButton.styleFrom(
-                      primary: Colors.black,
+                      backgroundColor: Colors.black,
                     ),
+                    child: const Text("Start"),
                   ),
                 ),
               ),
               ElevatedButton(
                 onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) => Home()));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => const Home()));
                 },
-                child: Padding(
-                  padding: const EdgeInsets.only(left: 2.0),
-                  child: Text("Back"),
-                ),
                 style: ElevatedButton.styleFrom(
-                  primary: Colors.black,
+                  backgroundColor: Colors.black,
+                ),
+                child: const Padding(
+                  padding: EdgeInsets.only(left: 2.0),
+                  child: Text("Back"),
                 ),
               ),
                   ],

@@ -3,6 +3,8 @@ import 'package:qhire/login.dart';
 import 'package:qhire/loginstudent.dart';
 
 class First extends StatelessWidget {
+  const First({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -18,7 +20,7 @@ class First extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Logstudent()),
+                      MaterialPageRoute(builder: (context) => const Logstudent()),
                     );
                     print('Student Clicked');
                   },
@@ -26,7 +28,7 @@ class First extends StatelessWidget {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/student.png'),
                         fit: BoxFit.cover,
                       ),
@@ -34,8 +36,8 @@ class First extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Student',
                   style: TextStyle(
                     fontSize: 18,
@@ -52,7 +54,7 @@ class First extends StatelessWidget {
                   onTap: () {
                     Navigator.push(
                       context,
-                      MaterialPageRoute(builder: (context) => Log()),
+                      MaterialPageRoute(builder: (context) => const Log()),
                     );
                     print('Employee Clicked');
                   },
@@ -60,7 +62,7 @@ class First extends StatelessWidget {
                     width: 150,
                     height: 150,
                     decoration: BoxDecoration(
-                      image: DecorationImage(
+                      image: const DecorationImage(
                         image: AssetImage('assets/employee.png'),
                         fit: BoxFit.cover,
                       ),
@@ -68,8 +70,8 @@ class First extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(height: 10),
-                Text(
+                const SizedBox(height: 10),
+                const Text(
                   'Employee',
                   style: TextStyle(
                     fontSize: 18,

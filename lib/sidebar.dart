@@ -1,5 +1,4 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qhire/const.dart';
@@ -70,14 +69,14 @@ class _SidebarPageState extends State<SidebarPage> {
             return Center(
               child: Text(
                 'Welcome ${snapshot.data![0]['name']}!',
-                style: TextStyle(fontSize: 20.0),
+                style: const TextStyle(fontSize: 20.0),
               ),
             );
           } else if (snapshot.hasError) {
             return Center(
               child: Text(
                 'Error loading profile data: ${snapshot.error}',
-                style: TextStyle(fontSize: 20.0),
+                style: const TextStyle(fontSize: 20.0),
               ),
             );
           } else {
@@ -113,7 +112,7 @@ class _SidebarPageState extends State<SidebarPage> {
               leading: const Icon(Icons.person),
               title: const Text(' My Profile '),
               onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>Viewpro()));
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>const Viewpro()));
               },
             ),
 
@@ -121,7 +120,7 @@ class _SidebarPageState extends State<SidebarPage> {
               leading: const Icon(Icons.logout),
               title: const Text('LogOut'),
               onTap: () {
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>First()));
+                Navigator.push(context,MaterialPageRoute(builder: (context)=>const First()));
               },
             ),
           ],

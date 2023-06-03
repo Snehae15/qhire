@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:qhire/newpayment.dart';
 import 'package:qhire/payment.dart';
 import 'package:qhire/splash.dart';
-import 'package:qhire/viewaddpost.dart';
 
 
 void main() {
@@ -17,6 +17,7 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'Qhire',
       theme: ThemeData(
+
       ),
        home: Splash(),
     );

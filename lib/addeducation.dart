@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
@@ -31,67 +30,66 @@ class _AddeducationState extends State<Addeducation> {
   Future<void> getData() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
-    var data ={
-      "id":sp,
-    "centername":centername.text,
-    "degree":degree.text,
-    "field":field.text,
-    "startdate":startdate.text,
-    "enddate":enddate.text,
-    "grade":grade.text,
-   "activity":activity.text,
-   "description":description.text,
-  };
+    var data = {
+      "id": sp,
+      "centername": centername.text,
+      "degree": degree.text,
+      "field": field.text,
+      "startdate": startdate.text,
+      "enddate": enddate.text,
+      "grade": grade.text,
+      "activity": activity.text,
+      "description": description.text,
+    };
     print(data);
-  var response = await post(Uri.parse('${Con.url}addeducation.php'),body: data);
-  print(response.body);
-  if(response.statusCode==200){
-  var res = jsonDecode(response.body)["message"];
-  if(res=='Added'){
-  const snackBar = SnackBar(
-  content: Text('added'),
-  );
-  ScaffoldMessenger.of(context).showSnackBar(snackBar);
-  Fluttertoast.showToast(msg:"added");
-  Navigator.push(context, MaterialPageRoute(
-  builder: (context) {
-  return Vieweducation();
-  },
-  ));
+    var response =
+        await post(Uri.parse('${Con.url}addeducation.php'), body: data);
+    print(response.body);
+    if (response.statusCode == 200) {
+      var res = jsonDecode(response.body)["message"];
+      if (res == 'Added') {
+        const snackBar = SnackBar(
+          content: Text('added'),
+        );
+        ScaffoldMessenger.of(context).showSnackBar(snackBar);
+        Fluttertoast.showToast(msg: "added");
+        Navigator.push(context, MaterialPageRoute(
+          builder: (context) {
+            return const Vieweducation();
+          },
+        ));
+      }
+    } else {
+      Fluttertoast.showToast(msg: 'Something went wrong!');
+    }
   }
-
-  }
-  else {
-  Fluttertoast.showToast(msg: 'Something went wrong!');
-  }
-}
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text("Add Education"),
+        title: const Text("Add Education"),
         centerTitle: true,
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
-          onPressed:(){
-            Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Home()));
+          icon: const Icon(Icons.arrow_back),
+          onPressed: () {
+            Navigator.push(
+                context, MaterialPageRoute(builder: (context) => const Home()));
           },
         ),
       ),
-      body:
-      Center(
+      body: Center(
         child: ListView(
-          children:  [
+          children: [
             Padding(
-              padding:const EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: centername,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Center name",hintText: "Enter Center name",
+                  labelText: "Center name",
+                  hintText: "Enter Center name",
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -100,15 +98,15 @@ class _AddeducationState extends State<Addeducation> {
                   return null;
                 },
               ),
-              ),
-
+            ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: degree,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Degree",hintText: "Enter Degree type",
+                  labelText: "Degree",
+                  hintText: "Enter Degree type",
                 ),
                 validator: (value) {
                   if (value == null || value.isEmpty) {
@@ -117,35 +115,33 @@ class _AddeducationState extends State<Addeducation> {
                   return null;
                 },
               ),
-              ),
-
+            ),
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: field,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Field of Study",hintText: "Enter Field of Study",
+                  labelText: "Field of Study",
+                  hintText: "Enter Field of Study",
                 ),
-                    validator: (value) {
-                    if (value == null || value.isEmpty) {
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
                     return 'Please enter';
-                    }
-                    return null;
-                    },
-                    ),
-                              ),
-
-
+                  }
+                  return null;
+                },
+              ),
+            ),
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: dateinput,
-                decoration : InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.only(),
                   ),
-                  labelText:"Start date",
+                  labelText: "Start date",
                 ),
                 onTap: () async {
                   DateTime? date = await showDatePicker(
@@ -167,16 +163,15 @@ class _AddeducationState extends State<Addeducation> {
                 },
               ),
             ),
-
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: dateinputs,
-                decoration : InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(
                     borderRadius: BorderRadius.only(),
                   ),
-                  labelText:"End date",
+                  labelText: "End date",
                 ),
                 onTap: () async {
                   DateTime? date = await showDatePicker(
@@ -198,28 +193,25 @@ class _AddeducationState extends State<Addeducation> {
                 },
               ),
             ),
-
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: grade,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-
-                  labelText:"Grade",hintText: "Enter Grade",
+                  labelText: "Grade",
+                  hintText: "Enter Grade",
                 ),
               ),
             ),
-
             Padding(
-              padding: EdgeInsets.all(8.0),
-
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: activity,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-
-                  labelText:"Activity",hintText: "Enter Activity",
+                  labelText: "Activity",
+                  hintText: "Enter Activity",
                 ),
               ),
             ),
@@ -229,30 +221,36 @@ class _AddeducationState extends State<Addeducation> {
                 controller: description,
                 keyboardType: TextInputType.multiline,
                 maxLines: 5,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
-                  labelText:"Description",
+                  labelText: "Description",
                 ),
               ),
             ),
-            SizedBox(height: 10,),
+            const SizedBox(
+              height: 10,
+            ),
             InkWell(
               onTap: () {
                 getData();
-                Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
+                Navigator.push(
+                    context, MaterialPageRoute(builder: (context) => const Home()));
               },
               child: Padding(
-                padding: const EdgeInsets.only(left: 88.0,right: 90.0),
+                padding: const EdgeInsets.only(left: 88.0, right: 90.0),
                 child: Container(
-                  child: Center(child: Text('SAVE',
-                    style: TextStyle(color: Colors.white),),),
                   decoration: BoxDecoration(
                     borderRadius: BorderRadius.circular(10),
                     color: Colors.black87,
                   ),
                   height: 50,
                   width: 50,
-
+                  child: const Center(
+                    child: Text(
+                      'SAVE',
+                      style: TextStyle(color: Colors.white),
+                    ),
+                  ),
                 ),
               ),
             ),

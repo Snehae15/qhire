@@ -5,10 +5,12 @@ import 'package:qhire/const.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Group {
-
   final String name;
 
-  Group( {required this.name, required link, });
+  Group({
+    required this.name,
+    required link,
+  });
 
   factory Group.fromJson(Map<String, dynamic> json) {
     return Group(
@@ -19,14 +21,14 @@ class Group {
 }
 
 class Groupdiscuttion extends StatefulWidget {
-  Groupdiscuttion({Key? key}) : super(key: key);
+  const Groupdiscuttion({Key? key}) : super(key: key);
 
   @override
   State<Groupdiscuttion> createState() => _GroupdiscuttionState();
 }
 
 class _GroupdiscuttionState extends State<Groupdiscuttion> {
-  var _link ;
+  var _link;
 
   Future<dynamic> viewCourse() async {
     var data;
@@ -47,9 +49,9 @@ class _GroupdiscuttionState extends State<Groupdiscuttion> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('GD'),
+          title: const Text('GD'),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               // Navigator.push(context, MaterialPageRoute(builder: (context) => More()));
             },
@@ -68,7 +70,7 @@ class _GroupdiscuttionState extends State<Groupdiscuttion> {
                     return Container(
                       height: 90,
                       width: 1000,
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -86,36 +88,40 @@ class _GroupdiscuttionState extends State<Groupdiscuttion> {
                                 padding: const EdgeInsets.all(5.0),
                                 child: Row(
                                   children: [
-                                    Text('${snapshot.data[index]['name']}',
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                    Text(
+                                      '${snapshot.data[index]['name']}',
+                                      style: const TextStyle(
+                                        fontSize: 15,
+                                        fontWeight: FontWeight.normal,
+                                      ),
+                                    ),
                                   ],
                                 ),
                               ),
                             ],
                           ),
                           InkWell(
-                              onTap: (){
+                              onTap: () {
                                 setState(() {
                                   _link = snapshot.data![index]['link'];
                                 });
                                 print(_link);
                                 print('....$_link');
                                 launchUrl(Uri.parse(_link),
-                                    mode: LaunchMode.externalApplication
-                                );
+                                    mode: LaunchMode.externalApplication);
                               },
-                              child: Icon(Icons.play_arrow)),
+                              child: const Icon(Icons.play_arrow)),
                         ],
                       ),
                     );
                   },
                 );
               } else if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text('Failed to fetch gd'),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }

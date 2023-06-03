@@ -1,15 +1,12 @@
-import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
-import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
-import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:qhire/services.dart';
-import 'package:qhire/viewpost.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottom.dart';
 
 class AddPost extends StatefulWidget {
   const AddPost({Key? key}) : super(key: key);
@@ -47,7 +44,6 @@ class _AddPostState extends State<AddPost> {
           endPoint: 'addpost.php',
           params: {
             "id": sp,
-
             "post": post.text,
             "description": description.text,
           },
@@ -57,14 +53,14 @@ class _AddPostState extends State<AddPost> {
       if ((data as Map)['result'] == 'done') {
         Navigator.of(context).pushReplacement(
           MaterialPageRoute(
-            builder: (_) => Pagehome(),
+            builder: (_) => const Pagehome(),
           ),
         );
       } else {
         Fluttertoast.showToast(msg: 'Post added');
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return Pagehome();
+            return const Pagehome();
           },
         ));
       }
@@ -72,10 +68,12 @@ class _AddPostState extends State<AddPost> {
       Fluttertoast.showToast(msg: 'Pick image ');
     }
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text("Add Post"),
+      appBar: AppBar(
+        title: const Text("Add Post"),
         backgroundColor: CupertinoColors.black,
       ),
       body: SingleChildScrollView(
@@ -89,7 +87,7 @@ class _AddPostState extends State<AddPost> {
                 child: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
-                    Text(
+                    const Text(
                       'Upload Image',
                       style: TextStyle(fontSize: 15),
                     ),
@@ -101,13 +99,13 @@ class _AddPostState extends State<AddPost> {
                         });
                         print(pickedImage!.path);
                       },
-                      child: Icon(Icons.camera_alt),
+                      child: const Icon(Icons.camera_alt),
                     ),
                     // image == null ? Text('no image') : Image.file(image!),
                   ],
                 ),
               ),
-              Text(
+              const Text(
                 '*Must upload a image',
                 style: TextStyle(color: Colors.red),
               ),
@@ -123,7 +121,7 @@ class _AddPostState extends State<AddPost> {
                     return null;
                   },
                   controller: post,
-                  decoration: InputDecoration(
+                  decoration: const InputDecoration(
                       labelText: 'Postname', border: OutlineInputBorder()),
                 ),
               ),
@@ -140,9 +138,8 @@ class _AddPostState extends State<AddPost> {
                   minLines: 6,
                   keyboardType: TextInputType.multiline,
                   maxLines: null,
-                  decoration: InputDecoration(
-                      labelText: 'Description',
-                      border: OutlineInputBorder()),
+                  decoration: const InputDecoration(
+                      labelText: 'Description', border: OutlineInputBorder()),
                 ),
               ),
 
@@ -153,32 +150,31 @@ class _AddPostState extends State<AddPost> {
                     onTap: () {
                       if (_formKey.currentState!.validate()) {
                         addComplaint(context);
-                      };
+                      }
                     },
                     child: Padding(
                       padding: const EdgeInsets.all(20.0),
                       child: Container(
-                        child: Center(
-                            child: Row(
-                              mainAxisAlignment: MainAxisAlignment.center,
-                              children: [
-                                Text(
-                                  'Submit',
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                Icon(
-                                  Icons.arrow_right,
-                                  color: Colors.white,
-                                )
-                              ],
-                            )
-                        ),
                         height: 50,
                         width: 320,
                         decoration: BoxDecoration(
                           borderRadius: BorderRadius.circular(50),
                           color: Colors.black, // <-- Add this line
                         ),
+                        child: const Center(
+                            child: Row(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Text(
+                              'Submit',
+                              style: TextStyle(color: Colors.white),
+                            ),
+                            Icon(
+                              Icons.arrow_right,
+                              color: Colors.white,
+                            )
+                          ],
+                        )),
                       ),
                     ),
                   )

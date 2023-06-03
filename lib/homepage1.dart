@@ -20,7 +20,7 @@ class Homepage1 extends StatefulWidget {
 class _HomeState extends State<Homepage1> {
   int _selectedIndex = 0;
 
-  static List<Widget> _widgetOptions = <Widget>[];
+  static final List<Widget> _widgetOptions = <Widget>[];
 
   void _onItemTapped(int index) {
     setState(() {
@@ -33,9 +33,10 @@ class _HomeState extends State<Homepage1> {
     await prefs.clear();
     Navigator.pushReplacement(
       context,
-      MaterialPageRoute(builder: (context) => First()),
+      MaterialPageRoute(builder: (context) => const First()),
     );
   }
+
   Future<dynamic> viewEducation() async {
     SharedPreferences spref = await SharedPreferences.getInstance();
     var sp = spref.getString('log_id');
@@ -46,25 +47,25 @@ class _HomeState extends State<Homepage1> {
     };
     print('>>>>>>>>>>>>$data');
 
-    var response =
-    await post(Uri.parse('${Con.url}login.php'), body: data);
+    var response = await post(Uri.parse('${Con.url}login.php'), body: data);
     print(response.body);
     var res = jsonDecode(response.body);
     return res;
     //print(res);
   }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Q-Hire"),
+        title: const Text("Q-Hire"),
         centerTitle: true,
         backgroundColor: Colors.black,
       ),
       drawer: Drawer(
         child: ListView(
           children: [
-            UserAccountsDrawerHeader(
+            const UserAccountsDrawerHeader(
               currentAccountPicture: Icon(
                 Icons.person,
                 size: 48.0,
@@ -74,22 +75,22 @@ class _HomeState extends State<Homepage1> {
               accountEmail: Text("youremail@example.com"),
             ),
             ListTile(
-              leading: Icon(Icons.person),
-              title: Text("Profile"),
+              leading: const Icon(Icons.person),
+              title: const Text("Profile"),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => Viewpro()),
+                  MaterialPageRoute(builder: (context) => const Viewpro()),
                 );
               },
             ),
             ListTile(
-              leading: Icon(Icons.logout),
-              title: Text("Logout"),
+              leading: const Icon(Icons.logout),
+              title: const Text("Logout"),
               onTap: () {
                 Navigator.push(
                   context,
-                  MaterialPageRoute(builder: (context) => First()),
+                  MaterialPageRoute(builder: (context) => const First()),
                 );
               },
             ),
@@ -104,8 +105,8 @@ class _HomeState extends State<Homepage1> {
               Container(
                 height: 300,
                 width: double.infinity,
-                margin: EdgeInsets.all(10.0),
-                padding: EdgeInsets.all(12.0),
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.grey,
@@ -113,19 +114,19 @@ class _HomeState extends State<Homepage1> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'News',
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     IconButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Viewnews()));
+                                builder: (context) => const Viewnews()));
                       },
-                      icon: Icon(Icons.arrow_forward),
+                      icon: const Icon(Icons.arrow_forward),
                       color: Colors.black,
                     ),
                   ],
@@ -134,8 +135,8 @@ class _HomeState extends State<Homepage1> {
               Container(
                 height: 300,
                 width: double.infinity,
-                margin: EdgeInsets.all(10.0),
-                padding: EdgeInsets.all(12.0),
+                margin: const EdgeInsets.all(10.0),
+                padding: const EdgeInsets.all(12.0),
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(8),
                   color: Colors.grey,
@@ -143,19 +144,19 @@ class _HomeState extends State<Homepage1> {
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.start,
                   children: [
-                    Text(
+                    const Text(
                       'Posts',
                       style: TextStyle(fontSize: 18),
                     ),
-                    SizedBox(height: 16),
+                    const SizedBox(height: 16),
                     IconButton(
                       onPressed: () {
                         Navigator.push(
                             context,
                             MaterialPageRoute(
-                                builder: (context) => Viewpost()));
+                                builder: (context) => const Viewpost()));
                       },
-                      icon: Icon(Icons.arrow_forward),
+                      icon: const Icon(Icons.arrow_forward),
                       color: Colors.black,
                     ),
                   ],
@@ -167,10 +168,11 @@ class _HomeState extends State<Homepage1> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.push(context, MaterialPageRoute(builder: (context) => ChatPage()));
+          Navigator.push(
+              context, MaterialPageRoute(builder: (context) => const ChatPage()));
         },
-        child: Icon(Icons.message),
         backgroundColor: Colors.black,
+        child: const Icon(Icons.message),
       ),
     );
   }

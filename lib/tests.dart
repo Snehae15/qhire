@@ -3,9 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/home.dart';
 import 'package:qhire/homepage1.dart';
-import 'package:qhire/skillassessnment1.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class Question {
@@ -25,7 +23,7 @@ class Question {
 
 
 class Questionnaire extends StatefulWidget {
-  Questionnaire({Key? key}) : super(key: key);
+  const Questionnaire({Key? key}) : super(key: key);
   @override
   _QuestionnaireState createState() => _QuestionnaireState();
 }
@@ -51,12 +49,12 @@ class _QuestionnaireState extends State<Questionnaire> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: Colors.black,
-        title: Text('Questionnaire page '),
+        title: const Text('Questionnaire page '),
         leading: IconButton(
-          icon: Icon(Icons.arrow_back),
+          icon: const Icon(Icons.arrow_back),
           onPressed: () {
             Navigator.push(context,
-                MaterialPageRoute(builder: (context) => Homepage1()));
+                MaterialPageRoute(builder: (context) => const Homepage1()));
           },
         ),
       ),
@@ -75,7 +73,7 @@ class _QuestionnaireState extends State<Questionnaire> {
                   return Container(
                     height: 90,
                     width: 1000,
-                    padding: EdgeInsets.all(8.0),
+                    padding: const EdgeInsets.all(8.0),
                     decoration: BoxDecoration(
                       border: Border.all(
                         color: Colors.blue,
@@ -94,14 +92,14 @@ class _QuestionnaireState extends State<Questionnaire> {
                               child: Row(
                                 children: [
                                   Text('${snapshot.data[index]['name']}',  // displays the name of the item from the snapshot data
-                                    style: TextStyle(
+                                    style: const TextStyle(
                                       fontSize: 15,  // sets font size to 15
                                       fontWeight: FontWeight.normal,  // sets font weight to normal
                                     ),
                                   ),
 
                                   Text('${snapshot.data[index]['content']}',
-                                    style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                    style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
                                 ],
                               ),
                             ),
@@ -118,18 +116,18 @@ class _QuestionnaireState extends State<Questionnaire> {
                                   mode: LaunchMode.externalApplication
                               );
                             },
-                            child: Icon(Icons.play_arrow)),
+                            child: const Icon(Icons.play_arrow)),
                       ],
                     ),
                   );
                 },
               );
             } else if (snapshot.hasError) {
-              return Center(
+              return const Center(
                 child: Text('Failed to fetch courses'),
               );
             } else {
-              return Center(
+              return const Center(
                 child: CircularProgressIndicator(),
               );
             }

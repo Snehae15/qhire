@@ -9,7 +9,11 @@ class Exam {
   final String link;
   final String content;
 
-  Exam({required this.name, required this.link, required this.content,});
+  Exam({
+    required this.name,
+    required this.link,
+    required this.content,
+  });
 
   factory Exam.fromJson(Map<String, dynamic> json) {
     return Exam(
@@ -21,14 +25,14 @@ class Exam {
 }
 
 class Attendexam extends StatefulWidget {
-  Attendexam({Key? key}) : super(key: key);
+  const Attendexam({Key? key}) : super(key: key);
 
   @override
   State<Attendexam> createState() => _AttendexamState();
 }
 
 class _AttendexamState extends State<Attendexam> {
-  var _link ;
+  var _link;
 
   Future<dynamic> viewCourse() async {
     var data;
@@ -48,10 +52,10 @@ class _AttendexamState extends State<Attendexam> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Exam'),
+          title: const Text('Exam'),
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               // Navigator.push(context,MaterialPageRoute(builder: (context) => More()));
             },
@@ -66,11 +70,11 @@ class _AttendexamState extends State<Attendexam> {
                 return ListView.builder(
                   itemCount: snapshot.data!.length,
                   itemBuilder: (context, index) {
-                     // Course course = snapshot.data!['name'];
+                    // Course course = snapshot.data!['name'];
                     return Container(
                       height: 90,
                       width: 100,
-                      padding: EdgeInsets.all(10.0),
+                      padding: const EdgeInsets.all(10.0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -90,19 +94,24 @@ class _AttendexamState extends State<Attendexam> {
                                   children: [
                                     Column(
                                       children: [
-                                        Text('${snapshot.data[index]['name']}',
-                                          style: TextStyle(
+                                        Text(
+                                          '${snapshot.data[index]['name']}',
+                                          style: const TextStyle(
                                             fontSize: 15,
                                             fontWeight: FontWeight.normal,
                                           ),
                                         ),
                                       ],
                                     ),
-
                                     Column(
                                       children: [
-                                        Text('${snapshot.data[index]['description']}',
-                                          style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                        Text(
+                                          '${snapshot.data[index]['description']}',
+                                          style: const TextStyle(
+                                            fontSize: 15,
+                                            fontWeight: FontWeight.normal,
+                                          ),
+                                        ),
                                       ],
                                     ),
                                   ],
@@ -111,28 +120,27 @@ class _AttendexamState extends State<Attendexam> {
                             ],
                           ),
                           InkWell(
-                              onTap: (){
+                              onTap: () {
                                 setState(() {
                                   _link = snapshot.data![index]['link'];
                                 });
                                 print(_link);
                                 print('....$_link');
                                 launchUrl(Uri.parse(_link),
-                                    mode: LaunchMode.externalApplication
-                                );
+                                    mode: LaunchMode.externalApplication);
                               },
-                              child: Icon(Icons.arrow_forward)),
+                              child: const Icon(Icons.arrow_forward)),
                         ],
                       ),
                     );
                   },
                 );
               } else if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text('Failed to fetch EXAM'),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }

@@ -1,6 +1,5 @@
 import 'dart:convert';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:http/http.dart' as http;
 import 'package:qhire/model.dart';
 
@@ -15,7 +14,7 @@ const backgroundColor = Colors.black;
 const botBackgroundColor = Color.fromARGB(246, 22, 24, 24);
 
 Future<String> generateResponse(String prompt) async {
-  const apiKey = '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';
+  const apiKey = 'api..........................';
 
   var url = Uri.https("api.openai.com", "/v1/completions");
   final response = await http.post(
@@ -53,13 +52,11 @@ class _ChatPageState extends State<ChatPage> {
     isLoading = false;
   }
 
-
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("CHAT HERE"),
+        title: const Text("CHAT HERE"),
         backgroundColor: Colors.black,
         centerTitle: true,
       ),
@@ -106,7 +103,7 @@ class _ChatPageState extends State<ChatPage> {
           ),
           onPressed: () async {
             setState(
-                  () {
+              () {
                 _messages.add(
                   ChatMessage(
                     text: _textController.text,
@@ -207,25 +204,25 @@ class ChatMessageWidget extends StatelessWidget {
           children: <Widget>[
             chatMessageType == ChatMessageType.bot
                 ? Container(
-              decoration: BoxDecoration(),
-              margin: const EdgeInsets.only(right: 16.0),
-              child: CircleAvatar(
-                  backgroundColor: Color.fromARGB(255, 255, 255, 255),
-                  child: Icon(
-                    Icons.person,
-                    color: Colors.black,
-                  )),
-            )
+                    decoration: const BoxDecoration(),
+                    margin: const EdgeInsets.only(right: 16.0),
+                    child: const CircleAvatar(
+                        backgroundColor: Color.fromARGB(255, 255, 255, 255),
+                        child: Icon(
+                          Icons.person,
+                          color: Colors.black,
+                        )),
+                  )
                 : Container(
-              margin: const EdgeInsets.only(right: 16.0),
-              child: const CircleAvatar(
-                backgroundColor: Color.fromARGB(255, 31, 102, 175),
-                child: Icon(
-                  Icons.person,
-                  color: Colors.white,
-                ),
-              ),
-            ),
+                    margin: const EdgeInsets.only(right: 16.0),
+                    child: const CircleAvatar(
+                      backgroundColor: Color.fromARGB(255, 31, 102, 175),
+                      child: Icon(
+                        Icons.person,
+                        color: Colors.white,
+                      ),
+                    ),
+                  ),
             Expanded(
               child: Column(
                 crossAxisAlignment: CrossAxisAlignment.start,

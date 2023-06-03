@@ -1,8 +1,6 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:qhire/home.dart';
-import 'package:qhire/login.dart';
 
 class Editpro extends StatefulWidget {
   const Editpro({Key? key}) : super(key: key);
@@ -39,12 +37,12 @@ class _RegState extends State<Editpro> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("Edit Profile"),
+        title: const Text("Edit Profile"),
         centerTitle: true,
-        leading: Icon(
+        leading: const Icon(
             Icons.home
         ),
-        actions: [Icon(Icons.more_vert,),
+        actions: const [Icon(Icons.more_vert,),
         ],
       ),
       body:
@@ -55,7 +53,7 @@ class _RegState extends State<Editpro> {
               padding:const EdgeInsets.all(8.0),
               child: TextField(
                 controller: firstname,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Name",hintText: "Enter your Name",
                 ),
@@ -63,10 +61,10 @@ class _RegState extends State<Editpro> {
             ),
 
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: email,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"Email id",hintText: "Enter Email id",
                 ),
@@ -74,11 +72,11 @@ class _RegState extends State<Editpro> {
             ),
 
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
 
               child: TextField(
                 controller: username,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
 
                   labelText:"User name",hintText: "Enter Username",
@@ -87,10 +85,10 @@ class _RegState extends State<Editpro> {
             ),
 
             Padding(
-              padding: EdgeInsets.all(8.0),
+              padding: const EdgeInsets.all(8.0),
               child: TextFormField(
                 controller: dob,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
                   labelText:"dob",hintText: "Enter your dob name",
                 ),
@@ -119,15 +117,15 @@ class _RegState extends State<Editpro> {
               padding: const EdgeInsets.all(8.0),
               child: TextField(
                 controller: highestQualification,
-                decoration: InputDecoration(
+                decoration: const InputDecoration(
                   border: OutlineInputBorder(),
 
                   labelText:"Highest Qualification",hintText: "",
                 ),
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
+            const Padding(
+              padding: EdgeInsets.all(8.0),
               child: TextField(
                 keyboardType: TextInputType.multiline,
                 maxLines: 4,
@@ -140,19 +138,19 @@ class _RegState extends State<Editpro> {
                 ),
               ),
             ),
-            ListTile(
+            const ListTile(
               title: Text("Current employment Status:"),
             ),
 
             RadioListTile(
-                title:Text("Employed"),
+                title:const Text("Employed"),
                 value: 'Employed', groupValue: employstatus, onChanged: (rad){
               setState(() {
                 employstatus = rad;
               });
             }),
             RadioListTile(
-                title:Text("UnEmployed"),
+                title:const Text("UnEmployed"),
                 value: 'UnEmployed', groupValue: employstatus, onChanged: (rad){
               setState(() {
                 employstatus = rad;
@@ -160,7 +158,7 @@ class _RegState extends State<Editpro> {
             }),
 
             RadioListTile(
-                title:Text("Self Employed"),
+                title:const Text("Self Employed"),
                 value: 'Self Employed', groupValue: employstatus, onChanged: (rad){
               setState(() {
                 employstatus = rad;
@@ -169,8 +167,8 @@ class _RegState extends State<Editpro> {
             ElevatedButton(onPressed: (){
               getData();
               Fluttertoast.showToast(msg: "Profile updated");
-              Navigator.push(context, MaterialPageRoute(builder: (context)=>Home()));
-            }, child: Text("Update")),
+              Navigator.push(context, MaterialPageRoute(builder: (context)=>const Home()));
+            }, child: const Text("Update")),
           ],
         ),
 

@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class EmployeeProfilePage extends StatefulWidget {
+  const EmployeeProfilePage({super.key});
+
   @override
   _EmployeeProfilePageState createState() => _EmployeeProfilePageState();
 }
@@ -30,43 +32,43 @@ class _EmployeeProfilePageState extends State<EmployeeProfilePage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Employee Profile'),
+        title: const Text('Employee Profile'),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            CircleAvatar(
+            const CircleAvatar(
               radius: 50.0,
               // backgroundImage: AssetImage('asset/profilepic.jpg'),
             ),
-            SizedBox(height: 16.0),
-            Text(
+            const SizedBox(height: 16.0),
+            const Text(
               'Name:',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             Text(
               _name,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 8.0),
-            Text(
+            const SizedBox(height: 8.0),
+            const Text(
               'Email:',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             Text(
               _email,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
-            SizedBox(height: 8.0),
-            Text(
+            const SizedBox(height: 8.0),
+            const Text(
               'Phone:',
               style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
             ),
             Text(
               _phone,
-              style: TextStyle(fontSize: 16.0),
+              style: const TextStyle(fontSize: 16.0),
             ),
           ],
         ),

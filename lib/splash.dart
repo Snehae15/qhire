@@ -10,10 +10,11 @@ class Splash extends StatefulWidget {
 }
 
 class _SplashState extends State<Splash> {
+  @override
   void initState(){
     super.initState();
-    Timer(Duration(seconds: 4),
-            ()=>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>First())));
+    Timer(const Duration(seconds: 4),
+            ()=>Navigator.pushReplacement(context,MaterialPageRoute(builder: (context)=>const First())));
 
   }
   @override
@@ -23,11 +24,11 @@ class _SplashState extends State<Splash> {
         fit: StackFit.expand,
         children: <Widget>[
           Container(
-            decoration: BoxDecoration(
-              color: new Color(0xB101C),
+            decoration: const BoxDecoration(
+              color: Color(0x000b101c),
               gradient: LinearGradient(
-                colors: [ new Color(0xff101010),
-                 new Color(0xFF8080)],
+                colors: [ Color(0xff101010),
+                 Color(0x00ff8080)],
                 begin: Alignment.centerRight,
                 end: Alignment.centerLeft,
               ),
@@ -40,7 +41,7 @@ class _SplashState extends State<Splash> {
                 radius: 80, // Adjust the radius as per your requirement
                 backgroundColor: Colors.black87,
                 child: Padding(
-                  padding: EdgeInsets.all(8),
+                  padding: const EdgeInsets.all(8),
                   child: ClipOval(
                     child: Image.asset(
                       'assets/logo.jpg', // Replace with your logo image path
@@ -51,7 +52,7 @@ class _SplashState extends State<Splash> {
                   ),
                 ),
               ),
-              Padding(
+              const Padding(
                 padding: EdgeInsets.only(top: 15.0),
               ),
               // Text(

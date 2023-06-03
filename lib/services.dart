@@ -6,11 +6,7 @@ import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qhire/const.dart';
 
-
-
-class Services{
-
-
+class Services {
   static Future<dynamic> postWithIamge({
     required String endPoint,
     required Map params,
@@ -18,11 +14,10 @@ class Services{
     required String imageParameter,
   }) async {
     var res;
-    var request =
-    MultipartRequest("POST", Uri.parse(Con.url + endPoint));
-    params.entries.forEach((element) {
+    var request = MultipartRequest("POST", Uri.parse(Con.url + endPoint));
+    for (var element in params.entries) {
       request.fields[element.key] = element.value;
-    });
+    }
     // request.fields['user'] = 'someone@somewhere.com';
     request.files.add(await MultipartFile.fromPath(
       imageParameter,
@@ -44,32 +39,32 @@ class Services{
     await showDialog(
         context: context,
         builder: (_) => AlertDialog(
-          title: Text('Select source'),
-          actions: [
-            ElevatedButton(
-              onPressed: () async {
-                pickedFile = await ImagePicker()
-                    .pickImage(source: ImageSource.camera);
-                Navigator.pop(context);
-              },
-              child: Text('camera'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                pickedFile = await ImagePicker()
-                    .pickImage(source: ImageSource.gallery);
-                Navigator.pop(context);
-              },
-              child: Text('gallery'),
-            ),
-          ],
-        ));
+              title: const Text('Select source'),
+              actions: [
+                ElevatedButton(
+                  onPressed: () async {
+                    pickedFile = await ImagePicker()
+                        .pickImage(source: ImageSource.camera);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('camera'),
+                ),
+                ElevatedButton(
+                  onPressed: () async {
+                    pickedFile = await ImagePicker()
+                        .pickImage(source: ImageSource.gallery);
+                    Navigator.pop(context);
+                  },
+                  child: const Text('gallery'),
+                ),
+              ],
+            ));
 
     print('>>>>>>>>>${pickedFile!.name}');
 
     if (pickedFile != null) {
       return File(pickedFile!.path);
     }
+    return null;
   }
-
 }

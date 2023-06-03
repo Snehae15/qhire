@@ -2,11 +2,10 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/homepage1.dart';
-import 'package:qhire/pagehome.dart';
+
 import 'package:url_launcher/url_launcher.dart';
 
-import 'home.dart';
+import 'bottom.dart';
 
 class Inter {
   final String name;
@@ -52,12 +51,12 @@ class _InterviewState extends State<Interview> {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title: Text('Interview preparation'),
+          title: const Text('Interview preparation'),
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
-               Navigator.push(context, MaterialPageRoute(builder: (context) => Pagehome()));
+               Navigator.push(context, MaterialPageRoute(builder: (context) => const Pagehome()));
             },
           ),
         ),
@@ -74,7 +73,7 @@ class _InterviewState extends State<Interview> {
                     return Container(
                       height: 90,
                       width: 1000,
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -93,14 +92,14 @@ class _InterviewState extends State<Interview> {
                                 child: Row(
                                   children: [
                                     Text('${snapshot.data[index]['name']}',  // displays the name of the item from the snapshot data
-                                      style: TextStyle(
+                                      style: const TextStyle(
                                         fontSize: 15,  // sets font size to 15
                                         fontWeight: FontWeight.normal,  // sets font weight to normal
                                       ),
                                     ),
 
                                     Text('${snapshot.data[index]['content']}',
-                                      style: TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
+                                      style: const TextStyle(fontSize: 15, fontWeight: FontWeight.normal,),),
                                   ],
                                 ),
                               ),
@@ -117,18 +116,18 @@ class _InterviewState extends State<Interview> {
                                     mode: LaunchMode.externalApplication
                                 );
                               },
-                              child: Icon(Icons.play_arrow)),
+                              child: const Icon(Icons.play_arrow)),
                         ],
                       ),
                     );
                   },
                 );
               } else if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text('Failed to fetch Interview preparation'),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }

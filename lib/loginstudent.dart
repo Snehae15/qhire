@@ -1,14 +1,14 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
+
 import 'package:qhire/regstudent.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import 'bottom.dart';
 
 class Logstudent extends StatefulWidget {
   const Logstudent({Key? key}) : super(key: key);
@@ -16,6 +16,7 @@ class Logstudent extends StatefulWidget {
   @override
   State<Logstudent> createState() => _LogstudentState();
 }
+
 class _LogstudentState extends State<Logstudent> {
   var email = TextEditingController();
   var password = TextEditingController();
@@ -39,7 +40,7 @@ class _LogstudentState extends State<Logstudent> {
     var data = {
       "email": email.text,
       "password": password.text,
-      "type":type.text,
+      "type": type.text,
     };
     var response = await post(Uri.parse('${Con.url}logstd.php'), body: data);
     print('>>>>>>>>${response.body}');
@@ -54,7 +55,7 @@ class _LogstudentState extends State<Logstudent> {
         Fluttertoast.showToast(msg: 'Successfully Login...');
         Navigator.push(context, MaterialPageRoute(
           builder: (context) {
-            return Pagehome();
+            return const Pagehome();
           },
         ));
       } else {
@@ -70,7 +71,7 @@ class _LogstudentState extends State<Logstudent> {
     return Scaffold(
       backgroundColor: Colors.black87,
       body: Container(
-        decoration: BoxDecoration(
+        decoration: const BoxDecoration(
           image: DecorationImage(
             image: AssetImage("assets/Wallpaper.jpeg"),
             fit: BoxFit.fill,
@@ -81,56 +82,64 @@ class _LogstudentState extends State<Logstudent> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                Row(
+                const Row(
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     Text('Sign In'),
                   ],
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     controller: email,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Email", hintText: "Enter Email",
-                        prefixIcon: Icon(Icons.email)
-                    ),
-                      // prefixIcon: Icon(Icons.email)
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Email",
+                        hintText: "Enter Email",
+                        prefixIcon: Icon(Icons.email)),
+                    // prefixIcon: Icon(Icons.email)
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.all(8.0),
+                  padding: const EdgeInsets.all(8.0),
                   child: TextField(
                     obscureText: true,
                     controller: password,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(),
-                      labelText: "Password", hintText: "Enter password",
-                        prefixIcon: Icon(Icons.lock)
-                    ),
-
+                    decoration: const InputDecoration(
+                        border: OutlineInputBorder(),
+                        labelText: "Password",
+                        hintText: "Enter password",
+                        prefixIcon: Icon(Icons.lock)),
                   ),
                 ),
-                SizedBox(height: 10,),
+                const SizedBox(
+                  height: 10,
+                ),
                 InkWell(
                   onTap: () {
                     getData();
                   },
                   child: Container(
-                    child: Center(child: Text('Login', style: TextStyle(color: Colors.white))),
                     decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(50),
                       color: Colors.black,
                     ),
                     height: 50,
                     width: 300,
+                    child: const Center(
+                        child: Text('Login',
+                            style: TextStyle(color: Colors.white))),
                   ),
                 ),
-                TextButton(onPressed: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (
-                      context) => Regstudent()));
-                }, child: Text("Don't have any account please login her!", style: TextStyle(color: Colors.black87)))
+                TextButton(
+                    onPressed: () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => const Regstudent()));
+                    },
+                    child: const Text("Don't have any account please login here!",
+                        style: TextStyle(color: Colors.blue)))
               ],
             ),
           ),
@@ -139,4 +148,3 @@ class _LogstudentState extends State<Logstudent> {
     );
   }
 }
-

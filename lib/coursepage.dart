@@ -2,10 +2,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/home.dart';
-import 'package:qhire/newpage.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'bottom.dart';
 
 class Course {
   final String name;
@@ -24,7 +23,7 @@ class Course {
 }
 
 class Coursepage extends StatefulWidget {
-  Coursepage({Key? key}) : super(key: key);
+  const Coursepage({Key? key}) : super(key: key);
 
   @override
   State<Coursepage> createState() => _CoursepageState();
@@ -36,7 +35,7 @@ class _CoursepageState extends State<Coursepage> {
   Future<dynamic> viewCourse() async {
     var data;
     var response =
-    await post(Uri.parse('${Con.url}viewcourse.php'), body: data);
+        await post(Uri.parse('${Con.url}viewcourse.php'), body: data);
     if (response.statusCode == 200) {
       var coursesJson = jsonDecode(response.body);
       print(coursesJson);
@@ -53,12 +52,12 @@ class _CoursepageState extends State<Coursepage> {
       home: Scaffold(
         appBar: AppBar(
           backgroundColor: Colors.black,
-          title: Text('Courses'),
+          title: const Text('Courses'),
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Pagehome()));
+                  context, MaterialPageRoute(builder: (context) => const Pagehome()));
             },
           ),
         ),
@@ -74,7 +73,7 @@ class _CoursepageState extends State<Coursepage> {
                     return Container(
                       height: 100,
                       width: 1000,
-                      padding: EdgeInsets.all(8.0),
+                      padding: const EdgeInsets.all(8.0),
                       decoration: BoxDecoration(
                         border: Border.all(
                           color: Colors.black,
@@ -89,7 +88,7 @@ class _CoursepageState extends State<Coursepage> {
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
                               '${snapshot.data[index]['name']}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -99,7 +98,7 @@ class _CoursepageState extends State<Coursepage> {
                             padding: const EdgeInsets.all(5.0),
                             child: Text(
                               '${snapshot.data[index]['content']}',
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 15,
                                 fontWeight: FontWeight.normal,
                               ),
@@ -118,7 +117,7 @@ class _CoursepageState extends State<Coursepage> {
                                   launchUrl(Uri.parse(_link),
                                       mode: LaunchMode.externalApplication);
                                 },
-                                child: Icon(Icons.play_arrow),
+                                child: const Icon(Icons.play_arrow),
                               ),
                             ],
                           ),
@@ -127,19 +126,16 @@ class _CoursepageState extends State<Coursepage> {
                     );
                   },
                 );
-
               } else if (snapshot.hasError) {
-                return Center(
+                return const Center(
                   child: Text('Failed to fetch courses'),
                 );
               } else {
-                return Center(
+                return const Center(
                   child: CircularProgressIndicator(),
                 );
               }
             },
-
-
           ),
         ),
       ),

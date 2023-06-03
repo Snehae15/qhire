@@ -12,32 +12,39 @@ class ProfilePicture extends StatelessWidget {
         clipBehavior: Clip.none,
         children: [
           Container(
-            margin: const EdgeInsets.only(top:25),
+            margin: const EdgeInsets.only(top: 25),
             decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(20)
-            ),
-            child: Column(
+                color: Colors.white, borderRadius: BorderRadius.circular(20)),
+            child: const Column(
               mainAxisAlignment: MainAxisAlignment.start,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                const SizedBox(height: 25,),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: const Text("Joe Doe",
-                    style: TextStyle(
-                        color: Colors.black,
-                        fontSize: 15,
-                        fontFamily: "Serif"
-                    ),),
+                SizedBox(
+                  height: 25,
                 ),
-                const SizedBox(height: 10,),
+                Padding(
+                  padding: EdgeInsets.all(8.0),
+                  child: Text(
+                    "Joe Doe",
+                    style: TextStyle(
+                        color: Colors.black, fontSize: 15, fontFamily: "Serif"),
+                  ),
+                ),
+                SizedBox(
+                  height: 10,
+                ),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.start,
                   crossAxisAlignment: CrossAxisAlignment.start,
-                  children: const [
-                    Icon(Icons.location_on_outlined,color: Colors.black,size: 30,),
-                    SizedBox(width: 10,),
+                  children: [
+                    Icon(
+                      Icons.location_on_outlined,
+                      color: Colors.black,
+                      size: 30,
+                    ),
+                    SizedBox(
+                      width: 10,
+                    ),
                     Text(
                       "Address: 43 Oxford Road M13\n4GR Manchester, UK",
                       style: TextStyle(
@@ -56,8 +63,10 @@ class ProfilePicture extends StatelessWidget {
             child: SizedBox(
               height: 56,
               width: 56,
-              child:  CircleAvatar(
-                backgroundImage: AssetImage("assets/drop.png",),
+              child: CircleAvatar(
+                backgroundImage: AssetImage(
+                  "assets/drop.png",
+                ),
               ),
             ),
           )

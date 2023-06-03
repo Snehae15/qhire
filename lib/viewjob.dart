@@ -2,11 +2,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
-import 'package:qhire/chatboat.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
+
 import 'package:qhire/tests.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottom.dart';
 
 void main() => runApp(const Viewjob());
 
@@ -35,7 +36,7 @@ class Viewjob extends StatelessWidget {
     return MaterialApp(
       home: Scaffold(
         appBar: AppBar(
-          title:Text("JOBS"),
+          title:const Text("JOBS"),
           centerTitle: true,
           backgroundColor: Colors.black,
           leading: IconButton(
@@ -62,7 +63,7 @@ class Viewjob extends StatelessWidget {
                 } else if (snapshot.data!.isEmpty) {
                   return const Center(child: Text('No data available'));
                 } else {
-                  final dataList = snapshot.data! as List;
+                  final dataList = snapshot.data!;
 
                   return SearchableList(dataList: dataList,);
                 }
@@ -103,7 +104,7 @@ class _SearchableListState extends State<SearchableList> {
               });
             }else {
               datas = [];
-              widget.dataList.forEach((singleItem) {
+              for (var singleItem in widget.dataList) {
                 if(singleItem['jobname']
                     .toString()
                     .toLowerCase()
@@ -112,7 +113,7 @@ class _SearchableListState extends State<SearchableList> {
                     datas.add(singleItem);
                   });
                 }
-              });
+              }
             }
           },
           decoration: const InputDecoration(
@@ -238,7 +239,7 @@ class _SearchableListState extends State<SearchableList> {
                         onPressed: () {
                           update(id: 'job_id');
                           Fluttertoast.showToast(msg: "Applied for exam");
-                          Navigator.push(context, MaterialPageRoute(builder: (context)=>Questionnaire()));
+                          Navigator.push(context, MaterialPageRoute(builder: (context)=>const Questionnaire()));
                         },
                         style: ButtonStyle(
                           backgroundColor: MaterialStateProperty.all<Color>(Colors.black),

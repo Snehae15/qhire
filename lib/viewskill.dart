@@ -38,7 +38,7 @@ class Viewskill extends StatelessWidget {
             icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Home()));
+                  context, MaterialPageRoute(builder: (context) => const Home()));
             },
           ),
         ),
@@ -49,14 +49,14 @@ class Viewskill extends StatelessWidget {
             builder: (context, snapshot) {
               if (snapshot.hasData && snapshot.data != null) {
                 if (snapshot.data![0]['message'] == 'failed') {
-                  return Center(child: Text('no data'));
+                  return const Center(child: Text('no data'));
                 } else {
                   return ListView.builder(
                     itemCount: snapshot.data!.length,
                     itemBuilder: (context, index) {
                       return Container(
-                        padding: EdgeInsets.all(16.0),
-                        margin: EdgeInsets.only(bottom: 16.0),
+                        padding: const EdgeInsets.all(16.0),
+                        margin: const EdgeInsets.only(bottom: 16.0),
                         decoration: BoxDecoration(
                           border: Border.all(color: Colors.grey),
                           borderRadius: BorderRadius.circular(8.0),
@@ -64,8 +64,8 @@ class Viewskill extends StatelessWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            Text('SKILL', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
-                            SizedBox(height: 8.0),
+                            const Text('SKILL', style: TextStyle(fontSize: 18.0, fontWeight: FontWeight.bold)),
+                            const SizedBox(height: 8.0),
                             Text(snapshot.data![index]['skill'] ?? ''),
                           ],
                         ),
@@ -74,7 +74,7 @@ class Viewskill extends StatelessWidget {
                   );
                 }
               } else {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               }
 
             },

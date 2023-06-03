@@ -19,7 +19,7 @@ publish_to: 'none' # Remove this line if you wish to publish to pub.dev
 version: 1.0.0+1
 
 environment:
-  sdk: '>=2.19.2 <3.0.0'
+  sdk: '>=3.0.2 <4.0.0'
 
 # Dependencies specify other packages that your package needs in order to work.
 # To automatically upgrade your package dependencies to the latest versions
@@ -33,12 +33,15 @@ dependencies:
   fluttertoast: ^8.2.1
   http: ^0.13.5
   shared_preferences: ^2.0.8
-  flutter_i18n: ^0.22.4
+  # flutter_i18n: ^0.22.4
   file_picker: ^5.2.8
   image_picker: ^0.8.4+4
   url_launcher: ^6.1.10
   pretty_qr_code: ^2.0.3
   carousel_slider: ^4.2.1
+
+
+
 #  flutter_dialogflow: ^0.1.1
 
 
@@ -52,6 +55,7 @@ dependencies:
 dev_dependencies:
   flutter_test:
     sdk: flutter
+
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is

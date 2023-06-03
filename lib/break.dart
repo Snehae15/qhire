@@ -58,7 +58,7 @@ class _ViewnewState extends State<Viewnew> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("View News"),
+        title: const Text("View News"),
         backgroundColor: Colors.black,
         centerTitle: true,
       ),
@@ -69,7 +69,7 @@ class _ViewnewState extends State<Viewnew> {
               future: getPostsData(),
               builder: (context, snapshot) {
                 if (snapshot.connectionState == ConnectionState.waiting) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.hasError) {
                   return Center(child: Text("Error: ${snapshot.error}"));
                 } else {
@@ -87,7 +87,7 @@ class _ViewnewState extends State<Viewnew> {
                               color: Colors.grey.withOpacity(0.5),
                               spreadRadius: 2,
                               blurRadius: 5,
-                              offset: Offset(0, 3),
+                              offset: const Offset(0, 3),
                             ),
                           ],
                         ),
@@ -96,15 +96,15 @@ class _ViewnewState extends State<Viewnew> {
                           children: [
                             Text(
                               snapshot.data[index]['postname'],
-                              style: TextStyle(
+                              style: const TextStyle(
                                 fontSize: 20,
                                 fontWeight: FontWeight.bold,
                               ),
                             ),
-                            SizedBox(height: 8),
+                            const SizedBox(height: 8),
                             Text(
                               snapshot.data[index]['description'],
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                             Container(
                               height: 350,

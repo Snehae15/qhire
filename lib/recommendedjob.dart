@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:qhire/viewpost.dart';
 
 void main() => runApp(const Recommented());
 
@@ -18,6 +17,7 @@ class Recommented extends StatelessWidget {
       ),
     );
   }
+
   @override
   State<StatefulWidget> createState() {
     // TODO: implement createState

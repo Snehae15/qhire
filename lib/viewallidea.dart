@@ -4,10 +4,11 @@ import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-void main() => runApp(Viewallidea());
+import 'bottom.dart';
+
+void main() => runApp(const Viewallidea());
 
 class Viewallidea extends StatelessWidget {
   const Viewallidea({Key? key}) : super(key: key);
@@ -45,14 +46,14 @@ class Viewallidea extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("View On Innovative Idea"),
+          title: const Text("View On Innovative Idea"),
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Pagehome()),
+                MaterialPageRoute(builder: (context) => const Pagehome()),
               );
             },
           ),
@@ -63,9 +64,9 @@ class Viewallidea extends StatelessWidget {
             future: viewIdea(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.data[0]['message'] == 'failed') {
-                return Center(child: Text('No data'));
+                return const Center(child: Text('No data'));
               }
               return ListView.builder(
                   itemCount: snapshot.data.length,
@@ -81,7 +82,7 @@ class Viewallidea extends StatelessWidget {
                             color: Colors.grey.withOpacity(0.5),
                             spreadRadius: 2,
                             blurRadius: 5,
-                            offset: Offset(0, 3),
+                            offset: const Offset(0, 3),
                           ),
                         ],
                       ),
@@ -90,15 +91,15 @@ class Viewallidea extends StatelessWidget {
                         children: [
                           Text(
                             snapshot.data[index]['name'],
-                            style: TextStyle(
+                            style: const TextStyle(
                               fontSize: 20,
                               fontWeight: FontWeight.bold,
                             ),
                           ),
-                          SizedBox(height: 8),
+                          const SizedBox(height: 8),
                           Text(
                             snapshot.data[index]['details'],
-                            style: TextStyle(fontSize: 16),
+                            style: const TextStyle(fontSize: 16),
                           ),
                           Container(
                             height: 350,

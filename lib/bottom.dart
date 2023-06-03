@@ -1,12 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:qhire/chatboat.dart';
 import 'package:qhire/home.dart';
 import 'package:qhire/homepage1.dart';
 import 'package:qhire/more.dart';
 import 'package:qhire/viewjob.dart';
-
-
 
 class Pagehome extends StatefulWidget {
   const Pagehome({Key? key}) : super(key: key);
@@ -16,12 +12,12 @@ class Pagehome extends StatefulWidget {
 }
 
 class _HomeState extends State<Pagehome> {
-  int currentindex=1;
-  final pages=[
-    Home(),
-    Homepage1(),
-    Morepage(),
-    Viewjob(),
+  int currentindex = 1;
+  final pages = [
+    const Home(),
+    const Homepage1(),
+    const Morepage(),
+    const Viewjob(),
   ];
 
   @override
@@ -30,24 +26,22 @@ class _HomeState extends State<Pagehome> {
       body: pages[currentindex],
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: currentindex,
-        onTap: (newIndex){
+        onTap: (newIndex) {
           setState(() {
-            currentindex=newIndex;
+            currentindex = newIndex;
           });
         },
-        items:[
+        items: const [
           BottomNavigationBarItem(
             icon: Icon(Icons.local_activity),
             label: "Activity",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.home),
-
             label: "Home",
           ),
           BottomNavigationBarItem(
             icon: Icon(Icons.add),
-
             label: "More",
           ),
           BottomNavigationBarItem(

@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:fluttertoast/fluttertoast.dart';
@@ -40,7 +39,7 @@ class _AddaboutState extends State<Addabout> {
         Navigator.push(
           context,
           MaterialPageRoute(builder: (context) {
-            return Viewabout();
+            return const Viewabout();
           }),
         );
       }
@@ -53,7 +52,7 @@ class _AddaboutState extends State<Addabout> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text(
+        title: const Text(
           "Add about",
           style: TextStyle(color: Colors.white),
         ),
@@ -64,16 +63,17 @@ class _AddaboutState extends State<Addabout> {
         child: Center(
           child: ListView(
             children: [
-              Padding(
+              const Padding(
                 padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                    EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Text(
-                  "You can write about your years of experience, industry, or skills. \n People also talk about their achievements or previous job experiences.",
+                  "You can write about your years of experience, industry, or skills. "
+                  "\n People also talk about their achievements or previous job experiences.",
                 ),
               ),
               Padding(
                 padding:
-                const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
+                    const EdgeInsets.only(left: 20.0, right: 20.0, top: 10.0),
                 child: Container(
                   decoration: BoxDecoration(
                     border: Border.all(color: Colors.black), // Add black border
@@ -83,7 +83,7 @@ class _AddaboutState extends State<Addabout> {
                     controller: about,
                     keyboardType: TextInputType.multiline,
                     maxLines: 5,
-                    decoration: InputDecoration(
+                    decoration: const InputDecoration(
                       border: InputBorder.none, // Remove default border
                       labelText: "Add about",
                       hintText: "Enter about",
@@ -94,33 +94,37 @@ class _AddaboutState extends State<Addabout> {
                   ),
                 ),
               ),
-        SizedBox(height: 10,),
-        InkWell(
-          onTap: () {
-            getData();
-           Navigator.push(context,MaterialPageRoute(builder: (context)=>Home()));
-          },
-
-          child: Padding(
-            padding: const EdgeInsets.only(left: 88.0,right: 90.0),
-            child: Container(
-              child: Center(
-                child: Text("ADD", style: TextStyle(color: Colors.white),),
+              const SizedBox(
+                height: 10,
               ),
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(10),
-                color: Colors.black87,
+              InkWell(
+                onTap: () {
+                  getData();
+                  Navigator.push(
+                      context, MaterialPageRoute(builder: (context) => const Home()));
+                },
+                child: Padding(
+                  padding: const EdgeInsets.only(left: 88.0, right: 90.0),
+                  child: Container(
+                    decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(10),
+                      color: Colors.black87,
+                    ),
+                    height: 50,
+                    width: 50,
+                    child: const Center(
+                      child: Text(
+                        "ADD",
+                        style: TextStyle(color: Colors.white),
+                      ),
+                    ),
+                  ),
+                ),
               ),
-              height: 50,
-              width: 50,
-            ),
-          ),
-
-        ),
             ],
-    ),
-    ),
-    ),
+          ),
+        ),
+      ),
     );
   }
 }

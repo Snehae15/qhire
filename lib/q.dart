@@ -25,19 +25,19 @@ class _SplashScreen1State extends State<SplashScreen1> {
     if (isStudent) {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Logstudent()),
+        MaterialPageRoute(builder: (context) => const Logstudent()),
       );
     } else {
       Navigator.pushReplacement(
         context,
-        MaterialPageRoute(builder: (context) => Log()),
+        MaterialPageRoute(builder: (context) => const Log()),
       );
     }
   }
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Center(
         child: CircularProgressIndicator(),
       ),
@@ -46,25 +46,27 @@ class _SplashScreen1State extends State<SplashScreen1> {
 }
 
 class MyApp extends StatelessWidget {
+  const MyApp({super.key});
+
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Qhire',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.deepOrange,
+        primarySwatch: Colors.lightBlue,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
-      home: SplashScreen1(),
+      home: const SplashScreen1(),
       routes: {
-        '/home': (BuildContext context) => Home(),
-        '/login': (BuildContext context) => Log(),
-        '/loginstudent': (BuildContext context) => Logstudent(),
+        '/home': (BuildContext context) => const Home(),
+        '/login': (BuildContext context) => const Log(),
+        '/loginstudent': (BuildContext context) => const Logstudent(),
       },
     );
   }
 }
 
 void main() {
-  runApp(MyApp());
+  runApp(const MyApp());
 }

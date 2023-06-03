@@ -7,7 +7,7 @@ class HomePages extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Home'),
+        title: const Text('Home'),
       ),
       body: Center(
         child: Container(
@@ -22,7 +22,7 @@ class HomePages extends StatelessWidget {
                   print('Container tapped');
                   // Add your code here for the first onclick function
                 },
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Click me',
                     style: TextStyle(
@@ -32,13 +32,13 @@ class HomePages extends StatelessWidget {
                   ),
                 ),
               ),
-              SizedBox(height: 16),
+              const SizedBox(height: 16),
               InkWell(
                 onTap: () {
                   print('Second container tapped');
                   // Add your code here for the second onclick function
                 },
-                child: Center(
+                child: const Center(
                   child: Text(
                     'Click me too',
                     style: TextStyle(

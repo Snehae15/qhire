@@ -5,8 +5,11 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
+import 'package:qhire/editprofile.dart';
+
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottom.dart';
 
 class Viewpro extends StatefulWidget {
   const Viewpro({Key? key}) : super(key: key);
@@ -57,13 +60,13 @@ class _ViewproState extends State<Viewpro> {
       title: Viewpro._title,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("Profile"),
+          title: const Text("Profile"),
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(
-                  context, MaterialPageRoute(builder: (context) => Pagehome()));
+                  context, MaterialPageRoute(builder: (context) => const Pagehome()));
             },
           ),
         ),
@@ -73,9 +76,9 @@ class _ViewproState extends State<Viewpro> {
             future: profileView(),
             builder: (context, snapshot) {
               if (!snapshot.hasData) {
-                return Center(child: CircularProgressIndicator());
+                return const Center(child: CircularProgressIndicator());
               } else if (snapshot.data[0]['message'] == 'failed') {
-                return Center(child: Text('no data'));
+                return const Center(child: Text('no data'));
               } else {
                 return ListView(children: [
                   Padding(
@@ -86,50 +89,50 @@ class _ViewproState extends State<Viewpro> {
                             Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                    Text('Name',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const Text('Name',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     Text(snapshot.data![0]['name']),
                   ]),
 
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                    Text('DOB',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const Text('DOB',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     Text(snapshot.data![0]['dob']),
                   ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                    Text('Phone no',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const Text('Phone no',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     Text(snapshot.data![0]['phone_no']),
                   ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                    Text('Gender',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                    const Text('Gender',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                     Text(snapshot.data![0]['gender']),
                   ]),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Address',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                      const Text('Address',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                       Text(snapshot.data![0]['address'])
                     ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Qualification',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        const Text('Qualification',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                         Text(snapshot.data![0]['qualification'].toString())
                       ]),
                 Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      Text('Username',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                      const Text('Username',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                       Text(snapshot.data![0]['username'].toString())
                     ]),
                   Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text('Email',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
+                        const Text('Email',style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),),
                         Text(snapshot.data![0]['email'].toString())
                       ]),
                   // Row(
@@ -150,10 +153,11 @@ class _ViewproState extends State<Viewpro> {
                padding: const EdgeInsets.only(bottom:500,right:10),
                child: FloatingActionButton(
                     onPressed: () {
-
-                    },
-                    child: Icon(Icons.edit), // Change the icon here
+                      Navigator.push(
+                          context, MaterialPageRoute(builder: (context) => const Edit()));
+                    }, // Change the icon here
                     backgroundColor: Colors.black,
+                    child: const Icon(Icons.edit),
     ),
              ),
     ),

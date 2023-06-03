@@ -31,7 +31,7 @@ class _ViewnewsState extends State<Viewnews> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("View News"),
+        title: const Text("View News"),
         backgroundColor: Colors.black,
         centerTitle: true,
       ),
@@ -41,11 +41,11 @@ class _ViewnewsState extends State<Viewnews> {
           future: getData(),
           builder: (context, snapshot) {
             if (snapshot.connectionState == ConnectionState.waiting) {
-              return Center(child: CircularProgressIndicator());
+              return const Center(child: CircularProgressIndicator());
             } else if (snapshot.hasError) {
               return Center(child: Text("Error: ${snapshot.error}"));
             } else if (snapshot.data[0]['message'] == 'failed') {
-              return Center(child: Text('No items added'));
+              return const Center(child: Text('No items added'));
             } else {
               return CarouselSlider.builder(
                 itemCount: snapshot.data.length,
@@ -56,8 +56,8 @@ class _ViewnewsState extends State<Viewnews> {
                   initialPage: 0,
                   enableInfiniteScroll: true,
                   autoPlay: true,
-                  autoPlayInterval: Duration(seconds: 3),
-                  autoPlayAnimationDuration: Duration(milliseconds: 800),
+                  autoPlayInterval: const Duration(seconds: 3),
+                  autoPlayAnimationDuration: const Duration(milliseconds: 800),
                   autoPlayCurve: Curves.easeInOutCubic,
                 ),
                 itemBuilder: (context, index, realIndex) {
@@ -73,7 +73,7 @@ class _ViewnewsState extends State<Viewnews> {
                           color: Colors.grey.withOpacity(0.5),
                           spreadRadius: 2,
                           blurRadius: 5,
-                          offset: Offset(0, 3),
+                          offset: const Offset(0, 3),
                         ),
                       ],
                     ),
@@ -82,17 +82,17 @@ class _ViewnewsState extends State<Viewnews> {
                       children: [
                         Text(
                           snapshot.data[index]['news'],
-                          style: TextStyle(
+                          style: const TextStyle(
                             fontSize: 20,
                             fontWeight: FontWeight.bold,
                           ),
                         ),
-                        SizedBox(height: 8),
+                        const SizedBox(height: 8),
                         Expanded(
                           child: SingleChildScrollView(
                             child: Text(
                               snapshot.data[index]['content'],
-                              style: TextStyle(fontSize: 16),
+                              style: const TextStyle(fontSize: 16),
                             ),
                           ),
                         ),

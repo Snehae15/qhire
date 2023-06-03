@@ -3,20 +3,22 @@ import 'package:qhire/login.dart';
 import 'package:qhire/coursepage.dart';
 
 class Viewcourse extends StatelessWidget {
+  const Viewcourse({super.key});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Course'),
+        title: const Text('Course'),
       ),
       body: ListView(
-        padding: EdgeInsets.all(10.0),
+        padding: const EdgeInsets.all(10.0),
         children: [
           GestureDetector(
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Coursepage()),
+                MaterialPageRoute(builder: (context) => const Coursepage()),
               );
             },
             child: Row(
@@ -28,7 +30,7 @@ class Viewcourse extends StatelessWidget {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'PHP',
                         style: TextStyle(
@@ -39,13 +41,13 @@ class Viewcourse extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Log()),
+                        MaterialPageRoute(builder: (context) => const Log()),
                       );
                     },
                     child: Padding(
@@ -56,7 +58,7 @@ class Viewcourse extends StatelessWidget {
                           color: Colors.grey,
                           borderRadius: BorderRadius.circular(10.0),
                         ),
-                        child: Center(
+                        child: const Center(
                           child: Text(
                             'Container 2',
                             style: TextStyle(
@@ -76,7 +78,7 @@ class Viewcourse extends StatelessWidget {
             onTap: () {
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => Log()),
+                MaterialPageRoute(builder: (context) => const Log()),
               );
             },
             child: Row(
@@ -88,7 +90,7 @@ class Viewcourse extends StatelessWidget {
                       color: Colors.grey,
                       borderRadius: BorderRadius.circular(10.0),
                     ),
-                    child: Center(
+                    child: const Center(
                       child: Text(
                         'PHP',
                         style: TextStyle(
@@ -99,13 +101,13 @@ class Viewcourse extends StatelessWidget {
                     ),
                   ),
                 ),
-                SizedBox(width: 10.0),
+                const SizedBox(width: 10.0),
                 Expanded(
                   child: GestureDetector(
                     onTap: () {
                       Navigator.push(
                         context,
-                        MaterialPageRoute(builder: (context) => Log()),
+                        MaterialPageRoute(builder: (context) => const Log()),
                       );
                     },
                     child: Container(
@@ -114,7 +116,7 @@ class Viewcourse extends StatelessWidget {
                         color: Colors.grey,
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      child: Center(
+                      child: const Center(
                         child: Text(
                           'Container 2',
                           style: TextStyle(

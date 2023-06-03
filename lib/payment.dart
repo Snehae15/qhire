@@ -1,6 +1,5 @@
 import 'dart:convert';
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:http/http.dart';
@@ -8,11 +7,8 @@ import 'package:pretty_qr_code/pretty_qr_code.dart';
 import 'package:qhire/const.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-
 class Payments extends StatefulWidget {
-  String id;
-  String amnt;
-  Payments({required this.id, Key? key, required this.amnt}) : super(key: key);
+  const Payments({Key? key}) : super(key: key);
 
   @override
   State<Payments> createState() => _PaymentsState();
@@ -25,34 +21,36 @@ class _PaymentsState extends State<Payments> {
 
     var data = {
       "id": sp,
-      "amount": widget.amnt,
     };
     print(data);
+print(sp);
     var response = await post(Uri.parse('${Con.url}payment.php'), body: data);
     var res = jsonDecode(response.body);
     print(response.body);
     if (response.statusCode == 200) {
       if (res['message'] == 'Added') {
-        Fluttertoast.showToast(msg: "@payment added");
+        Fluttertoast.showToast(msg:"payment added");
         // Navigator.push(context,MaterialPageRoute(builder:(context){
         //   return Stdhome();
         // }));
-        return "upi://pay?pa=name@oksbi&pn=qhire&am=${widget.amnt}.00&cu=INR";
+        return "upi ://pay?pa=name@oksbi&pn=admin&am=250.00&cu=INR";
       }
     } else {
       Fluttertoast.showToast(msg: "something went wrong");
     }
+    return null;
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+
         title: const Text(
           "Payments",
-          style: TextStyle(color: Colors.black),
+          style: TextStyle(color: Colors.white),
         ),
-        backgroundColor: Colors.lightBlue,
+        backgroundColor: Colors.black,
         centerTitle: true,
         leading: const Icon(
           Icons.arrow_back,
@@ -70,32 +68,38 @@ class _PaymentsState extends State<Payments> {
                   child: Text('Something went wrong'),
                 );
               }
-              return ListView(children: [
-                Padding(
-                  padding:const EdgeInsets.all(8.0),
-                  child: Center(child: Text(snapshot.data!)),
-                ),
-                Padding(
-                  padding:const EdgeInsets.all(8.0),
-                  child: Text('price: ${widget.amnt}Rs'),
-                ),
-                Center(
-                  child: PrettyQr(
-                    size: 200,
-                    data: snapshot.data!,
-                    errorCorrectLevel: QrErrorCorrectLevel.M,
-                    roundEdges: true,
+              return Padding(
+                padding: const EdgeInsets.all(25.0),
+                child: ListView(children: [
+                  Padding(
+                    padding: const EdgeInsets.all(8.0),
+                    child: Center(child: Text(snapshot.data!)),
                   ),
-                ),
-                Padding(
-                  padding: const EdgeInsets.all(8.0),
-                  child: ElevatedButton(
-                      onPressed: () {
-                        getSave();
-                      },
-                      child: const Text("add")),
-                ),
-              ]);
+                  const Padding(
+                    padding: EdgeInsets.all(8.0),
+                    child: Text('price: 250 Rs'),
+                  ),
+                  Center(
+                    child: Padding(
+                      padding: const EdgeInsets.all(15.0),
+                      child: PrettyQr(
+                        size: 200,
+                        data: snapshot.data!,
+                        errorCorrectLevel: QrErrorCorrectLevel.M,
+                        roundEdges: true,
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(50.0),
+                    child: ElevatedButton(
+                        onPressed: () {
+                          getSave();
+                        },
+                        child: const Text("Pay"),),
+                  ),
+                ]),
+              );
             }
           }),
     );

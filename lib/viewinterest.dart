@@ -3,8 +3,9 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart';
 import 'package:qhire/const.dart';
-import 'package:qhire/pagehome.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import 'bottom.dart';
 
 void main() => runApp(const Viewinterest());
 
@@ -36,13 +37,13 @@ class Viewinterest extends StatelessWidget {
       title: _title,
       home: Scaffold(
         appBar: AppBar(
-          title: Text("View interests"),
+          title: const Text("View interests"),
           backgroundColor: Colors.black,
           leading: IconButton(
-            icon: Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back),
             onPressed: () {
               Navigator.push(context,
-                  MaterialPageRoute(builder: (context) => Pagehome()));
+                  MaterialPageRoute(builder: (context) => const Pagehome()));
             },
           ),
         ),
@@ -52,9 +53,9 @@ class Viewinterest extends StatelessWidget {
               future: viewInterest(),
               builder: (context, snapshot) {
                 if (!snapshot.hasData) {
-                  return Center(child: CircularProgressIndicator());
+                  return const Center(child: CircularProgressIndicator());
                 } else if (snapshot.data[0]['message'] == 'failed') {
-                  return Center(child: Text('No data'));
+                  return const Center(child: Text('No data'));
                 } else {
                   return ListView.builder(
                       itemCount: snapshot.data.length,
@@ -64,7 +65,7 @@ class Viewinterest extends StatelessWidget {
                             ListTile(
                               title: Text(snapshot.data![index]['interest']),
                             ),
-                            Divider(),
+                            const Divider(),
                           ],
                         );
                       });
